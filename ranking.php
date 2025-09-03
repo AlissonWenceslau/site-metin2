@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Conexão com o banco de dados
 include 'conn.php';
 
@@ -32,7 +33,7 @@ $players = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $total = $pdo->query("SELECT COUNT(*) FROM $dbplayer.player")->fetchColumn();
 $paginas = ceil($total / $por_pagina);
 
-$offset = ($pagina -1) * $por_pagina;
+$offset = ($pagina - 1) * $por_pagina;
 
 function pgClass($job)
 {
@@ -86,15 +87,29 @@ function pgKingdom($kingdom)
         </div>
         <div class="container-fluid">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Cadastro</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Início</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="download.php">Download</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="ranking.php">Ranking</a>
+                    <a class="nav-link" href="ranking.php">Ranking</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.php"><?php if (!$_SESSION['user']) {echo 'Entrar';} ?></a>
+                </li>
+            </ul>
+            <?php
+            if ($_SESSION['user']) {
+                echo '<div class="rounded-circle border d-flex justify-content-center align-items-center text-light bg-primary"
+                style="width:50px;height:50px"
+                alt="Avatar">';
+                echo '<a href="index.php" class="link-offset-2 link-underline link-underline-opacity-0 text-light">' . htmlspecialchars(strtoupper($_SESSION['user'])[0]) . '</a>';
+
+                '</div>';
+            }
+            ?>
         </div>
     </nav>
     <div class="content">
@@ -116,7 +131,7 @@ function pgKingdom($kingdom)
                     $count = 0;
                     // Saída dos dados de cada linha
                     foreach ($players as $player => $row) {
-                        $position = $offset + $player +1;
+                        $position = $offset + $player + 1;
                         echo "<tr>";
                         echo "<th scop='row'>" . $position . "</th>";
                         echo "<td>" . pgClass($row['job']) . "</td>";
@@ -137,24 +152,24 @@ function pgKingdom($kingdom)
             $total_paginas = ceil($total / $por_pagina);
             $limite = 2; // Número de páginas a mostrar antes e depois da página atual
             echo '<div class="container">';
-                echo '<div class="pagination">';
+            echo '<div class="pagination">';
 
-                for ($i = 1; $i <= $total_paginas; $i++) {
-                    // Se estamos na primeira página ou na última, sempre mostramos
-                    if ($i == 1 || $i == $total_paginas) {
-                        echo ($i == $pagina) ? "<strong class='page-link active'>$i</strong> " : "<a class='page-link' href='?pagina=$i'>$i</a> ";
-                    }
-                    // Mostra páginas vizinhas à página atual
-                    elseif ($i >= $pagina - $limite && $i <= $pagina + $limite) {
-                        echo ($i == $pagina) ? "<strong class='page-link active'>$i</strong> " : "<a class='page-link' href='?pagina=$i'>$i</a> ";
-                    }
-                    // Adiciona os três pontinhos
-                    elseif ($i == $pagina - $limite - 1 || $i == $pagina + $limite + 1) {
-                        echo "<div class='page-link'>...</div>";
-                    }
+            for ($i = 1; $i <= $total_paginas; $i++) {
+                // Se estamos na primeira página ou na última, sempre mostramos
+                if ($i == 1 || $i == $total_paginas) {
+                    echo ($i == $pagina) ? "<strong class='page-link active'>$i</strong> " : "<a class='page-link' href='?pagina=$i'>$i</a> ";
                 }
+                // Mostra páginas vizinhas à página atual
+                elseif ($i >= $pagina - $limite && $i <= $pagina + $limite) {
+                    echo ($i == $pagina) ? "<strong class='page-link active'>$i</strong> " : "<a class='page-link' href='?pagina=$i'>$i</a> ";
+                }
+                // Adiciona os três pontinhos
+                elseif ($i == $pagina - $limite - 1 || $i == $pagina + $limite + 1) {
+                    echo "<div class='page-link'>...</div>";
+                }
+            }
 
-                echo '</div>';
+            echo '</div>';
             echo '</div>';
             ?>
         </div>

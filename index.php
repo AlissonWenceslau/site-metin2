@@ -50,7 +50,7 @@ session_start();
       if ($_SESSION['user']) {
         include './panel.php';
       } else {
-        include './cadastro.php';
+        include './register.php';
       }
       ?>
     </div>

@@ -4,9 +4,16 @@ Este é um webpage responsivo simples desenvolvido por mim, que conta com um for
 - [x] PHP 8+
 - [x] Mysql 5.6
 - [x] Bootstrap
-![cadastro](https://github.com/user-attachments/assets/b669c5ca-603b-4f5b-b141-00b657c1f8ea)
-![download](https://github.com/user-attachments/assets/7926ee98-7817-4f2a-918d-7ebffb513ecc)
+
+![cadastro](https://github.com/user-attachments/assets/b299ea6c-8da9-45ba-a3eb-9798679988c7)
+![login](https://github.com/user-attachments/assets/27ce8ea2-81e0-483c-8131-23df8e82791f)
+![logado](https://github.com/user-attachments/assets/d9570712-7005-4694-a614-fea98344be3f)
+![alterar_senha](https://github.com/user-attachments/assets/e317455a-e96e-4ff8-b898-2e7050754725)
+![download](https://github.com/user-attachments/assets/1110f5c0-393c-47f0-b998-165de8177a02)
 ![ranking](https://github.com/user-attachments/assets/bc73136f-6ec9-4ef2-9cad-dc89ecfaf271)
+![regras](https://github.com/user-attachments/assets/3ef60742-6dca-412c-9670-ab6ab7291f7f)
+![status](https://github.com/user-attachments/assets/6d16e4a3-638c-49a4-9b6c-36145627d17c)
+
 
 
 

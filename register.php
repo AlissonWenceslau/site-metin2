@@ -136,7 +136,7 @@ session_start();
                 <tr>
                   <td>7</td>
                   <td>KS (Kill Steal)</td>
-                  <td>Roubar monstros ou pedras que outro jogador está enfrentando.</td>
+                  <td>Roubar monstros ou pedras que outro jogador está enfrentando é proibido.</td>
                 </tr>
                 <tr>
                   <td>8</td>

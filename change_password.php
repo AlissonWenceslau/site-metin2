@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $login = $_SESSION['user'];
   $senhaAtual = $_POST['actualPassword'];
   $novaSenha = $_POST['newPassword'];
+  $newConfirmPassword = $_POST['newConfirmPassword'];
 
   // Criptografa a senha atual e nova no formato MySQL
   $senhaAtualHash = '*' . strtoupper(sha1(sha1($senhaAtual, true)));
@@ -32,8 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $stmt->execute();
   $result = $stmt->get_result();
 
-  $errors = validatePassword($novaSenha, $errors);
-  
+  $errorsValidatePassword = validatePassword($novaSenha);
+  $errorsValidadeNewConfirmPassword = validateNewConfirmPassword($novaSenha, $newConfirmPassword);
+  $errors = array_merge($errorsValidatePassword, $errorsValidadeNewConfirmPassword);
+
   if ($result->num_rows === 0) {
     $errors[] = 'Senha atual incorreta';
   }
@@ -87,24 +90,26 @@ $conn->close();
           <a class="nav-link" href="ranking.php">Ranking</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="login.php"><?php if(!$_SESSION['user']){echo 'Entrar';} ?></a>
+          <a class="nav-link" href="login.php"><?php if (!$_SESSION['user']) {
+                                                  echo 'Entrar';
+                                                } ?></a>
         </li>
       </ul>
       <?php
       if ($_SESSION['user']) {
-        echo '<div class="rounded-circle border d-flex justify-content-center align-items-center text-light bg-primary"
-          style="width:50px;height:50px"
-          alt="Avatar">';
-        echo '<a href="index.php" class="link-offset-2 link-underline link-underline-opacity-0 text-light">' . htmlspecialchars(strtoupper($_SESSION['user'])[0]) . '</a>';
+        echo '<a href="index.php" class="rounded-circle border d-flex justify-content-center align-items-center text-light bg-primary link-offset-2 link-underline link-underline-opacity-0"
+        style="width:50px;height:50px"
+        alt="Avatar">';
+        echo htmlspecialchars(strtoupper($_SESSION['user'])[0]) . '</a>';
 
-        '</div>';
+        '</a>';
       }
       ?>
   </nav>
-  <div class="content d-flex justify-content-center mt-5 align-items-sm-start">
+  <div class="content d-flex justify-content-center mt-5 align-items-sm-start mb-2">
     <div class="d-flex flex-column border p-2 w-25 rounded">
       <h3>Alterar minha senha</h3>
-      <span class="badge text-bg-secondary mb-1 bg bg-primary"><?php echo 'Conta: '. htmlspecialchars($_SESSION['user'])?> </span>
+      <span class="badge text-bg-secondary mb-1 bg bg-primary"><?php echo 'Conta: ' . htmlspecialchars($_SESSION['user']) ?> </span>
       <?php
       if (isset($_SESSION['password_updated'])) {
         echo "<div class='alert alert-success' id='alert' role='alert'>";
@@ -121,12 +126,13 @@ $conn->close();
 
       if (isset($_SESSION['errors'])) {
         foreach ($_SESSION['errors'] as $erro) {
-          echo "<div class='alert alert-danger updated-password-fail' id='alert' role='alert'>";
+          echo "<div class='alert alert-danger updated-password-fail alert-dismissible fade show' id='alert' role='alert'>";
           echo "
                 <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-person-fill-x' viewBox='0 0 16 16'>
                   <path d='M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4'/>
                   <path d='M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708'/>
                 </svg>
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                 ";
           echo $erro;
           echo "</div>";
@@ -135,20 +141,27 @@ $conn->close();
       unset($_SESSION['errors']);
       ?>
       <form class="needs-validation" method="post" action="" novalidate>
-        <div class="form-group">
-          <label for="actualPassword">Senha atual</label>
-          <input type="password" class="form-control campo-senha" id="actualPassword" name="actualPassword" required>
-          <div class="invalid-feedback">
-            Campo obrigatório!
-          </div>
+        <label for="actualPassword">Senha atual</label>
+        <input type="password" class="form-control campo-senha" id="actualPassword" name="actualPassword" required>
+        <div class="invalid-feedback">
+          Campo obrigatório!
         </div>
-        <div class="form-group">
-          <label for="newPassword">Nova senha</label>
+        <label for="newPassword">Nova senha</label>
+        <div class="d-flex">
           <input type="password" class="form-control campo-senha" id="newPassword" name="newPassword" required>
-          <strong><small>A nova senha deve conter letra maiúscula, minúscula, número e um caractere especial</small></strong>
-          <div class="invalid-feedback">
-            Campo obrigatório!
-          </div>
+          <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter 1 letra maiúscula<br>Deve conter 1 letra minúscula<br>Deve conter 1 caractere especial<br>Deve conter 1 número">
+            ?
+          </button>
+        </div>
+        <div class="invalid-feedback">
+          Campo obrigatório!
+        </div>
+        <label for="newConfirmPassword">Confirmar Senha</label>
+        <div class="d-flex">
+          <input type="password" class="form-control campo-senha" id="newConfirmPassword" name="newConfirmPassword" required>
+        </div>
+        <div class="invalid-feedback">
+          Campo obrigatório!
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" value="" id="showPasword">

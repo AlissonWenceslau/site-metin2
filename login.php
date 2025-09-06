@@ -34,7 +34,7 @@
         echo '<div class="rounded-circle border d-flex justify-content-center align-items-center text-light bg-primary"
           style="width:50px;height:50px"
           alt="Avatar">';
-        echo htmlspecialchars(strtoupper($_SESSION['user'])[0]);
+        echo  htmlspecialchars(strtoupper($_SESSION['user'])[0]);
 
         '</div>';
       }

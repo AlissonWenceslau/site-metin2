@@ -81,37 +81,47 @@ function pgKingdom($kingdom)
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="logo">
-            <a href="index.php" class="navbar-brand"><img src="./assets/metin2.png" class="img-fluid" alt="metin2"></a>
-        </div>
-        <div class="container-fluid">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php">Início</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="download.php">Download</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="ranking.php">Ranking</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php"><?php if (!$_SESSION['user']) {echo 'Entrar';} ?></a>
-                </li>
-            </ul>
-            <?php
-            if ($_SESSION['user']) {
-                echo '<div class="rounded-circle border d-flex justify-content-center align-items-center text-light bg-primary"
-                style="width:50px;height:50px"
-                alt="Avatar">';
-                echo '<a href="index.php" class="link-offset-2 link-underline link-underline-opacity-0 text-light">' . htmlspecialchars(strtoupper($_SESSION['user'])[0]) . '</a>';
-
-                '</div>';
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between">
+    <div class="d-flex">
+      <div class="logo">
+        <a href="index.php" class="navbar-brand"><img src="./assets/metin2.png" class="img-fluid" alt="metin2"></a>
+      </div>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index.php">Início</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="download.php">Download</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="ranking.php">Ranking</a>
+        </li>
+      </ul>
+    </div>
+    <div class="d-flex">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <?php
+            if (!$_SESSION['user']) {
+              echo '<a class="btn btn-primary me-2" href="login.php">';
+              echo 'Entrar';
+              echo '</a>';
             }
-            ?>
-        </div>
-    </nav>
+          ?>
+        </li>
+      </ul>
+      <?php
+      if ($_SESSION['user']) {
+        echo '<a href="index.php" class="rounded-circle border d-flex justify-content-center align-items-center text-light bg-primary link-offset-2 link-underline link-underline-opacity-0"
+        style="width:50px;height:50px"
+        alt="Avatar">';
+        echo htmlspecialchars(strtoupper($_SESSION['user'])[0]) . '</a>';
+
+        '</a>';
+      }
+      ?>
+    </div>
+  </nav>
     <div class="content">
         <div class="container">
             <h2 class="text text-primary">Ranking de Personagens</h2>

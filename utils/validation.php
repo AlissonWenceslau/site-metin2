@@ -44,6 +44,24 @@ function validatePassword($password)
     return  $errors;
 }
 
+function validateNewConfirmPassword($password, $confirmPassword)
+{
+    //Array com os erros
+    $errors = [];
+    // Critérios de validação
+    $minCaracteres = 8;
+
+    if (strlen($password) < $minCaracteres || strlen($confirmPassword) < $minCaracteres) {
+        $errors[] = "Senha conta: A nova senha deve ter pelo menos $minCaracteres caracteres.";
+    }
+
+    if (strcmp($password, $confirmPassword)) {
+        $errors[] = "Senha conta: A nova não corresponde";
+    }
+
+    return $errors;
+}
+
 function validateMax7Alphanumeric($input)
 {
     //Array com os erros

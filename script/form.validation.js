@@ -26,12 +26,6 @@ setTimeout(function () {
   });
 }, 5000);
 
-setTimeout(function () {
-  var mensagensErro = document.querySelectorAll('.updated-password-fail');
-  mensagensErro.forEach(function (mensagem) {
-    mensagem.style.display = 'none';
-  });
-}, 5000);
 
 // Validação do checkbox de termos
 let checkBoxTerms = document.querySelector('.form-check-input');

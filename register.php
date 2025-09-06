@@ -37,7 +37,12 @@ session_start();
     ?>
     <div class="mb-3">
       <label for="username" class="form-label">Login</label>
-      <input type="text" class="form-control" maxlength="12" placeholder="Mínimo 5 e Máximo 12 caracteres" pattern="[a-zA-Z0-9]+" aria-label="default input example" id="username" name="username" required>
+      <div class="d-flex">
+        <input type="text" class="form-control" maxlength="12" placeholder="Mínimo 8 e Máximo 12 caracteres" pattern="[a-zA-Z0-9]+" aria-label="default input example" id="username" name="username" required>
+        <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter 1 letra<br>Deve conter 1 número">
+          ?
+        </button>
+      </div>
       <div class="invalid-feedback">
         Campo obrigatório!
       </div>
@@ -47,17 +52,29 @@ session_start();
         Campo obrigatório!
       </div>
       <label for="password" class="form-label">Senha</label>
-      <input type="password" maxlength="12" class="form-control" placeholder="Mínimo 5 e Máximo 12 caracteres" pattern="[a-zA-Z0-9]+" id="password" name="password" required>
+      <div class="d-flex">
+        <input type="password" maxlength="12" class="form-control" placeholder="Mínimo 8 e Máximo 12 caracteres" pattern="[a-zA-Z0-9]+" id="password" name="password" required>
+        <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter 1 letra maiúscula<br>Deve conter 1 letra minúscula<br>Deve conter 1 caractere especial<br>Deve conter 1 número">
+          ?
+        </button>
+      </div>
       <div class="invalid-feedback">
         Campo obrigatório!
       </div>
       <label for="password-confirm" class="form-label">Confirmar Senha</label>
-      <input type="password" maxlength="12" class="form-control" placeholder="Mínimo 5 e Máximo 12 caracteres" pattern="[a-zA-Z0-9]+" id="password-confirm" name="password-confirm" required>
+      <div class="d-flex">
+        <input type="password" maxlength="12" class="form-control" placeholder="Mínimo 8 e Máximo 12 caracteres" pattern="[a-zA-Z0-9]+" id="password-confirm" name="password-confirm" required>
+      </div>
       <div class="invalid-feedback">
         Campo obrigatório!
       </div>
       <label for="password-character" class="form-label">Senha do Personagem</label>
-      <input class="form-control" maxlength="7" type="text" pattern="[a-zA-Z0-9]+" placeholder="Mínimo 7 caracteres" aria-label="default input example" id="password-character" name="character" required>
+      <div class="d-flex">
+        <input class="form-control" maxlength="7" type="text" pattern="[a-zA-Z0-9]+" placeholder="Mínimo 7 caracteres" aria-label="default input example" id="password-character" name="character" required>
+        <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter 1 letra<br>Deve conter 1 número">
+          ?
+        </button>
+      </div>
       <div class="invalid-feedback">
         Campo obrigatório!
       </div>

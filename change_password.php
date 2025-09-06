@@ -90,6 +90,12 @@ $conn->close();
           <a class="nav-link" href="ranking.php">Ranking</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="rules.php">Regras</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="status.php">Status</a>
+        </li>         
+        <li class="nav-item">
           <a class="nav-link" href="login.php"><?php if (!$_SESSION['user']) {
                                                   echo 'Entrar';
                                                 } ?></a>

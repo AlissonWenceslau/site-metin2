@@ -6,10 +6,10 @@ session_start();
 $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
-    $username_account = validateMax12Alphanumeric($_POST['username']);
-    $password_account = validatePassword($_POST['password']);
-    $confirm_password_account = validatePassword($_POST['password-confirm']);
-    $social_id = validateMax7Alphanumeric($_POST['character']);
+    $username_account = $_POST['username'];
+    $password_account = $_POST['password'];
+    $confirm_password_account = $_POST['password-confirm'];
+    $social_id = $_POST['character'];
     $email = $_POST['email'];
 } 
 
@@ -19,11 +19,14 @@ $sql = "INSERT INTO account (login, password, social_id, email) VALUES ('$userna
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbaccount);
 
+$errors_login = validateMax12Alphanumeric($username_account);
+$errors_password = validatePassword($password_account);
+$errors_password_confirm = validateConfirmPassword($confirm_password_account);
+$errors_password_delete_character = validateMax7Alphanumeric($social_id);
+
+$errors = array_merge($errors_login, $errors_password, $errors_password_confirm, $errors_password_delete_character);
+
 try{
-    $errors = validateMax12Alphanumeric($username_account);
-    $errors = validatePassword($password_account);
-    $errors = validatePassword($confirm_password_account);
-    $errors = validateMax7Alphanumeric($social_id);
     if(count($errors) > 0){
         $_SESSION['errors'] = $errors;
         header('Location: index.php');
@@ -38,6 +41,8 @@ try{
     }
     mysqli_close($conn);
 }catch (Exception $e) {
-    echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+    $errors[] = $e->getMessage();
+    $_SESSION['errors'] = $errors;
+    header('Location: index.php');
 }
 ?>

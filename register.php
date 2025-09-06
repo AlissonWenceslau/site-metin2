@@ -8,12 +8,13 @@ session_start();
     // Verifica se há erros na sessão e exibe-os
     if (isset($_SESSION['errors'])) {
       foreach ($_SESSION['errors'] as $erro) {
-        echo "<div class='alert alert-danger' id='alert' role='alert'>";
+        echo "<div class='alert alert-danger alert-dismissible fade show' id='alert' role='alert'>";
         echo "
               <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-person-fill-x' viewBox='0 0 16 16'>
               <path d='M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4'/>
               <path d='M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708'/>
               </svg>
+              <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
               ";
         echo $erro;
         echo "</div>";
@@ -38,8 +39,8 @@ session_start();
     <div class="mb-3">
       <label for="username" class="form-label">Login</label>
       <div class="d-flex">
-        <input type="text" class="form-control" maxlength="12" placeholder="Mínimo 8 e Máximo 12 caracteres" pattern="[a-zA-Z0-9]+" aria-label="default input example" id="username" name="username" required>
-        <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter 1 letra<br>Deve conter 1 número">
+        <input type="text" class="form-control" maxlength="12" aria-label="default input example" id="username" name="username" required>
+        <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter no mínimo 8 catacter<br>Deve ter no máximo 12 caracter<br>Deve conter 1 letra<br>Deve conter 1 número">
           ?
         </button>
       </div>
@@ -47,14 +48,14 @@ session_start();
         Campo obrigatório!
       </div>
       <label for="exampleFormControlInput1" class="form-label">Endereço de Email</label>
-      <input type="email" maxlength="50" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="email" required>
+      <input type="email" maxlength="50" class="form-control" id="exampleFormControlInput1" name="email" data-bs-toggle="tooltip" data-bs-placement="top" title="email@example.com" required>
       <div class="invalid-feedback">
         Campo obrigatório!
       </div>
       <label for="password" class="form-label">Senha</label>
       <div class="d-flex">
-        <input type="password" maxlength="12" class="form-control" placeholder="Mínimo 8 e Máximo 12 caracteres" pattern="[a-zA-Z0-9]+" id="password" name="password" required>
-        <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter 1 letra maiúscula<br>Deve conter 1 letra minúscula<br>Deve conter 1 caractere especial<br>Deve conter 1 número">
+        <input type="password" maxlength="12" class="form-control" id="password" name="password" required>
+        <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter no mínimo 8 catacter<br>Deve ter no máximo 12 caracter<br>Deve conter 1 letra maiúscula<br>Deve conter 1 letra minúscula<br>Deve conter 1 caractere especial<br>Deve conter 1 número">
           ?
         </button>
       </div>
@@ -63,15 +64,15 @@ session_start();
       </div>
       <label for="password-confirm" class="form-label">Confirmar Senha</label>
       <div class="d-flex">
-        <input type="password" maxlength="12" class="form-control" placeholder="Mínimo 8 e Máximo 12 caracteres" pattern="[a-zA-Z0-9]+" id="password-confirm" name="password-confirm" required>
+        <input type="password" maxlength="12" class="form-control" id="password-confirm" name="password-confirm" required>
       </div>
       <div class="invalid-feedback">
         Campo obrigatório!
       </div>
       <label for="password-character" class="form-label">Senha do Personagem</label>
       <div class="d-flex">
-        <input class="form-control" maxlength="7" type="text" pattern="[a-zA-Z0-9]+" placeholder="Mínimo 7 caracteres" aria-label="default input example" id="password-character" name="character" required>
-        <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter 1 letra<br>Deve conter 1 número">
+        <input class="form-control" maxlength="7" type="text" aria-label="default input example" id="password-character" name="character" required>
+        <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter no máximo 7 catacter<br>Deve conter 1 letra<br>Deve conter 1 número">
           ?
         </button>
       </div>

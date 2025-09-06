@@ -79,30 +79,75 @@ session_start();
         Campo obrigatório!
       </div>
     </div>
-    <div class="accordion" id="accordionExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Termos de Uso
-          </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <ol>
-              <li>Proibido usar hack - <strong><small>BANIMENTO PERMANENTE</small></strong></li>
-              <li>Proibido se passar por GM - <strong><small>BANIMENTO PERMANENTE</small></strong></li>
-              <li>Proibido insultar os jogadores - <strong><small>BANIMENTO DE 7 DIAS</small></strong></li>
-              <small><strong>Caso o administrador identifique qualquer outra situação que impacte na dinamica e jogabilidade do servidor, será aplicada uma penalização aos jogadores envolvidos!</strong></small>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="form-check mt-2 mb-2">
       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
       <label class="form-check-label" for="flexCheckDefault">
-        Estou ciente e aceito os termos acima
+        Estou ciente e aceito os <a href="#" class="text-primary" data-bs-toggle="modal" data-bs-target="#modal">termos</a> de uso
+        do servidor
       </label>
+    </div>
+    <div class="modal" tabindex="-1" id="modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Termos de Uso</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered table-striped">
+              <thead class="table-primary text-center">
+                <tr>
+                  <th>#</th>
+                  <th>Regra</th>
+                  <th>Descrição</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Uso de Hacks/Bots</td>
+                  <td>É proibido usar programas externos para ganhar vantagem (auto-farm, speed, etc).</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Comércio por dinheiro real (RMT)</td>
+                  <td>Vender ou comprar itens/moedas do jogo por dinheiro real é proibido.</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Abuso de bugs</td>
+                  <td>Explorar falhas no jogo para benefício próprio pode levar a banimento.</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Ofensas e discurso de ódio</td>
+                  <td>Não é permitido insultar outros jogadores ou usar linguagem ofensiva/preconceituosa.</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Fake de Staff/Admin</td>
+                  <td>Fingir ser parte da equipe do servidor é terminantemente proibido.</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Spam e flood no chat</td>
+                  <td>Enviar muitas mensagens repetitivas no chat é proibido.</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>KS (Kill Steal)</td>
+                  <td>Roubar monstros ou pedras que outro jogador está enfrentando.</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>Divulgação de outros servidores</td>
+                  <td>Falar ou divulgar outros servidores de Metin2 dentro do jogo não é permitido.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
     <button type="submit" class="btn btn-primary w-100 mb-2 mt-2" disabled id="submit">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">

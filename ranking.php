@@ -3,7 +3,18 @@ session_start();
 // Conexão com o banco de dados
 include 'conn.php';
 
-$conn = new mysqli($servername, $username, $password);
+try {
+    // Conectar ao banco
+    $conn = new mysqli($servername, $username, $password, $dbaccount);
+} catch (mysqli_sql_exception $e) {
+    // captura o erro e lida com ele
+    $_SESSION['error'] = "Erro na conexão com o banco de dados: " . $e->getMessage();
+    http_response_code(500);
+    header('Location: status.php');
+    // error_log("Erro na conexão com o banco de dados: " . $e->getMessage());
+    // echo "Erro ao conectar ao banco de dados. Tente novamente mais tarde.";
+    unset($_SESSION['error']);
+}
 
 try {
     $pdo = new PDO("mysql:host=$servername;dbname=$dbplayer", $username, $password);

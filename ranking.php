@@ -100,23 +100,16 @@ $offset = ($pagina - 1) * $por_pagina;
                     ?>
                 </li>
             </ul>
-            <?php
-            if ($_SESSION['user']) {
-                echo '<a href="index.php" class="rounded-circle border d-flex justify-content-center align-items-center text-light bg-primary link-offset-2 link-underline link-underline-opacity-0"
-        style="width:50px;height:50px"
-        alt="Avatar">';
-                echo htmlspecialchars(strtoupper($_SESSION['user'])[0]) . '</a>';
-
-                '</a>';
-            }
-            ?>
+      <?php
+        avatar($_SESSION['user'], $avatarBackgroundColor);
+      ?>
         </div>
     </nav>
     <div class="content">
         <div class="container">
             <h2 class="text text-primary">Ranking de Personagens</h2>
             <table class="table table-striped table-hover text-center">
-                <thead class="table-primary">
+                <thead class="table-dark">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Classe</th>

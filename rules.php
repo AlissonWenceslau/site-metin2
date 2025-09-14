@@ -1,5 +1,6 @@
 <?php
 session_start();
+include './utils/utils.php'
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -53,14 +54,7 @@ session_start();
         </li>
       </ul>
       <?php
-      if ($_SESSION['user']) {
-        echo '<a href="index.php" class="rounded-circle border d-flex justify-content-center align-items-center text-light bg-primary link-offset-2 link-underline link-underline-opacity-0"
-        style="width:50px;height:50px"
-        alt="Avatar">';
-        echo htmlspecialchars(strtoupper($_SESSION['user'])[0]) . '</a>';
-
-        '</a>';
-      }
+        avatar($_SESSION['user'], $avatarBackgroundColor);
       ?>
     </div>
   </nav>
@@ -69,7 +63,7 @@ session_start();
       <div class="col-lg-6 offset-lg-3">
         <h2>Regras do Servidor </h2>
         <table class="table table-bordered table-striped">
-          <thead class="table-primary text-center">
+          <thead class="table-dark text-center">
             <tr>
               <th>#</th>
               <th>Regra</th>

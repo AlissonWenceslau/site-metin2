@@ -96,7 +96,7 @@ session_start();
           </div>
           <div class="modal-body">
             <table class="table table-bordered table-striped">
-              <thead class="table-primary text-center">
+              <thead class="table-dark text-center">
                 <tr>
                   <th>#</th>
                   <th>Regra</th>

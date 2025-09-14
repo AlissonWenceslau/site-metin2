@@ -29,10 +29,13 @@ $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $inicio = ($pagina > 1) ? ($pagina * $por_pagina) - $por_pagina : 0;
 
 //SQL
-$sql = "SELECT p.job, p.name, p.level, p.exp, pi.empire FROM $dbplayer.player as p
-INNER JOIN $dbplayer.player_index as pi ON p.account_id = pi.id
-WHERE p.`name` NOT IN (SELECT mName FROM $dbcommon.gmlist)
-ORDER BY p.level DESC LIMIT :inicio, :por_pagina";
+$sql = "SELECT p.job, p.name, p.level, p.exp, pi.empire
+FROM $dbplayer.player AS p
+INNER JOIN $dbplayer.player_index AS pi ON p.account_id = pi.id
+WHERE p.name NOT IN (SELECT mName FROM $dbcommon.gmlist)
+ORDER BY p.level DESC, p.exp ASC
+LIMIT :inicio, :por_pagina";
+
 
 //Consulta ao Banco de Dados
 $stmt = $pdo->prepare($sql);

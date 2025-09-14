@@ -10,9 +10,10 @@ Este é um webpage responsivo simples desenvolvido por mim, que conta com um for
 ![logado](https://github.com/user-attachments/assets/d9570712-7005-4694-a614-fea98344be3f)
 ![alterar_senha](https://github.com/user-attachments/assets/e317455a-e96e-4ff8-b898-2e7050754725)
 ![download](https://github.com/user-attachments/assets/1110f5c0-393c-47f0-b998-165de8177a02)
-![ranking](https://github.com/user-attachments/assets/3e1550a3-0618-471c-b829-aa3b8974612a)
-![regras](https://github.com/user-attachments/assets/3ef60742-6dca-412c-9670-ab6ab7291f7f)
-![status](https://github.com/user-attachments/assets/6d16e4a3-638c-49a4-9b6c-36145627d17c)
+![ranking](https://github.com/user-attachments/assets/1b022b5e-68f3-4c55-928a-5f2be3660986)
+![regras](https://github.com/user-attachments/assets/244c2cbf-4ef5-4f3c-a075-a007b55f52df)
+![status](https://github.com/user-attachments/assets/e6b28e4f-7412-4f40-9003-6bd038ad25c4)
+
 
 
 

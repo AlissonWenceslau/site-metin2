@@ -1,4 +1,5 @@
 <?php
+include './utils/utils.php';
 session_start();
 // Conexão com o banco de dados
 include 'conn.php';
@@ -46,39 +47,7 @@ $paginas = ceil($total / $por_pagina);
 
 $offset = ($pagina - 1) * $por_pagina;
 
-function pgClass($job)
-{
-    switch ($job) {
-        case 0:
-            return '<img src="./assets/ranking/0.png">';
-        case 1:
-            return '<img src="./assets/ranking/1.png">';
-        case 2:
-            return '<img src="./assets/ranking/2.png">';
-        case 3:
-            return '<img src="./assets/ranking/3.png">';
-        case 4:
-            return '<img src="./assets/ranking/4.png">';
-        case 5:
-            return '<img src="./assets/ranking/5.png">';
-        case 6:
-            return '<img src="./assets/ranking/6.png">';
-        case 7:
-            return '<img src="./assets/ranking/7.png">';
-    }
-}
 
-function pgKingdom($kingdom)
-{
-    switch ($kingdom) {
-        case 1:
-            return '<img src="./assets/ranking/shinso.jpg">';
-        case 2:
-            return '<img src="./assets/ranking/chunjo.jpg">';
-        case 3:
-            return '<img src="./assets/ranking/jinno.jpg">';
-    }
-}
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -146,8 +115,8 @@ function pgKingdom($kingdom)
     <div class="content">
         <div class="container">
             <h2 class="text text-primary">Ranking de Personagens</h2>
-            <table class="table">
-                <thead class="thead-dark">
+            <table class="table table-striped table-hover text-center">
+                <thead class="table-primary">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Classe</th>

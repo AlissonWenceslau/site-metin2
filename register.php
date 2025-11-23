@@ -40,7 +40,7 @@ session_start();
       <label for="username" class="form-label">Login</label>
       <div class="d-flex">
         <input type="text" class="form-control" maxlength="12" aria-label="default input example" id="username" name="username" required>
-        <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter no mínimo 8 catacter<br>Deve ter no máximo 12 caracter<br>Deve conter 1 letra<br>Deve conter 1 número">
+        <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter no mínimo 8 caracter<br>Deve ter no máximo 12 caracter ">
           ?
         </button>
       </div>
@@ -72,7 +72,7 @@ session_start();
       <label for="password-character" class="form-label">Senha do Personagem</label>
       <div class="d-flex">
         <input class="form-control" maxlength="7" type="text" aria-label="default input example" id="password-character" name="character" required>
-        <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter no máximo 7 catacter<br>Deve conter 1 letra<br>Deve conter 1 número">
+        <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter no exatamente 7 dígitos">
           ?
         </button>
       </div>

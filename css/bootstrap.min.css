@@ -24,3 +24,7 @@ body {
     letter-spacing: 5px;
     font-size: 20px;
 }
+.card-login {
+  max-width: 400px;
+  width: 100%;
+}

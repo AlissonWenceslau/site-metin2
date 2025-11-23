@@ -63,7 +63,7 @@
     </div>
   </nav>
   <div class="content d-flex justify-content-center align-items-sm-start mt-5">
-    <div class="d-fex border border-dark p-5 rounded">
+    <div class="card-login border border-dark p-5 rounded">
       <h3>Faça o seu login</h3>
       <?php
       session_start();

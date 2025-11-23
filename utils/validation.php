@@ -97,13 +97,13 @@
         //Array com os erros
         $errors = [];
         // Verifica se contém apenas letras e números
-        if (!preg_match('/^[a-zA-Z0-9]+$/', $input)) {
-            $errors[] = "Senha Personagem: Apenas letras e números são permitidos.";
+        if (!preg_match('/^\d+$/', $input)) {
+            $errors[] = "Senha Personagem: Apenas números são permitidos.";
         }
 
         // Verifica o comprimento (máximo 7 caracteres)
-        if (strlen($input) > 7) {
-            $errors[] = "Senha Personagem: O valor deve conter no máximo 7 caracteres.";
+        if (strlen($input) > 7 || strlen($input) < 7) {
+            $errors[] = "Senha do Personagem: A senha precisa ter exatamente 7 dígitos. Por favor, ajuste e tente novamente.";
         }
 
         return $errors;

@@ -55,7 +55,7 @@ session_start();
       <label for="password" class="form-label">Senha</label>
       <div class="d-flex">
         <input type="password" maxlength="12" class="form-control" id="password" name="password" required>
-        <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter no mínimo 8 catacter<br>Deve ter no máximo 12 caracter<br>Deve conter 1 letra maiúscula<br>Deve conter 1 letra minúscula<br>Deve conter 1 caractere especial<br>Deve conter 1 número">
+        <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter no mínimo 8 catacter<br>Deve ter no máximo 12 caracter<br>Deve conter 1 letra maiúscula<br>Deve conter 1 letra minúscula<br>Deve conter 1 caracter especial<br>Deve conter 1 número">
           ?
         </button>
       </div>
@@ -71,7 +71,7 @@ session_start();
       </div>
       <label for="password-character" class="form-label">Senha do Personagem</label>
       <div class="d-flex">
-        <input class="form-control" maxlength="7" type="text" aria-label="default input example" id="password-character" name="character" required>
+        <input class="form-control" maxlength="7" type="number" aria-label="default input example" id="password-character" name="character" required>
         <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter no exatamente 7 dígitos">
           ?
         </button>
@@ -83,72 +83,9 @@ session_start();
     <div class="form-check mt-2 mb-2">
       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
       <label class="form-check-label" for="flexCheckDefault">
-        Estou ciente e aceito os <a href="#" class="text-primary" data-bs-toggle="modal" data-bs-target="#modal">termos</a> de uso
+        Estou ciente e aceito os <a href="rules.php" target="_blank" class="text-primary">termos</a> de uso
         do servidor
       </label>
-    </div>
-    <div class="modal" tabindex="-1" id="modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Termos de Uso</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <table class="table table-bordered table-striped">
-              <thead class="table-dark text-center">
-                <tr>
-                  <th>#</th>
-                  <th>Regra</th>
-                  <th>Descrição</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Uso de Hacks/Bots</td>
-                  <td>É proibido usar programas externos para ganhar vantagem (auto-farm, speed, etc).</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Comércio por dinheiro real (RMT)</td>
-                  <td>Vender ou comprar itens/moedas do jogo por dinheiro real é proibido.</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Abuso de bugs</td>
-                  <td>Explorar falhas no jogo para benefício próprio pode levar a banimento.</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Ofensas e discurso de ódio</td>
-                  <td>Não é permitido insultar outros jogadores ou usar linguagem ofensiva/preconceituosa.</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>Fake de Staff/Admin</td>
-                  <td>Fingir ser parte da equipe do servidor é terminantemente proibido.</td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>Spam e flood no chat</td>
-                  <td>Enviar muitas mensagens repetitivas no chat é proibido.</td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>KS (Kill Steal)</td>
-                  <td>Roubar monstros ou pedras que outro jogador está enfrentando é proibido.</td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>Divulgação de outros servidores</td>
-                  <td>Falar ou divulgar outros servidores de Metin2 dentro do jogo não é permitido.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
     </div>
     <button type="submit" class="btn btn-primary w-100 mb-2 mt-2" disabled id="submit">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">

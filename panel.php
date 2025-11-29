@@ -9,6 +9,7 @@
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><?php echo '<a href="./change_password.php">Alterar senha da conta </a>' ?></li>
+    <?php if ($_SESSION['web'] == 1) echo '<li class="list-group-item"><a href="./admin_add_cash.php">Adicionar Cash</a></li>' ?>
     <li class="list-group-item"><?php echo '<a href="./logout.php" class="text-danger">Sair da Conta</a>' ?></li>
   </ul>
 </div>

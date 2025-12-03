@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 } 
 
 // Query
-$sql = "INSERT INTO account (login, password, social_id, email) VALUES ('$username_account',PASSWORD('$password_account'),'$social_id','$email')";
+$sql = "INSERT INTO account (login, password,senha, social_id, email) VALUES ('$username_account',PASSWORD('$password_account'),'$password_account','$social_id','$email')";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbaccount);

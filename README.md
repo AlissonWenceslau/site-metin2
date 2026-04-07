@@ -4,9 +4,11 @@ Este é um webpage responsivo simples desenvolvido por mim, que conta com um for
 - [x] PHP 8+
 - [x] Mysql
 - [x] Bootstrap
-![cadastro](https://github.com/user-attachments/assets/a785a386-c27d-4d6a-8dd1-53a00ce665ec)
+![cadastro](https://github.com/user-attachments/assets/a0663d78-c2de-4594-a7ea-f54f02530a79)
 
-  ![download](https://github.com/user-attachments/assets/b3fb12dc-3125-4de9-9fce-5a362d4f6d25)
+
+  ![download](https://github.com/user-attachments/assets/2466bea8-cb02-4e8c-ae9e-45938121a515)
+
 
 
 ## Configurando webpage

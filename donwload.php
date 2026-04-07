@@ -8,78 +8,82 @@ session_start();
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <title>Metin2 - Simple Page</title>
-  <link href="./css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a href="index.php" class="navbar-brand"><img src="./assets/metin2.png" class="img-fluid" alt="metin2"></a>
-    <div class="container-fluid">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
           <a class="nav-link" href="index.php">Cadastro</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="donwload.php">Download</a>
         </li>
+      </ul>
     </div>
   </nav>
-  <div class="col-lg-6 offset-lg-3">
-    <table class="table">
-      <thead class="thead-dark">
-        <h2 class="text text-primary">Requisitos Recomendados</h2>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">Sistema Operacional</th>
-          <td>Windows 8.1 e 10</td>
-        </tr>
-        <tr>
-          <th scope="row">Processador</th>
-          <td>P4 3Ghz ou Athlon 3000+</td>
-        </tr>
-        <tr>
-        <tr>
-          <th scope="row">Memória RAM</th>
-          <td>RAM 1GB</td>
-        </tr>
-        <tr>
-          <th scope="row">Placa de Vídeo</th>
-          <td>Geforce 6600/Radeon X600</td>
-        </tr>
-        <tr>
-        <tr>
-          <th scope="row">DirectX</th>
-          <td>Directx 9.0c ou mais recente</td>
-        </tr>
-        <tr>
-          <th scope="row">Disco Rígido</th>
-          <td>8 GB de espaço livre</td>
-        </tr>
-        <tr>
-        <tr>
-          <th scope="row">Internet</th>
-          <td>Banda Larga</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="d-flex justify-content-center">
-      <a class="btn btn-primary w-100 mt-2 mb-2" href="#LinkAqui" role="button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-download" viewBox="0 0 16 16">
-          <path d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383" />
-          <path d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708z" />
-        </svg>
-        Fazer Download
-      </a>
+  <main>
+    <div class="col-lg-6 offset-lg-3">
+      <table class="table">
+        <thead class="thead-dark">
+          <h2 class="text text-primary">Requisitos Recomendados</h2>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Sistema Operacional</th>
+            <td>Windows 10+</td>
+          </tr>
+          <tr>
+            <th scope="row">Processador</th>
+            <td>Intel Core I5</td>
+          </tr>
+          <tr>
+          <tr>
+            <th scope="row">Memória RAM</th>
+            <td>RAM 4GB</td>
+          </tr>
+          <tr>
+            <th scope="row">Placa de Vídeo</th>
+            <td>Geforce GTX 1060 </td>
+          </tr>
+          <tr>
+          <tr>
+            <th scope="row">DirectX</th>
+            <td>Directx 9.0c ou mais recente</td>
+          </tr>
+          <tr>
+            <th scope="row">Disco Rígido</th>
+            <td>8 GB de espaço livre</td>
+          </tr>
+          <tr>
+          <tr>
+            <th scope="row">Internet</th>
+            <td>Banda Larga</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-center">
+        <a class="bi bi-cloud-arrow-down-fill btn btn-primary w-100 mt-2 mb-2" href="#LinkAqui" role="button">
+          Fazer Download
+        </a>
+      </div>
     </div>
-  </div>
+  </main>
   <footer id="sticky-footer" class="flex-shrink-0 py-3 bg-dark text-white-50">
     <div class="container text-center">
       <small>Copyright &copy; <?php echo date("Y"); ?></small>
     </div>
   </footer>
-  <script src="./script/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 
 </html>

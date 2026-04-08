@@ -18,9 +18,9 @@
   })
 })()
 
-setTimeout(function () {
-  var mensagensErro = document.querySelectorAll('.alert');
-  mensagensErro.forEach(function (mensagem) {
-    mensagem.style.display = 'none';
-  });
-}, 5000);
+// setTimeout(function () {
+//   var mensagensErro = document.querySelectorAll('.alert');
+//   mensagensErro.forEach(function (mensagem) {
+//     mensagem.style.display = 'none';
+//   });
+// }, 5000);

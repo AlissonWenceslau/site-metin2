@@ -31,8 +31,8 @@ session_start();
       </ul>
     </div>
   </nav>
-  <main>
-    <div class="col-lg-6 offset-lg-3">
+  <main class="d-flex justify-content-center">
+    <div class="w-75">
       <table class="table">
         <thead class="thead-dark">
           <h2 class="text text-primary">Requisitos Recomendados</h2>

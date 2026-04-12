@@ -2,13 +2,13 @@
 session_start();
 ?>
 <div class="form">
-  <h2>Faça seu cadastro</h2>
+  <h2 class="text text-primary">Faça seu cadastro</h2>
   <form class="needs-validation" method="post" action="./validate_register.php" novalidate>
     <?php
     // Verifica se há erros na sessão e exibe-os
     if (isset($_SESSION['errors'])) {
       foreach ($_SESSION['errors'] as $erro) {
-        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
+        echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">';
         echo '<i class="bi bi-person-fill-x me-1"></i>';
         echo '<strong class="me-1">Erro!</strong>';
         echo $erro;

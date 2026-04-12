@@ -12,3 +12,9 @@ main{
         justify-content: space-between;
     }
 }
+
+.erro-register{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

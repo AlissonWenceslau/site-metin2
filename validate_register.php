@@ -54,7 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } catch (mysqli_sql_exception $e) {
             // Verifica se o código do erro é 1062 (Duplicate entry no MySQL)
             if ($e->getCode() === 1062) {
-                echo "Erro: Esta conta ou e-mail já está cadastrado.";
+                header("location: erro.php");
+                exit; // Sempre use exit após um header de redirecionamento
             } else {
                 echo "Ocorreu um erro inesperado: " . $e->getMessage();
             }

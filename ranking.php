@@ -81,8 +81,8 @@ $offset = ($pagina - 1) * $por_pagina;
           <li class="nav-item">
             <a class="nav-link" href="download.php">Download</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="ranking.php">Ranking</a>
+          <li class="nav-item">
+            <a class="nav-link active" href="ranking.php">Ranking</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="rules.php">Regras</a>

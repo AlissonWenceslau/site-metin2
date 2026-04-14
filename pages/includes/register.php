@@ -76,7 +76,7 @@ session_start();
     <div class="form-check mt-2 mb-2">
       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
       <label class="form-check-label" for="flexCheckDefault">
-        Estou ciente e aceito os <a href="rules.php" target="_blank" class="text-primary">termos</a> de uso
+        Estou ciente e aceito os <a href="./pages/rules.php" target="_blank" class="text-primary">termos</a> de uso
         do servidor
       </label>
     </div>

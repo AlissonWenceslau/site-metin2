@@ -1,7 +1,7 @@
 <?php
 session_start();
-include './utils/utils.php';
-include 'conn.php'; // Presume que este arquivo define: $servername, $username, $password, $dbaccount
+require '../utils/utils.php';
+require './includes/conn.php'; // Presume que este arquivo define: $servername, $username, $password, $dbaccount
 
 $mysql_host  = $servername;
 $mysql_port  = 3306;         // Porta padrão do MySQL
@@ -41,17 +41,17 @@ if (isMysqlOnline($mysql_host, $mysql_port, $timeout)) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="./assets/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/favicon.ico">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
   <title>Metin2</title>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a href="index.php" class="navbar-brand"><img src="./assets/metin2.png" class="img-fluid" alt="metin2"></a>
+    <a href="../index.php" class="navbar-brand"><img src="../assets/metin2.png" class="img-fluid" alt="metin2"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -59,7 +59,7 @@ if (isMysqlOnline($mysql_host, $mysql_port, $timeout)) {
       <div class="links-navegator">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.php">Início</a>
+            <a class="nav-link" href="../index.php">Início</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="download.php">Download</a>
@@ -89,7 +89,7 @@ if (isMysqlOnline($mysql_host, $mysql_port, $timeout)) {
           </li>
         </ul>
         <?php
-        avatar($_SESSION['user'], $avatarBackgroundColor);
+        avatar($_SESSION['user'], $avatarBackgroundColor, '../index.php');
         ?>
       </div>
     </div>

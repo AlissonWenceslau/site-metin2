@@ -29,16 +29,16 @@ require './utils/utils.php'
             <a class="nav-link active" href="index.php">Início</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="download.php">Download</a>
+            <a class="nav-link" href="./pages/download.php">Download</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="ranking.php">Ranking</a>
+            <a class="nav-link" href="./pages/ranking.php">Ranking</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="rules.php">Regras</a>
+            <a class="nav-link" href="./pages/rules.php">Regras</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="status.php">Status</a>
+            <a class="nav-link" href="./pages/status.php">Status</a>
           </li>
         </ul>
       </div>
@@ -47,7 +47,7 @@ require './utils/utils.php'
           <li class="nav-item">
             <?php
             if (!$_SESSION['user']) {
-              echo '<a class="btn btn-primary me-2" href="login.php">';
+              echo '<a class="btn btn-primary me-2" href="./pages/login.php">';
               echo '<i class="bi bi-box-arrow-in-right me-1"></i>';
               echo 'Entrar';
               echo '</a>';
@@ -56,7 +56,7 @@ require './utils/utils.php'
           </li>
         </ul>
         <?php
-        avatar($_SESSION['user'], $avatarBackgroundColor);
+        avatar($_SESSION['user'], $avatarBackgroundColor, 'index.php');
         ?>
       </div>
     </div>
@@ -66,9 +66,9 @@ require './utils/utils.php'
       <div class="container">
         <?php
         if ($_SESSION['user']) {
-          require './panel.php';
+          require './pages/includes/panel.php';
         } else {
-          require './register.php';
+          require './pages/includes/register.php';
         }
         ?>
       </div>

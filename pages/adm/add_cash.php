@@ -1,18 +1,18 @@
 <?php
 session_start();
-include './utils/utils.php';
+require '../../utils/utils.php';
 
 if (!isset($_SESSION['user'])) {
   // Usuário não logado, redireciona para a página de login
-  header("Location: login.php");
+  header("Location: ../login.php");
   exit;
 } else if ($_SESSION['web'] == 0) {
-  header("Location: logout.php");
+  header("Location: ../logout.php");
   exit;
 }
 
-include 'conn.php';
-include './utils/validation.php';
+require '../includes/conn.php';
+require '../../utils/validation.php';
 
 // Conectar ao banco
 $conn = new mysqli($servername, $username, $password, $dbaccount);
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if (count($errors) > 0) {
     $_SESSION['errors'] = $errors;
-    header('Location: admin_add_cash.php');
+    header('Location: add_cash.php');
     exit();
   }
 
@@ -64,17 +64,17 @@ $conn->close();
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="./assets/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/favicon.ico">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="../../css/style.css">
   <title>Metin2</title>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a href="index.php" class="navbar-brand"><img src="./assets/metin2.png" class="img-fluid" alt="metin2"></a>
+    <a href="../../index.php" class="navbar-brand"><img src="../../assets/metin2.png" class="img-fluid" alt="metin2"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -82,19 +82,19 @@ $conn->close();
       <div class="links-navegator">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="index.php">Início</a>
+            <a class="nav-link active" href="../../index.php">Início</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="download.php">Download</a>
+            <a class="nav-link" href="../download.php">Download</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="ranking.php">Ranking</a>
+            <a class="nav-link" href="../ranking.php">Ranking</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="rules.php">Regras</a>
+            <a class="nav-link" href="../rules.php">Regras</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="status.php">Status</a>
+            <a class="nav-link" href="../status.php">Status</a>
           </li>
         </ul>
       </div>
@@ -112,7 +112,7 @@ $conn->close();
           </li>
         </ul>
         <?php
-        avatar($_SESSION['user'], $avatarBackgroundColor);
+        avatar($_SESSION['user'], $avatarBackgroundColor, '../../index.php');
         ?>
       </div>
     </div>
@@ -165,7 +165,7 @@ $conn->close();
       <small>Todos os direitos reservados! Copyright &copy; <?php echo date("Y"); ?></small>
     </div>
   </footer>
-  <script src="./script/form.validation.js"></script>
+  <script src="../../script/form.validation.js"></script>
 </body>
 
 </html>

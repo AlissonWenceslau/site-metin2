@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../includes/conn.php';
+require '../../connection/conn.php';
 
 try {
     $conn = new mysqli($servername, $username, $password, $dbaccount);
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $hash = '*' . strtoupper(sha1(sha1($password, true))); // mantém compatível com o banco
 
     // Busca apenas pelo login
-    $stmt = $conn->prepare("SELECT login, password, web FROM account WHERE login = ?");
+    $stmt = $conn->prepare("SELECT login, password, web, cash FROM account WHERE login = ?");
     $stmt->bind_param("s", $login);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -40,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $_SESSION['user'] = $user['login'];
             $_SESSION['web'] = $user['web'];
+            $_SESSION['cash'] = $user['cash'];
 
             header("Location: ../../index.php");
             exit;

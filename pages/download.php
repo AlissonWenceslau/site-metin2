@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../utils/utils.php';
+require './utils/utils.php';
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -109,7 +109,7 @@ require '../utils/utils.php';
   </main>
   <footer id="sticky-footer" class="flex-shrink-0 py-3 bg-dark text-white-50">
     <div class="container text-center">
-      <small>Copyright &copy; <?php echo date("Y"); ?></small>
+      <small>Todos os direitos reservados! Copyright &copy; <?php echo date("Y"); ?></small>
     </div>
   </footer>
 </html>

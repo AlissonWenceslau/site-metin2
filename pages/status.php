@@ -1,7 +1,7 @@
 <?php
 session_start();
-require '../utils/utils.php';
-require './includes/conn.php'; // Presume que este arquivo define: $servername, $username, $password, $dbaccount
+require './utils/utils.php';
+require '../connection/conn.php'; // Presume que este arquivo define: $servername, $username, $password, $dbaccount
 
 $mysql_host  = $servername;
 $mysql_port  = 3306;         // Porta padrão do MySQL
@@ -133,7 +133,6 @@ if (isMysqlOnline($mysql_host, $mysql_port, $timeout)) {
       <small>Todos os direitos reservados! Copyright &copy; <?php echo date("Y"); ?></small>
     </div>
   </footer>
-  <script src="./script/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

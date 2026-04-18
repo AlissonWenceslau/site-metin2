@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../utils/utils.php'
+require './utils/utils.php'
 ?>
 <!doctype html>
 <html lang="pt-br">

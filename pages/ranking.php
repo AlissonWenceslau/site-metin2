@@ -1,8 +1,8 @@
 <?php
-require '../utils/utils.php';
+require './utils/utils.php';
 session_start();
 // Conexão com o banco de dados
-require './includes/conn.php';
+require '../connection/conn.php';
 
 try {
     // Conectar ao banco

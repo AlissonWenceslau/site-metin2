@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../utils/utils.php'
+require './utils/utils.php'
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -113,26 +113,6 @@ require '../utils/utils.php'
     </div>
   </footer>
   <script src="../script/form.validation.js"></script>
-  <script>
-    const form = document.querySelector('form');
-    const spinner = document.getElementById('spinner');
-    const btn = document.getElementById('btnEntrar');
-
-    form.addEventListener('submit', function(event) {
-      if (!form.checkValidity()) {
-        // Formulário inválido → impede envio e mantém spinner oculto
-        event.preventDefault();
-        event.stopPropagation();
-      } else {
-        // Formulário válido → mostra spinner e desativa botão
-        spinner.classList.remove('visually-hidden');
-        btn.disabled = true;
-      }
-
-      // Aplica classes de validação do Bootstrap
-      form.classList.add('was-validated');
-    });
-  </script>
 </body>
 
 </html>

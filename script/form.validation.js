@@ -19,6 +19,7 @@
     })
 })()
 
+//Ocultar mensagem sucesso de cadastro
 setTimeout(function () {
   var mensagensErro = document.querySelectorAll('.alert-success');
   mensagensErro.forEach(function (mensagem) {
@@ -56,3 +57,23 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 //Popover
 const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
 const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
+//Formulário página de login
+const form = document.querySelector('form');
+const spinner = document.getElementById('spinner');
+const btn = document.getElementById('btnEntrar');
+
+form.addEventListener('submit', function (event) {
+  if (!form.checkValidity()) {
+    // Formulário inválido → impede envio e mantém spinner oculto
+    event.preventDefault();
+    event.stopPropagation();
+  } else {
+    // Formulário válido → mostra spinner e desativa botão
+    spinner.classList.remove('visually-hidden');
+    btn.disabled = true;
+  }
+
+  // Aplica classes de validação do Bootstrap
+  form.classList.add('was-validated');
+});

@@ -1,6 +1,8 @@
 <?php
 session_start();
-require '../../utils/utils.php';
+require '../../connection/conn.php';;
+require '../utils/validation.php';
+require '../utils/utils.php';
 
 if (!isset($_SESSION['user'])) {
   // Usuário não logado, redireciona para a página de login
@@ -11,8 +13,6 @@ if (!isset($_SESSION['user'])) {
   exit;
 }
 
-require '../includes/conn.php';
-require '../../utils/validation.php';
 
 // Conectar ao banco
 $conn = new mysqli($servername, $username, $password, $dbaccount);

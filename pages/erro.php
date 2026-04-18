@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../utils/utils.php'
+require './utils/utils.php'
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -21,7 +21,7 @@ require '../utils/utils.php'
     <a href="index.php" class="navbar-brand"><img src="../assets/metin2.png" class="img-fluid ms-1" alt="metin2"></a>
   </nav>
   <main class="d-flex flex-column erro-register">
-    <h1 class="text text-primary text-center">Esta conta ou e-mail já está cadastrado.</h1>
+    <h1 class="text text-primary text-center">Login ou e-mail já existente.</h1>
     <p><a class="btn btn-info" href="../index.php">Voltar a página princial</a></p>
   </main>
   <footer id="sticky-footer" class="flex-shrink-0 py-3 bg-dark text-white-50">

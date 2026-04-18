@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (count($errors) > 0) {
         $_SESSION['errors'] = $errors;
-        header('Location: index.php');
+        header('Location: ../../index.php');
         exit();
     }
 
@@ -48,13 +48,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
             if (mysqli_stmt_execute($stmt)) {
                 $_SESSION['success'] = "Sua conta foi criada com sucesso!";
-                header("location: index.php");
+                header("location: ../../index.php");
                 exit; // Sempre use exit após um header de redirecionamento
             }
         } catch (mysqli_sql_exception $e) {
             // Verifica se o código do erro é 1062 (Duplicate entry no MySQL)
             if ($e->getCode() === 1062) {
-                header("location: erro.php");
+                header("location: ../erro.php");
                 exit; // Sempre use exit após um header de redirecionamento
             } else {
                 echo "Ocorreu um erro inesperado: " . $e->getMessage();

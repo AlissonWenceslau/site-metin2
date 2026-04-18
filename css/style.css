@@ -13,6 +13,12 @@ main{
     }
 }
 
+@media screen and (max-width: 992px) {
+    .navbar-nav{
+        padding: 5px;
+    }
+}
+
 .erro-register{
     display: flex;
     justify-content: center;

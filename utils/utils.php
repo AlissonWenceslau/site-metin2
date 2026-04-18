@@ -72,7 +72,7 @@ function avatar($session, $avatarBackgroundColor, $path)
         $letraSegura = htmlspecialchars($letra);
         $cor = $avatarBackgroundColor[$letra] ?? '#CCC'; // Cor padrão
 
-        echo '<a href="'.$path.'" class="rounded-circle border d-flex justify-content-center align-items-center text-light link-offset-2 link-underline link-underline-opacity-0"
+        echo '<a href="'.$path.'" class="rounded-circle border d-flex justify-content-center align-items-center text-light link-offset-2 link-underline link-underline-opacity-0 me-1"
         style="width:50px;height:50px;background-color:' . $cor . ';" alt="Avatar">';
         echo $letraSegura . '</a>';
     }

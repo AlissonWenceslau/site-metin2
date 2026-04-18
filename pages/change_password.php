@@ -78,7 +78,7 @@ $conn->close();
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a href="../index.php" class="navbar-brand"><img src="../assets/metin2.png" class="img-fluid" alt="metin2"></a>
+    <a href="../index.php" class="navbar-brand"><img src="../assets/metin2.png" class="img-fluid ms-1" alt="metin2"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -137,7 +137,7 @@ $conn->close();
         if (isset($_SESSION['errors'])) {
           foreach ($_SESSION['errors'] as $erro) {
             echo '<div class="alert alert-warning updated-password-fail alert-dismissible fade show" id="alert" role="alert">';
-            echo '<i class="bi bi-exclamation-triangle-fill"></i>';
+            echo '<i class="bi bi-exclamation-triangle-fill me-1"></i>';
             echo $erro;
             echo '</div>';
           }

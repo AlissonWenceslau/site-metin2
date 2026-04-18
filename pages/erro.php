@@ -18,7 +18,7 @@ require '../utils/utils.php'
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a href="index.php" class="navbar-brand"><img src="../assets/metin2.png" class="img-fluid" alt="metin2"></a>
+    <a href="index.php" class="navbar-brand"><img src="../assets/metin2.png" class="img-fluid ms-1" alt="metin2"></a>
   </nav>
   <main class="d-flex flex-column erro-register">
     <h1 class="text text-primary text-center">Esta conta ou e-mail já está cadastrado.</h1>

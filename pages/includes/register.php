@@ -3,7 +3,7 @@ session_start();
 ?>
 <div class="form">
   <h2 class="text text-primary">Faça seu cadastro</h2>
-  <form class="needs-validation" method="post" action="./validate_register.php" novalidate>
+  <form class="needs-validation" method="post" action="/pages/validation/validate_register.php" novalidate>
     <?php
     // Verifica se há erros na sessão e exibe-os
     if (isset($_SESSION['errors'])) {

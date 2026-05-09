@@ -36,3 +36,36 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+a > i {
+    margin-right: 5px;
+}
+
+.rodape {
+    display: flex;
+    justify-content: space-between; /* Espaça os elementos */
+    align-items: center; /* Centraliza verticalmente */
+    padding: 20px;
+    background-color: #212529; /* Cor de fundo */
+    color: white;
+}
+
+.direitos {
+    text-align: center;
+    flex-grow: 1; /* Faz o texto ocupar o centro */
+}
+
+.redes-sociais {
+    display: flex;
+    gap: 15px; /* Espaço entre os ícones */
+    justify-content: flex-end; /* Garante que fique na direita */
+}
+
+.redes-sociais img {
+    width: 24px;
+    height: 24px;
+}
+
+.redes-sociais > a > i{
+    color: white;
+}

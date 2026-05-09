@@ -59,19 +59,19 @@ if (isMysqlOnline($mysql_host, $mysql_port, $timeout)) {
       <div class="links-navegator">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="../index.php">Início</a>
+            <a class="nav-link" href="../index.php"><i class="bi bi-house-door-fill"></i>Início</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="download.php">Download</a>
+            <a class="nav-link" href="download.php"><i class="bi bi-cloud-arrow-down-fill"></i>Download</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="ranking.php">Ranking</a>
+            <a class="nav-link" href="ranking.php"><i class="bi bi-trophy-fill"></i>Ranking</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="rules.php">Regras</a>
+            <a class="nav-link" href="rules.php"><i class="bi bi-book-fill"></i>Regras</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="status.php">Status</a>
+            <a class="nav-link active" href="status.php"><i class="bi bi-info-circle-fill"></i>Status</a>
           </li>
         </ul>
       </div>
@@ -128,10 +128,17 @@ if (isMysqlOnline($mysql_host, $mysql_port, $timeout)) {
     </div>
   </main>
   </div>
-  <footer id="sticky-footer" class="flex-shrink-0 py-3 bg-dark text-white-50">
-    <div class="container text-center">
-      <small>Todos os direitos reservados! Copyright &copy; <?php echo date("Y"); ?></small>
-    </div>
+  <footer class="rodape">   
+      <!-- Direitos Autorais no meio -->
+      <div class="direitos">
+        &copy; <?php echo date("Y"); ?> Todos os direitos reservados!
+      </div>
+      
+      <!-- Redes Sociais na direita -->
+      <div class="redes-sociais">
+          <a href="#"><i class="bi bi-youtube"></i></a>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+      </div>
   </footer>
 </body>
 

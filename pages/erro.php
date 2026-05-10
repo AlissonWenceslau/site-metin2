@@ -18,16 +18,23 @@ require './utils/utils.php'
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a href="index.php" class="navbar-brand"><img src="../assets/metin2.png" class="img-fluid ms-1" alt="metin2"></a>
+    <a href="#" class="navbar-brand"><img src="../assets/metin2.png" class="img-fluid ms-1" alt="metin2"></a>
   </nav>
   <main class="d-flex flex-column erro-register">
     <h1 class="text text-primary text-center">Login ou e-mail já existente.</h1>
-    <p><a class="btn btn-info" href="../index.php">Voltar a página princial</a></p>
+    <p><a class="btn btn-primary" href="../index.php">Voltar a página princial</a></p>
   </main>
-  <footer id="sticky-footer" class="flex-shrink-0 py-3 bg-dark text-white-50">
-    <div class="container text-center">
-      <small>Todos os direitos reservados! Copyright &copy; <?php echo date("Y"); ?></small>
-    </div>
+  <footer class="rodape">   
+      <!-- Direitos Autorais no meio -->
+      <div class="direitos">
+        &copy; <?php echo date("Y"); ?> Todos os direitos reservados!
+      </div>
+      
+      <!-- Redes Sociais na direita -->
+      <div class="redes-sociais">
+          <a href="#" target="_blank"><i class="bi bi-youtube"></i></a>
+          <a href="#" target="_blank"><i class="bi bi-instagram"></i></a>
+      </div>
   </footer>
 </body>
 

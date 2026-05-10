@@ -57,21 +57,21 @@ if (isMysqlOnline($mysql_host, $mysql_port, $timeout)) {
     </button>
     <div class="collapse navbar-collapse responsive" id="navbarText">
       <div class="links-navegator">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" id="mainNav">
           <li class="nav-item">
-            <a class="nav-link" href="../index.php"><i class="bi bi-house-door-fill"></i>Início</a>
+            <a class="nav-link" href="../index.php"><i class="bi bi-house-door"></i>Início</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="download.php"><i class="bi bi-cloud-arrow-down-fill"></i>Download</a>
+            <a class="nav-link" href="download.php"><i class="bi bi-cloud-arrow-down"></i>Download</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="ranking.php"><i class="bi bi-trophy-fill"></i>Ranking</a>
+            <a class="nav-link" href="ranking.php"><i class="bi bi-trophy"></i>Ranking</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="rules.php"><i class="bi bi-book-fill"></i>Regras</a>
+            <a class="nav-link" href="rules.php"><i class="bi bi-book"></i>Regras</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="status.php"><i class="bi bi-info-circle-fill"></i>Status</a>
+            <a class="nav-link active" href="status.php"><i class="bi bi-info-circle"></i>Status</a>
           </li>
         </ul>
       </div>
@@ -136,10 +136,11 @@ if (isMysqlOnline($mysql_host, $mysql_port, $timeout)) {
       
       <!-- Redes Sociais na direita -->
       <div class="redes-sociais">
-          <a href="#"><i class="bi bi-youtube"></i></a>
-          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#" target="_blank"><i class="bi bi-youtube"></i></a>
+          <a href="#" target="_blank"><i class="bi bi-instagram"></i></a>
       </div>
   </footer>
+  <script src="../script/dynamic-icons.js"></script>
 </body>
 
 </html>

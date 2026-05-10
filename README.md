@@ -11,15 +11,8 @@ Webpage completa e responsiva desenvolvida para gerenciamento e interface de ser
 - Informativo: Seções dedicadas a Regras e Status do servidor em tempo real.
 - Design: Interface totalmente responsiva (Mobile/Desktop).
 
-## Print
-<img width="1913" height="909" alt="image" src="https://github.com/user-attachments/assets/7398a627-7b6a-4497-b268-b0bfbb9717b2" />
-
-### Responsivo a dispositivos móveis
-<img width="380" height="815" alt="image" src="https://github.com/user-attachments/assets/71556ed6-d05b-444e-a36c-e617acc5152f" />
-
-
-
-
+## Demo
+<img width="1142" height="912" alt="demo" src="https://github.com/user-attachments/assets/6e017201-6ce1-4068-bcf8-e09aa8a16e32" />
 
 
 ## Tecnologia

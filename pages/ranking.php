@@ -78,6 +78,13 @@ $offset = ($pagina - 1) * $por_pagina;
           <li class="nav-item">
             <a class="nav-link" href="../index.php"><i class="bi bi-house-door"></i>Início</a>
           </li>
+          <?php
+            if (!$_SESSION['user']) {          
+              echo '<li class="nav-item">';
+              echo '<a class="nav-link" href="register.php"><i class="bi bi-person-plus"></i>Cadastrar</a>';
+              echo '</li>';
+            }
+          ?>             
           <li class="nav-item">
             <a class="nav-link" href="download.php"><i class="bi bi-cloud-arrow-down"></i>Download</a>
           </li>

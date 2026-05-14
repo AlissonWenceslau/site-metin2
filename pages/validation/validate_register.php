@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
             if (mysqli_stmt_execute($stmt)) {
                 $_SESSION['success'] = "Sua conta foi criada com sucesso!";
-                header("location: ../../index.php");
+                header("location: ../register.php");
                 exit; // Sempre use exit após um header de redirecionamento
             }
         } catch (mysqli_sql_exception $e) {

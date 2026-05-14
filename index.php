@@ -28,6 +28,13 @@ require './pages/utils/utils.php'
           <li class="nav-item">
             <a class="nav-link active" href="index.php"><i class="bi bi-house-door"></i>Início</a>
           </li>
+          <?php
+            if (!$_SESSION['user']) {          
+              echo '<li class="nav-item">';
+              echo '<a class="nav-link" href="./pages/register.php"><i class="bi bi-person-plus"></i>Cadastrar</a>';
+              echo '</li>';
+            }
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="./pages/download.php"><i class="bi bi-cloud-arrow-down"></i>Download</a>
           </li>
@@ -68,7 +75,10 @@ require './pages/utils/utils.php'
         if ($_SESSION['user']) {
           require './pages/includes/panel.php';
         } else {
-          require './pages/includes/register.php';
+          echo '<div class="d-flex justify-content-center align-items-center flex-column">';
+          echo '<h2 class="text text-primary">Apresentação do Servidor</h2>';
+          echo '<div class="ratio ratio-21x9"><iframe src="https://www.youtube.com/embed/CAwasAQvgZQ?rel=0" title="YouTube video" allowfullscreen></iframe>';
+          echo '</div>';
         }
         ?>
       </div>

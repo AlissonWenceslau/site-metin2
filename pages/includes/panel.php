@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+  // Usuário não logado, redireciona para a página de login
+  header("Location: ../../index.php");
+  exit;
+}
+?>
 <div class="card mt-2">
   <div class="card-header">
     <div>

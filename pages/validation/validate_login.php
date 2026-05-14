@@ -5,7 +5,7 @@ require '../../connection/conn.php';
 try {
     $conn = new mysqli($servername, $username, $password, $dbaccount);
 } catch (mysqli_sql_exception $e) {
-    $_SESSION['error'] = "Erro na conexão com o banco de dados: " . $e->getMessage() . " <a href='status.php'>Status</a>";
+    $_SESSION['error'] = "Erro na conexão com o banco de dados: " . $e->getMessage() . " - <a href='status.php'>Status</a>";
     http_response_code(500);
     header('Location: ../login.php');
 }

@@ -28,6 +28,13 @@ require './utils/utils.php'
           <li class="nav-item" id="mainNav">
             <a class="nav-link active" href="../index.php"><i class="bi bi-house-door"></i>Início</a>
           </li>
+          <?php
+            if (!$_SESSION['user']) {          
+              echo '<li class="nav-item">';
+              echo '<a class="nav-link" href="register.php"><i class="bi bi-person-plus"></i>Cadastrar</a>';
+              echo '</li>';
+            }
+          ?>             
           <li class="nav-item">
             <a class="nav-link" href="download.php"><i class="bi bi-cloud-arrow-down"></i>Download</a>
           </li>
@@ -70,7 +77,7 @@ require './utils/utils.php'
         // Verifica se há erros na sessão e exibe-os
         if (isset($_SESSION['error'])) {
           echo "<div class='alert alert-danger' id='alert' role='alert'>";
-          echo '<i class="bi bi-person-fill-x me-1"></i>';
+          echo '<i class="bi bi-database-fill-x me-1"></i>';
           echo $_SESSION['error'];
           echo "</div>";
           // Limpa as mensagens de erro para evitar que apareçam novamente

@@ -62,7 +62,7 @@ require './utils/utils.php';
           </li>
         </ul>
         <?php
-        avatar($_SESSION['user'], $avatarBackgroundColor, '../index.php');
+        avatar($_SESSION['user'], $avatarBackgroundColor, 'logout.php');
         ?>
       </div>
     </div>

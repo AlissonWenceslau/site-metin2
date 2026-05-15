@@ -1,25 +1,46 @@
-html, body{
+html,
+body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
-main{
+
+main {
     flex: 1;
 }
-@media screen and (min-width: 992px){
-    .responsive{
+
+@media screen and (min-width: 992px) {
+    .responsive {
         display: flex;
         justify-content: space-between;
     }
+
+    /* Seleciona o menu dropdown quando ele é ativado pelo Bootstrap */
+    .dropdown-menu[data-bs-popper] {
+        left: auto !important;
+        right: 0px !important;
+        transform: translate(0px, 0px) !important;
+        /* Ajuste os 40px conforme a altura do seu botão */
+    }
 }
 
+
 @media screen and (max-width: 992px) {
-    .navbar-nav{
+    .navbar-nav {
         padding: 5px;
     }
 }
 
-.erro-register{
+.dropdown a[href]{
+    text-decoration: none;
+    color: white;
+}
+
+.dropdown-menu a[href]{
+    color: black;
+}
+
+.erro-register {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,37 +49,43 @@ main{
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
-a > i {
+a>i {
     margin-right: 5px;
 }
 
 .rodape {
     display: flex;
-    justify-content: space-between; /* Espaça os elementos */
-    align-items: center; /* Centraliza verticalmente */
+    justify-content: space-between;
+    /* Espaça os elementos */
+    align-items: center;
+    /* Centraliza verticalmente */
     padding: 20px;
-    background-color: #212529; /* Cor de fundo */
+    background-color: #212529;
+    /* Cor de fundo */
     color: white;
 }
 
 .direitos {
     text-align: center;
-    flex-grow: 1; /* Faz o texto ocupar o centro */
+    flex-grow: 1;
+    /* Faz o texto ocupar o centro */
 }
 
 .redes-sociais {
     display: flex;
-    gap: 15px; /* Espaço entre os ícones */
-    justify-content: flex-end; /* Garante que fique na direita */
+    gap: 15px;
+    /* Espaço entre os ícones */
+    justify-content: flex-end;
+    /* Garante que fique na direita */
 }
 
 .redes-sociais img {
@@ -66,6 +93,6 @@ a > i {
     height: 24px;
 }
 
-.redes-sociais > a > i{
+.redes-sociais>a>i {
     color: white;
 }

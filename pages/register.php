@@ -67,7 +67,7 @@ if (isset($_SESSION['user'])) {
             </li>
           </ul>
           <?php
-          avatar($_SESSION['user'], $avatarBackgroundColor, '../index.php');
+          avatar($_SESSION['user'], $avatarBackgroundColor, 'logout.php');
           ?>
         </div>
       </div>
@@ -100,7 +100,7 @@ if (isset($_SESSION['user'])) {
           unset($_SESSION['success'])
           ?>
           <div class="mb-3">
-            <label for="username" class="form-label">Login</label>
+            <label for="username" class="form-label"><i class="bi bi-person-vcard me-1"></i>Login</label>
             <div class="d-flex input-group has-validation">
               <input type="text" class="form-control" maxlength="12" aria-label="default input example" id="username" name="username" required>
               <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-title="Requisitos" data-bs-content="Deve conter no mínimo 8 caracter<br>Deve ter no máximo 12 caracter ">
@@ -110,14 +110,14 @@ if (isset($_SESSION['user'])) {
                 Campo obrigatório!
               </div>
             </div>
-            <label for="exampleFormControlInput1" class="form-label">Endereço de Email</label>
+            <label for="exampleFormControlInput1" class="form-label"><i class="bi bi-envelope-plus me-1"></i>Endereço de Email</label>
             <div class="d-flex input-group has-validation">
               <input type="email" class="form-control" maxlength="50" id="exampleFormControlInput1" name="email" data-bs-toggle="tooltip" data-bs-placement="top" title="email@example.com" required>
               <div class="invalid-feedback">
                 Campo obrigatório!
               </div>
             </div>
-            <label for="password" class="form-label">Senha</label>
+            <label for="password" class="form-label"><i class="bi bi-lock me-1"></i>Senha</label>
             <div class="d-flex input-group has-validation">
               <input type="password" maxlength="12" class="form-control" id="password" name="password" required>
               <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-title="Requisitos" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter no mínimo 8 catacter<br>Deve ter no máximo 12 caracter<br>Deve conter 1 letra maiúscula<br>Deve conter 1 letra minúscula<br>Deve conter 1 caracter especial<br>Deve conter 1 número">
@@ -127,14 +127,14 @@ if (isset($_SESSION['user'])) {
                 Campo obrigatório!
               </div>
             </div>
-            <label for="password-confirm" class="form-label">Confirmar Senha</label>
+            <label for="password-confirm" class="form-label"><i class="bi bi-arrow-clockwise me-1"></i>Confirmar Senha</label>
             <div class="d-flex input-group has-validation">
               <input type="password" maxlength="12" class="form-control" id="password-confirm" name="password-confirm" required>
               <div class="invalid-feedback">
                 Campo obrigatório!
               </div>
             </div>
-            <label for="password-character" class="form-label">Senha do Personagem</label>
+            <label for="password-character" class="form-label"><i class="bi bi-key"></i>Senha do Personagem</label>
             <div class="d-flex input-group has-validation">
               <input class="form-control" maxlength="7" type="number" value="1234567" aria-label="default input example" id="password-character" name="character" required>
               <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-title="Requisitos" data-bs-content="Deve conter no exatamente 7 dígitos">

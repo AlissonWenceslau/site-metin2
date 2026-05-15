@@ -123,7 +123,7 @@ $conn->close();
           </li>
         </ul>
         <?php
-        avatar($_SESSION['user'], $avatarBackgroundColor, '../index.php');
+        avatar($_SESSION['user'], $avatarBackgroundColor, 'logout.php');
         ?>
       </div>
     </div>
@@ -152,14 +152,14 @@ $conn->close();
         unset($_SESSION['errors']);
         ?>
         <form class="needs-validation" method="post" action="" novalidate>
-          <label for="actualPassword">Senha atual</label>
+          <label for="actualPassword"><i class="bi bi-lock me-1"></i>Senha atual</label>
           <div class="d-flex input-group has-validation">
             <input type="password" class="form-control campo-senha" id="actualPassword" name="actualPassword" required>
             <div class="invalid-feedback">
               Campo obrigatório!
             </div>
           </div>
-          <label for="newPassword">Nova senha</label>
+          <label for="newPassword"><i class="bi bi-arrow-clockwise me-1"></i>Nova senha</label>
           <div class="d-flex input-group has-validation">
             <input type="password" class="form-control campo-senha" id="newPassword" name="newPassword" required>
             <button type="button" class="btn btn-primary ms-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="Deve conter no mínimo 8 catacter<br>Deve ter no máximo 12 caracter<br>Deve conter 1 letra maiúscula<br>Deve conter 1 letra minúscula<br>Deve conter 1 caractere especial<br>Deve conter 1 número">
@@ -169,7 +169,7 @@ $conn->close();
               Campo obrigatório!
             </div>
           </div>
-          <label for="newConfirmPassword">Confirmar Senha</label>
+          <label for="newConfirmPassword"><i class="bi bi-arrow-clockwise me-1"></i>Confirmar Senha</label>
           <div class="d-flex input-group has-validation">
             <input type="password" class="form-control campo-senha" id="newConfirmPassword" name="newConfirmPassword" required>
             <div class="invalid-feedback">

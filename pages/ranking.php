@@ -113,7 +113,7 @@ $offset = ($pagina - 1) * $por_pagina;
           </li>
         </ul>
         <?php
-        avatar($_SESSION['user'], $avatarBackgroundColor, '../index.php');
+        avatar($_SESSION['user'], $avatarBackgroundColor, 'logout.php');
         ?>
       </div>
     </div>

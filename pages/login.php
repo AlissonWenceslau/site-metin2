@@ -63,7 +63,7 @@ require './utils/utils.php'
           </li>
         </ul>
         <?php
-        avatar($_SESSION['user'], $avatarBackgroundColor, '../index.php');
+        avatar($_SESSION['user'], $avatarBackgroundColor, 'logout.php');
         ?>
       </div>
     </div>
@@ -71,13 +71,13 @@ require './utils/utils.php'
   <main>
     <div class="content d-flex justify-content-center align-items-sm-start mt-5">
       <div class="card-login border border-dark p-5 m-2 w-100 rounded">
-        <h3 class="text text-primary text-center">Faça o seu login</h3>
+        <h3 class="text text-primary text-center"><i class="bi bi-box-arrow-in-right me-1"></i>Faça o seu login</h3>
         <?php
         session_start();
         // Verifica se há erros na sessão e exibe-os
         if (isset($_SESSION['error'])) {
           echo "<div class='alert alert-danger' id='alert' role='alert'>";
-          echo '<i class="bi bi-database-fill-x me-1"></i>';
+          echo '<i class="bi bi bi-person-fill-x me-1"></i>';
           echo $_SESSION['error'];
           echo "</div>";
           // Limpa as mensagens de erro para evitar que apareçam novamente
@@ -86,14 +86,14 @@ require './utils/utils.php'
         ?>
         <form class="needs-validation" method="post" action="./validation/validate_login.php" novalidate>
           <div class="form-group">
-            <label for="login">Login</label>
+            <label for="login"><i class="bi bi-person-vcard me-1"></i>Login</label>
             <input type="text" class="form-control" id="login" name="login" required>
             <div class="invalid-feedback">
               Campo obrigatório!
             </div>
           </div>
           <div class="form-group">
-            <label for="password">Senha</label>
+            <label for="password"><i class="bi bi-lock me-1"></i>Senha</label>
             <input type="password" class="form-control campo-senha" id="password" name="password" required>
             <div class="invalid-feedback">
               Campo obrigatório!

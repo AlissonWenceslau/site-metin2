@@ -72,8 +72,18 @@ function avatar($session, $avatarBackgroundColor, $path)
         $letraSegura = htmlspecialchars($letra);
         $cor = $avatarBackgroundColor[$letra] ?? '#CCC'; // Cor padrão
 
-        echo '<a href="'.$path.'" class="rounded-circle border d-flex justify-content-center align-items-center text-light link-offset-2 link-underline link-underline-opacity-0 me-1"
-        style="width:50px;height:50px;background-color:' . $cor . ';" alt="Avatar">';
-        echo $letraSegura . '</a>';
+        echo '<div class="dropdown me-1">';
+        echo '<a href="#" class="d-flex align-items-center dropdown-toggle" data-bs-toggle="dropdown">';
+        echo 
+            '<div class="rounded-circle border d-flex justify-content-center align-items-center text-light link-offset-2 link-underline link-underline-opacity-0 me-1"
+            style="width:40px;height:40px;background-color:' . $cor . ';" alt="Avatar">' 
+                . $letraSegura . 
+            '</div>';
+        echo '</a>';
+        echo '<ul class="dropdown-menu">';
+        echo '<li><a class="dropdown-item" href="'.$path.'">Sair</a></li>';
+        echo '</ul>';
+        echo '</div>';
+
     }
 }

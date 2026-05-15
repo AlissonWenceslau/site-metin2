@@ -64,7 +64,7 @@ $conn->close();
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="../assets/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="../../assets/favicon.ico">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
@@ -119,7 +119,7 @@ $conn->close();
           </li>
         </ul>
         <?php
-        avatar($_SESSION['user'], $avatarBackgroundColor, '../../index.php');
+        avatar($_SESSION['user'], $avatarBackgroundColor, '../logout.php');
         ?>
       </div>
     </div>
@@ -147,12 +147,12 @@ $conn->close();
         unset($_SESSION['errors']);
         ?>
         <form class="needs-validation" method="post" action="" novalidate>
-          <label for="actualPassword">Login</label>
+          <label for="actualPassword"><i class="bi bi-person-vcard me-1"></i>Login</label>
           <input type="text" class="form-control campo-senha" id="account" name="account" required>
           <div class="invalid-feedback">
             Campo obrigatório!
           </div>
-          <label for="addCash">Quantidade</label>
+          <label for="addCash"><i class="bi bi-cash-coin me-1"></i>Quantidade</label>
           <div class="d-flex">
             <input type="number" class="form-control campo-senha" id="addCash" name="addCash" required>
           </div>

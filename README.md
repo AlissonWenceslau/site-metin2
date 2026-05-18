@@ -12,7 +12,8 @@ Webpage completa e responsiva desenvolvida para gerenciamento e interface de ser
 - Design: Interface totalmente responsiva (Mobile/Desktop).
 
 ## Demo
-<img width="1142" height="912" alt="demo" src="https://github.com/user-attachments/assets/6e017201-6ce1-4068-bcf8-e09aa8a16e32" />
+<img width="1915" height="905" alt="image" src="https://github.com/user-attachments/assets/a9f37ec1-ff94-46bb-a0d6-62b333b718c5" />
+
 
 
 ## Tecnologia

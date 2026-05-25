@@ -96,3 +96,10 @@ a>i {
 .redes-sociais>a>i {
     color: white;
 }
+
+/*[NOTICIAS] Efeito opcional de hover (pode colocar na sua tag <style> ou arquivo CSS)*/
+.hover-zoom:hover {
+    transform: translateY(-3px);
+    border-color: #ffc107 !important; /* Muda a borda para amarelo/ouro no hover */
+    box-shadow: 0 4px 15px #0B5ED7 !important;
+}

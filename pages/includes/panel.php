@@ -21,5 +21,6 @@ if (!isset($_SESSION['user'])) {
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><?php echo '<i class="bi bi-lock me-1"></i><a href="./pages/change_password.php">Alterar senha</a>' ?></li>
     <?php if ($_SESSION['web'] == 1) echo '<li class="list-group-item"><i class="bi bi-cash-coin me-1"></i><a href="../pages/adm/add_cash.php">Adicionar Cash</a></li>' ?>
+    <?php if ($_SESSION['web'] == 1) echo '<li class="list-group-item"><i class="bi bi-newspaper me-1"></i><a href="../pages/adm/register_news.php">Adicionar Noticia</a></li>' ?>    
   </ul>
 </div>

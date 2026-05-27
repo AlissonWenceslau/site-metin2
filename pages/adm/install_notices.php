@@ -1,5 +1,5 @@
 <?php
-    require_once './connection/conn.php';
+    require_once '../../connection/conn.php';
 
     $dsn = "mysql:host=$servername;dbname=$dbaccount;charset=$charset";
     $options = [
@@ -48,6 +48,13 @@
             $pdo->exec($sqlTrigger);
         }
 
+        // 2. SALVA A MENSAGEM DE SUCESSO NA SESSÃO
+        $_SESSION['success_system'] = "🚀 Sistema de notícias inicializado e sincronizado com o horário de Brasília!";
+
+        // 3. REDIRECIONA PARA A OUTRA PÁGINA (mude 'index.php' para o arquivo que preferir)
+        header("Location: ../../index.php");
+        exit(); // Interrompe o script para garantir o redirecionamento imediato
+        
     } catch (\PDOException $e) {
         // Se houver erro na conexão ou no SQL, captura aqui
         die("Erro no sistema de notícias: " . $e->getMessage());

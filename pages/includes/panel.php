@@ -21,6 +21,22 @@ if (!isset($_SESSION['user'])) {
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><?php echo '<i class="bi bi-lock me-1"></i><a href="./pages/change_password.php">Alterar senha</a>' ?></li>
     <?php if ($_SESSION['web'] == 1) echo '<li class="list-group-item"><i class="bi bi-cash-coin me-1"></i><a href="../pages/adm/add_cash.php">Adicionar Cash</a></li>' ?>
-    <?php if ($_SESSION['web'] == 1) echo '<li class="list-group-item"><i class="bi bi-newspaper me-1"></i><a href="../pages/adm/register_news.php">Adicionar Noticia</a></li>' ?>    
+    <?php if (isset($_SESSION['web']) && $_SESSION['web'] == 1): ?>
+        
+        <?php if (isset($_SESSION['news_system']) && $_SESSION['news_system'] === 'success'): ?>
+            <li class="list-group-item">
+                <i class="bi bi-newspaper me-1"></i>
+                <a href="../pages/adm/register_news.php">Adicionar Notícia</a>
+            </li>
+        <?php else: ?>
+            <li class="list-group-item">
+                <i class="bi bi-newspaper me-1"></i>
+                <a href="../pages/adm/install_notices.php" onclick="return confirm('Atenção! Esta ação irá verificar e criar a tabela de notícias e os gatilhos de fuso horário no seu banco de dados.\n\nSe a tabela já existir, as configurações serão atualizadas.\n\nDeseja prosseguir com a instalação do sistema de notícias?')">
+                    Instalar sistema de notícia
+                </a>
+            </li>
+        <?php endif; ?>
+
+    <?php endif; ?>   
   </ul>
 </div>

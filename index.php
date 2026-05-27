@@ -3,13 +3,35 @@ session_start();
 require './pages/utils/utils.php';
 require './connection/conn.php';
 
-// Exemplo de conexão PDO
-$pdo = new PDO("mysql:host=$servername;dbname=$dbaccount", "$username", "$password");
+try{
+  // Exemplo de conexão PDO
+  $pdo = new PDO("mysql:host=$servername;dbname=$dbaccount", "$username", "$password");
 
-// Prepara e executa a busca
-$sql = "SELECT id, titulo, conteudo, data_publicacao FROM noticias ORDER BY data_publicacao DESC LIMIT 5";
-$query = $pdo->query($sql);
-$noticias = $query->fetchAll(PDO::FETCH_ASSOC);
+  // Prepara e executa a busca
+  $sql = "SELECT id, titulo, conteudo, data_publicacao FROM noticias ORDER BY data_publicacao DESC LIMIT 5";
+  $query = $pdo->query($sql);
+  $noticias = $query->fetchAll(PDO::FETCH_ASSOC);
+
+  //Essa variável é utilizada no 'panel.php' dentro da pasta 'adm'
+  $_SESSION['news_system'] = 'success';
+
+}catch (PDOException $e) {
+    // O código '42S02' é o erro específico do MySQL para "Tabela não encontrada"
+    if ($e->getCode() === '42S02' || strpos($e->getMessage(), 'not found') !== false) {
+        
+        // OPÇÃO A: Silenciar o erro e deixar a lista vazia (o site carrega normal, apenas sem notícias)
+        $noticias = []; 
+
+        $_SESSION['news_system'] = 'failed';
+        
+        // OPÇÃO B (Opcional): Se quiser se avisado, você pode descomentar a linha abaixo:
+        // error_log("Aviso: A tabela noticias ainda não foi criada no banco de dados.");
+        
+    } else {
+        // Se for QUALQUER OUTRO erro de banco (senha errada, queda de servidor), aí sim ele avisa
+        die("Erro crítico no banco de dados: " . $e->getMessage());
+    }
+}
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -78,16 +100,41 @@ $noticias = $query->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </nav>
   <main>
+    <!--Toast de mensagens do sistema de noticia -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+    
+      <?php if (isset($_SESSION['sucesso_sistema'])): ?>
+          <div id="toastSucesso" class="toast align-items-center text-white bg-success border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+              <div class="d-flex">
+                  <div class="toast-body fw-semibold">
+                      <?= $_SESSION['sucesso_sistema']; ?>
+                  </div>
+                  <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+          </div>
+          <?php unset($_SESSION['sucesso_sistema']); // Limpa a mensagem ?>
+      <?php endif; ?>
+
+      <?php if (isset($_SESSION['erro_sistema'])): ?>
+          <div id="toastErro" class="toast align-items-center text-white bg-danger border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="7000">
+              <div class="d-flex">
+                  <div class="toast-body fw-semibold">
+                      <?= $_SESSION['erro_sistema']; ?>
+                  </div>
+                  <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+          </div>
+          <?php unset($_SESSION['erro_sistema']); // Limpa a mensagem ?>
+      <?php endif; ?>
+
+    </div>
+    <!--Fim do toast de mensagens do sistema de noticia -->
+    
     <div class="d-flex flex-column">
       <div class="container">
         <?php
           if ($_SESSION['user']) {
             require './pages/includes/panel.php';
-          } else {
-            echo '<div class="d-flex justify-content-center align-items-center flex-column">';
-            echo '<h2 class="text text-primary">Apresentação do Servidor</h2>';
-            echo '<div class="ratio ratio-21x9"><iframe src="https://www.youtube.com/embed/CAwasAQvgZQ?rel=0" title="YouTube video" allowfullscreen></iframe></div>';
-            echo '</div>';
           }
         ?>
         <div class="container mt-5 mb-2">
@@ -99,78 +146,95 @@ $noticias = $query->fetchAll(PDO::FETCH_ASSOC);
               <hr class="flex-grow-1 border-secondary opacity-25 d-none d-sm-block">
           </div>
 
-            <div class="row justify-content-center g-4">
-                <?php foreach ($noticias as $index => $item): ?>
-                    
-                    <!-- CARD DA NOTÍCIA (Gatilho para abrir o Modal) -->
-                    <div class="col-12 col-md-10 col-lg-8">
-                        <!-- Observe os atributos data-bs-toggle e data-bs-target -->
-                        <div class="card bg-dark text-light border-secondary h-100 shadow-sm hover-zoom" 
-                            style="transition: transform 0.2s; cursor: pointer;"
-                            data-bs-toggle="modal" 
-                            data-bs-target="#modalNoticia<?= $item['id']; ?>">
-                            
-                            <div class="card-body d-flex align-items-center justify-content-between p-4">
-                                <div>
-                                  <?php if ($index === 0): ?>
-                                          <!-- Destaca em vermelho (bg-danger) apenas a última notícia -->
-                                          <span class="badge bg-danger text-uppercase mb-2" style="font-size: 0.75rem; letter-spacing: 1px; animation: pulse 2s infinite;">🔥NOVIDADE</span>
-                                      <?php else: ?>
-                                          <!-- As outras notícias ganham um tom neutro -->
-                                          <span class="badge bg-secondary text-uppercase mb-2" style="font-size: 0.75rem;">Notícia</span>
+          <div class="row justify-content-center g-4">
+            <?php if (!empty($noticias)): ?>
+              <?php foreach ($noticias as $index => $item): ?>
+                  
+                <!-- CARD DA NOTÍCIA (Gatilho para abrir o Modal) -->
+                <div class="col-12 col-md-10 col-lg-8">
+                  <div class="card bg-dark text-light border-secondary h-100 shadow-sm hover-zoom" 
+                      style="transition: transform 0.2s; cursor: pointer;"
+                      data-bs-toggle="modal" 
+                      data-bs-target="#modalNoticia<?= $item['id']; ?>">
+                      
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                              <?php if ($index === 0): ?>
+                                      <span class="badge bg-danger text-uppercase mb-2" style="font-size: 0.75rem; letter-spacing: 1px; animation: pulse 2s infinite;">🔥NOVIDADE</span>
+                                  <?php else: ?>
+                                      <span class="badge bg-secondary text-uppercase mb-2" style="font-size: 0.75rem;">Notícia</span>
                                   <?php endif; ?>
-                                    <h4 class="card-title h5 mb-0 text-light fw-semibold">
-                                        <?= htmlspecialchars(utf8_encode($item['titulo'])); ?>
-                                    </h4>
-                                </div>
-                                <div class="text-end">
-                                    <span class="text-light small"><?= date('d/m/Y', strtotime($item['data_publicacao'])); ?></span>
-                                </div>
+                                <h4 class="card-title h5 mb-0 text-light fw-semibold">
+                                    <?= htmlspecialchars($item['titulo']); ?>
+                                </h4>
+                            </div>
+                            <div class="text-end">
+                                <span class="text-light small d-block mb-1"><?= date('d/m/Y', strtotime($item['data_publicacao'])); ?></span>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- MODAL ESPECÍFICO DESTA NOTÍCIA -->
-                    <div class="modal fade" id="modalNoticia<?= $item['id']; ?>" tabindex="-1" aria-labelledby="labelModal<?= $item['id']; ?>" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg">
-                            <div class="modal-content bg-dark text-light border-secondary">
-                                
-                                <!-- Cabeçalho do Modal -->
-                                <div class="modal-header border-secondary">
-                                    <div>
-                                  <?php if ($index === 0): ?>
-                                          <!-- Destaca em vermelho (bg-danger) apenas a última notícia -->
-                                          <span class="badge bg-danger text-uppercase mb-2" style="font-size: 0.75rem; letter-spacing: 1px; animation: pulse 2s infinite;">🔥NOVIDADE</span>
-                                      <?php else: ?>
-                                          <!-- As outras notícias ganham um tom neutro -->
-                                          <span class="badge bg-secondary text-uppercase mb-2" style="font-size: 0.75rem;">Notícia</span>
-                                  <?php endif; ?>
-                                        <h5 class="modal-title fw-bold text-warning" id="labelModal<?= $item['id']; ?>">
-                                            <?= htmlspecialchars(utf8_encode($item['titulo'])); ?>
-                                        </h5>
-                                        <small class="text-light">Publicado em <?= date('d/m/Y à\s H:i', strtotime($item['data_publicacao'])); ?></small>
-                                    </div>
-                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                
-                                <!-- Corpo do Modal (Conteúdo Completo) -->
-                                <div class="modal-body fs-5 lh-base text-secondary-light" style="max-height: 70vh; overflow-y: auto;">
-                                    <!-- Busque o campo 'conteudo' na sua query para exibi-lo aqui -->
-                                    <?= nl2br(htmlspecialchars(utf8_encode($item['conteudo']))); ?>
-                                </div>
-                                
-                                <!-- Rodapé do Modal -->
-                                <div class="modal-footer border-secondary">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                </div>
-
+                        <?php if (isset($_SESSION['web']) && $_SESSION['web'] == 1): ?>
+                            <div class="text-end mt-3 border-top border-secondary pt-2">
+                                <a href="./pages/adm/notices/delete_notice.php?id=<?= $item['id']; ?>" 
+                                   class="btn btn-outline-danger btn-sm p-1 px-2 fw-semibold"
+                                   style="font-size: 0.8rem;"
+                                   onclick="event.stopPropagation(); return confirm('⚠️ Tem certeza que deseja excluir esta notícia?\n\nEsta ação não poderá ser desfeita!');">
+                                    <i class="bi bi-trash me-1"></i> Excluir Notícia
+                                </a>
                             </div>
-                        </div>
-                    </div>
-                    <!-- FIM DO MODAL -->
+                        <?php endif; ?>
 
-                <?php endforeach; ?>
-            </div>
+                    </div>
+                  </div>
+                </div>
+
+                  <!-- MODAL ESPECÍFICO DESTA NOTÍCIA -->
+                  <div class="modal fade" id="modalNoticia<?= $item['id']; ?>" tabindex="-1" aria-labelledby="labelModal<?= $item['id']; ?>" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-lg">
+                          <div class="modal-content bg-dark text-light border-secondary">
+                              
+                              <!-- Cabeçalho do Modal -->
+                              <div class="modal-header border-secondary">
+                                  <div>
+                                <?php if ($index === 0): ?>
+                                        <!-- Destaca em vermelho (bg-danger) apenas a última notícia -->
+                                        <span class="badge bg-danger text-uppercase mb-2" style="font-size: 0.75rem; letter-spacing: 1px; animation: pulse 2s infinite;">🔥NOVIDADE</span>
+                                    <?php else: ?>
+                                        <!-- As outras notícias ganham um tom neutro -->
+                                        <span class="badge bg-secondary text-uppercase mb-2" style="font-size: 0.75rem;">Notícia</span>
+                                <?php endif; ?>
+                                      <h5 class="modal-title fw-bold text-warning" id="labelModal<?= $item['id']; ?>">
+                                          <?= htmlspecialchars($item['titulo']); ?>
+                                      </h5>
+                                      <small class="text-light">Publicado em <?= date('d/m/Y à\s H:i', strtotime($item['data_publicacao'])); ?></small>
+                                  </div>
+                                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              
+                              <!-- Corpo do Modal (Conteúdo Completo) -->
+                              <div class="modal-body fs-5 lh-base text-secondary-light" style="max-height: 70vh; overflow-y: auto;">
+                                  <!-- Busque o campo 'conteudo' na sua query para exibi-lo aqui -->
+                                  <?= nl2br(htmlspecialchars($item['conteudo'])); ?>
+                              </div>
+                              
+                              <!-- Rodapé do Modal -->
+                              <div class="modal-footer border-secondary">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+                  <!-- FIM DO MODAL -->
+              <?php endforeach; ?>
+            <?php else: ?>
+              <div class="col-12 col-md-8 text-center text-muted py-5">
+                  <p class="fs-5 mb-0">📡 Nenhuma novidade encontrada no momento.</p>
+                  <small>Fique ligado, as atualizações aparecem aqui!</small>
+              </div>
+            <?php endif; ?>                
+          </div>
         </div>
     </div>
   </main>
@@ -187,6 +251,7 @@ $noticias = $query->fetchAll(PDO::FETCH_ASSOC);
       </div>
   </footer>
   <script src="./script/dynamic-icons.js"></script>
+  <script src="./script/toast-message.js"></script>
 </body>
 
 </html>

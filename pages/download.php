@@ -41,7 +41,7 @@ require './utils/utils.php';
             <a class="nav-link" href="ranking.php"><i class="bi bi-trophy"></i>Ranking</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="rules.php"><i class="bi bi-book"></i>Regras</a>
+            <a class="nav-link" href="rules.php"><i class="bi bi-shield-shaded me-2"></i>Regras</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="status.php"><i class="bi bi-info-circle"></i>Status</a>
@@ -49,71 +49,113 @@ require './utils/utils.php';
         </ul>
       </div>
       <div class="logar">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav align-items-center pe-3 pe-md-4">
           <li class="nav-item">
-            <?php
-            if (!$_SESSION['user']) {
-              echo '<a class="btn btn-primary me-2" href="login.php">';
-              echo '<i class="bi bi-box-arrow-in-right me-1"></i>';
-              echo 'Entrar';
-              echo '</a>';
-            }
-            ?>
+            <?php if (!$_SESSION['user']): ?>
+              <a class="btn btn-outline-primary btn-sm px-3 py-1.5 fw-semibold text-uppercase d-inline-flex align-items-center gap-2" 
+                href="./login.php" 
+                style="letter-spacing: 0.5px; font-size: 0.85rem; transition: all 0.2s ease;">
+                <i class="bi bi-box-arrow-in-right fs-5"></i>
+                <span>Entrar</span>
+              </a>
+            <?php endif; ?>
           </li>
         </ul>
         <?php
-        avatar($_SESSION['user'], $avatarBackgroundColor, 'logout.php');
+        avatar($_SESSION['user'], $avatarBackgroundColor, 'logout.php', './change_password.php');
         ?>
       </div>
     </div>
   </nav>
-  <main class="d-flex justify-content-center">
-    <div class="w-75">
-      <table class="table">
-        <thead class="thead-dark">
-          <h2 class="text text-primary">Requisitos Recomendados</h2>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Sistema Operacional</th>
-            <td>Windows 10+</td>
-          </tr>
-          <tr>
-            <th scope="row">Processador</th>
-            <td>Intel Core I5</td>
-          </tr>
-          <tr>
-          <tr>
-            <th scope="row">Memória RAM</th>
-            <td>RAM 4GB</td>
-          </tr>
-          <tr>
-            <th scope="row">Placa de Vídeo</th>
-            <td>Geforce GTX 1060 </td>
-          </tr>
-          <tr>
-          <tr>
-            <th scope="row">DirectX</th>
-            <td>Directx 9.0c ou mais recente</td>
-          </tr>
-          <tr>
-            <th scope="row">Disco Rígido</th>
-            <td>8 GB de espaço livre</td>
-          </tr>
-          <tr>
-          <tr>
-            <th scope="row">Internet</th>
-            <td>Banda Larga</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="d-flex justify-content-center">
-        <a class="bi bi-cloud-arrow-down-fill btn btn-primary w-100 mt-2 mb-2" href="#LinkAqui" role="button">
-          Fazer Download
-        </a>
-      </div>
+<main class="bg-white text-dark min-vh-100 py-5">
+    <div class="content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+
+                    <div class="text-center mb-5 bg-dark p-4 rounded border border-secondary shadow-sm">
+                        <h2 class="h3 text-white text-uppercase fw-bold mb-2" style="letter-spacing: 1px;">
+                            <i class="bi bi-cloud-arrow-down-fill me-2 text-primary"></i>Central de Download
+                        </h2>
+                        <p class="text-white-50 small mb-0">Baixe o cliente oficial e comece sua jornada hoje mesmo.</p>
+                    </div>
+
+                    <div class="text-center mb-5 p-4 rounded bg-light border border-secondary-subtle shadow-sm">
+                        <p class="fw-semibold text-ligth mb-2 small text-uppercase" style="letter-spacing: 0.5px;">Cliente Oficial Completo</p>
+                        <a class="btn btn-primary btn-lg px-5 py-3 fw-bold text-uppercase d-inline-flex align-items-center gap-2 download-btn shadow" 
+                           href="#LinkAqui" 
+                           role="button">
+                            <i class="bi bi-download fs-5"></i> Fazer Download do Jogo
+                        </a>
+                        <div class="text-ligth small mt-2">
+                            <i class="bi bi-shield-check text-success me-1"></i> Arquivo verificado e seguro contra vírus.
+                        </div>
+                    </div>
+
+                    <div class="card bg-dark text-light border-secondary shadow-sm">
+                        <div class="card-header bg-transparent border-secondary py-3">
+                            <h3 class="h6 text-uppercase fw-bold text-primary mb-0 d-flex align-items-center gap-2" style="letter-spacing: 0.5px;">
+                                <i class="bi bi-cpu text-warning"></i> Requisitos Recomendados do Sistema
+                            </h3>
+                        </div>
+                        
+                        <div class="card-body p-0">
+                            <div class="row g-0 spec-row border-bottom border-secondary-subtle">
+                                <div class="col-4 p-3 fw-bold text-ligth text-uppercase small bg-secondary bg-opacity-10 d-flex align-items-center">
+                                    <i class="bi bi-windows me-2 text-info"></i> Sistema
+                                </div>
+                                <div class="col-8 p-3 text-white fw-medium">Windows 10+</div>
+                            </div>
+
+                            <div class="row g-0 spec-row border-bottom border-secondary-subtle">
+                                <div class="col-4 p-3 fw-bold text-ligth text-uppercase small bg-secondary bg-opacity-10 d-flex align-items-center">
+                                    <i class="bi bi-cpu-fill me-2 text-primary"></i> Processador
+                                </div>
+                                <div class="col-8 p-3 text-white fw-medium">Intel Core i5 ou equivalente</div>
+                            </div>
+
+                            <div class="row g-0 spec-row border-bottom border-secondary-subtle">
+                                <div class="col-4 p-3 fw-bold text-ligth text-uppercase small bg-secondary bg-opacity-10 d-flex align-items-center">
+                                    <i class="bi bi-memory me-2 text-danger"></i> Memória RAM
+                                </div>
+                                <div class="col-8 p-3 text-white fw-medium">4 GB de RAM</div>
+                            </div>
+
+                            <div class="row g-0 spec-row border-bottom border-secondary-subtle">
+                                <div class="col-4 p-3 fw-bold text-ligth text-uppercase small bg-secondary bg-opacity-10 d-flex align-items-center">
+                                    <i class="bi bi-gpu-card me-2 text-success"></i> Placa de Vídeo
+                                </div>
+                                <div class="col-8 p-3 text-white fw-medium">NVIDIA GeForce GTX 1060</div>
+                            </div>
+
+                            <div class="row g-0 spec-row border-bottom border-secondary-subtle">
+                                <div class="col-4 p-3 fw-bold text-ligth text-uppercase small bg-secondary bg-opacity-10 d-flex align-items-center">
+                                    <i class="bi bi-box-seam me-2 text-warning"></i> DirectX
+                                </div>
+                                <div class="col-8 p-3 text-white fw-medium">DirectX 9.0c ou mais recente</div>
+                            </div>
+
+                            <div class="row g-0 spec-row border-bottom border-secondary-subtle">
+                                <div class="col-4 p-3 fw-bold text-ligth text-uppercase small bg-secondary bg-opacity-10 d-flex align-items-center">
+                                    <i class="bi bi-hdd-fill me-2 text-info"></i> Disco Rígido
+                                </div>
+                                <div class="col-8 p-3 text-white fw-medium">8 GB de espaço livre</div>
+                            </div>
+
+                            <div class="row g-0 spec-row">
+                                <div class="col-4 p-3 fw-bold text-ligth text-uppercase small bg-secondary bg-opacity-10 d-flex align-items-center">
+                                    <i class="bi bi-router-fill me-2 text-light"></i> Internet
+                                </div>
+                                <div class="col-8 p-3 text-white fw-medium">Conexão de Banda Larga</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
-  </main>
+</main>
   <footer class="rodape">   
       <!-- Direitos Autorais no meio -->
       <div class="direitos">

@@ -92,7 +92,7 @@ $offset = ($pagina - 1) * $por_pagina;
             <a class="nav-link active" href="ranking.php"><i class="bi bi-trophy"></i>Ranking</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="rules.php"><i class="bi bi-book"></i>Regras</a>
+            <a class="nav-link" href="rules.php"><i class="bi bi-shield-shaded me-2"></i>Regras</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="status.php"><i class="bi bi-info-circle"></i>Status</a>
@@ -100,88 +100,119 @@ $offset = ($pagina - 1) * $por_pagina;
         </ul>
       </div>
       <div class="logar">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav align-items-center pe-3 pe-md-4">
           <li class="nav-item">
-            <?php
-            if (!$_SESSION['user']) {
-              echo '<a class="btn btn-primary me-2" href="login.php">';
-              echo '<i class="bi bi-box-arrow-in-right me-1"></i>';
-              echo 'Entrar';
-              echo '</a>';
-            }
-            ?>
+            <?php if (!$_SESSION['user']): ?>
+              <a class="btn btn-outline-primary btn-sm px-3 py-1.5 fw-semibold text-uppercase d-inline-flex align-items-center gap-2" 
+                href="./login.php" 
+                style="letter-spacing: 0.5px; font-size: 0.85rem; transition: all 0.2s ease;">
+                <i class="bi bi-box-arrow-in-right fs-5"></i>
+                <span>Entrar</span>
+              </a>
+            <?php endif; ?>
           </li>
         </ul>
         <?php
-        avatar($_SESSION['user'], $avatarBackgroundColor, 'logout.php');
+        avatar($_SESSION['user'], $avatarBackgroundColor, 'logout.php', './change_password.php');
         ?>
       </div>
     </div>
   </nav>
-    <main>
-        <div class="content">
-            <div class="container">
-                <h2 class="text text-primary">Ranking de Personagens</h2>
-                <table class="table table-striped table-hover text-center">
-                    <thead class="table-dark">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Classe</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Nível</th>
-                            <th scope="col">Exp</th>
-                            <th scope="col">Reino</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $count = 0;
-                        // Saída dos dados de cada linha
-                        foreach ($players as $player => $row) {
-                            $position = $offset + $player + 1;
-                            echo "<tr>";
-                            echo "<th scop='row'>" . $position . "</th>";
-                            echo "<td>" . pgClass($row['job']) . "</td>";
-                            echo "<td>" . $row["name"] . "</td>";
-                            echo "<td>" . $row["level"] . "</td>";
-                            echo "<td>" . $row["exp"] . "</td>";
-                            echo "<td>" . pgKingdom($row["empire"]) . "</td>";
-                            echo "</tr>";
-                        }
+<main class="bg-white text-dark min-vh-100 py-5">
+    <div class="content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-xl-10">
 
+                    <div class="text-center mb-4 bg-dark p-4 rounded border border-secondary shadow-sm">
+                        <h2 class="h3 text-white text-uppercase fw-bold mb-2" style="letter-spacing: 1px;">
+                            <i class="bi bi-trophy-fill me-2 text-warning"></i>Ranking de Personagens
+                        </h2>
+                        <p class="text-white-50 small mb-0">Os guerreiros mais poderosos que moldam a história do servidor.</p>
+                    </div>
 
-                        // Fecha a conexão
-                        $conn->close();
-                        ?>
-                    </tbody>
-                </table>
-                <?php
-                $total_paginas = ceil($total / $por_pagina);
-                $limite = 2; // Número de páginas a mostrar antes e depois da página atual
-                echo '<div class="container">';
-                echo '<div class="pagination">';
+                    <div class="card bg-dark text-light border-secondary shadow-sm">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover align-middle mb-0 text-center custom-table">
+                                <thead>
+                                    <tr class="border-bottom border-secondary text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px;">
+                                        <th scope="col" class="py-3 text-light">#</th>
+                                        <th scope="col" class="py-3 text-light">Classe</th>
+                                        <th scope="col" class="py-3 text-light">Nome</th>
+                                        <th scope="col" class="py-3 text-light">Nível</th>
+                                        <th scope="col" class="py-3 text-light">Exp</th>
+                                        <th scope="col" class="py-3 text-light">Reino</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $count = 0;
+                                    foreach ($players as $player => $row) {
+                                        $position = $offset + $player + 1;
+                                        
+                                        $rowClass = '';
+                                        $medalha = '';
+                                        
+                                        if ($position === 1) {
+                                            $rowClass = 'table-podium-gold';
+                                            $medalha = '<i class="bi bi-award-fill text-warning fs-5 me-1 animate-glow" title="1º Lugar (Ouro)"></i> ';
+                                        } elseif ($position === 2) {
+                                            $rowClass = 'table-podium-silver';
+                                            $medalha = '<i class="bi bi-award-fill text-secondary fs-5 me-1" title="2º Lugar (Prata)"></i> ';
+                                        } elseif ($position === 3) {
+                                            $rowClass = 'table-podium-bronze';
+                                            $medalha = '<i class="bi bi-award-fill fs-5 me-1" style="color: #cd7f32;" title="3º Lugar (Bronze)"></i> ';
+                                        }
 
-                for ($i = 1; $i <= $total_paginas; $i++) {
-                    // Se estamos na primeira página ou na última, sempre mostramos
-                    if ($i == 1 || $i == $total_paginas) {
-                        echo ($i == $pagina) ? "<strong class='page-link active'>$i</strong> " : "<a class='page-link' href='?pagina=$i'>$i</a> ";
-                    }
-                    // Mostra páginas vizinhas à página atual
-                    elseif ($i >= $pagina - $limite && $i <= $pagina + $limite) {
-                        echo ($i == $pagina) ? "<strong class='page-link active'>$i</strong> " : "<a class='page-link' href='?pagina=$i'>$i</a> ";
-                    }
-                    // Adiciona os três pontinhos
-                    elseif ($i == $pagina - $limite - 1 || $i == $pagina + $limite + 1) {
-                        echo "<div class='page-link'>...</div>";
-                    }
-                }
+                                        echo "<tr class='border-bottom border-secondary-subtle " . $rowClass . "'>";
+                                        echo "<th scope='row' class='fw-bold text-white py-3'>" . $medalha . $position . "</th>";
+                                        echo "<td class='text-white-50'>" . pgClass($row['job']) . "</td>";
+                                        echo "<td class='fw-semibold text-white'>" . htmlspecialchars($row["name"]) . "</td>";
+                                        echo "<td><span class='badge bg-primary bg-opacity-25 border border-primary text-primary px-2.5 py-1.5 fw-bold'>" . $row["level"] . "</span></td>";
+                                        echo "<td class='text-white-50 text-opacity-75'>" . number_format($row["exp"]) . "</td>";
+                                        echo "<td>" . pgKingdom($row["empire"]) . "</td>";
+                                        echo "</tr>";
+                                    }
+                                    
+                                    $conn->close();
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-                echo '</div>';
-                echo '</div>';
-                ?>
+                    <?php
+                    $total_paginas = ceil($total / $por_pagina);
+                    $limite = 2;
+
+                    if ($total_paginas > 1): ?>
+                        <nav aria-label="Navegação do ranking" class="mt-4">
+                            <ul class="pagination justify-content-center mb-0">
+                                <?php
+                                for ($i = 1; $i <= $total_paginas; $i++) {
+                                    $isActive = ($i == $pagina);
+                                    
+                                    if ($i == 1 || $i == $total_paginas || ($i >= $pagina - $limite && $i <= $pagina + $limite)) {
+                                        if ($isActive) {
+                                            echo '<li class="page-item active" aria-current="page"><span class="page-link bg-primary border-primary text-white fw-bold">' . $i . '</span></li>';
+                                        } else {
+                                            echo '<li class="page-item"><a class="page-link bg-white border-secondary-subtle text-dark hover-page" href="?pagina=' . $i . '">' . $i . '</a></li>';
+                                        }
+                                    }
+                                    elseif ($i == $pagina - $limite - 1 || $i == $pagina + $limite + 1) {
+                                        echo '<li class="page-item disabled"><span class="page-link bg-light border-secondary-subtle text-muted">...</span></li>';
+                                    }
+                                }
+                                ?>
+                            </ul>
+                        </nav>
+                    <?php endif; ?>
+
+                </div>
             </div>
         </div>
-    </main>
+    </div>
+</main>
     <footer class="rodape">   
         <!-- Direitos Autorais no meio -->
         <div class="direitos">

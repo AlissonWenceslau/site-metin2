@@ -96,3 +96,47 @@ a>i {
 .redes-sociais>a>i {
     color: white;
 }
+
+/*[NOTICIAS] Efeito opcional de hover (pode colocar na sua tag <style> ou arquivo CSS)*/
+.hover-zoom:hover {
+    transform: translateY(-3px);
+    border-color: #ffc107 !important; /* Muda a borda para amarelo/ouro no hover */
+    box-shadow: 0 4px 15px #0B5ED7 !important;
+}
+
+/*PÁGINA DE CADASTRO*/
+.signup-btn {
+    transition: all 0.2s ease-in-out;
+}
+.signup-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.15);
+}
+
+/* Regra para garantir o placeholder em branco absoluto */
+.custom-placeholder::placeholder {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+.custom-placeholder::-webkit-input-placeholder {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+.custom-placeholder::-moz-placeholder {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+.custom-placeholder:-ms-input-placeholder {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+/*PÁGINA PUBLICAR NOVA NOTÍCIA*/
+/* Ajustes finos de inputs para o tema dark */
+.form-control:focus {
+    background-color: #212529 !important;
+    color: #fff !important;
+    border-color: #ffc107 !important;
+    box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25) !important;
+}
+.text-secondary-light { color: #d0d0d0; }

@@ -98,23 +98,23 @@ try {
           </li>
         </ul>
       </div>
-      <div class="logar">
-        <ul class="navbar-nav">
+        <div class="logar">
+        <ul class="navbar-nav align-items-center pe-3 pe-md-4">
           <li class="nav-item">
-            <?php
-            if (!$_SESSION['user']) {
-              echo '<a class="btn btn-primary me-2" href="login.php">';
-              echo '<i class="bi bi-box-arrow-in-right me-1"></i>';
-              echo 'Entrar';
-              echo '</a>';
-            }
-            ?>
+            <?php if (!$_SESSION['user']): ?>
+              <a class="btn btn-outline-primary btn-sm px-3 py-1.5 fw-semibold text-uppercase d-inline-flex align-items-center gap-2" 
+                href="./login.php" 
+                style="letter-spacing: 0.5px; font-size: 0.85rem; transition: all 0.2s ease;">
+                <i class="bi bi-box-arrow-in-right fs-5"></i>
+                <span>Entrar</span>
+              </a>
+            <?php endif; ?>
           </li>
         </ul>
-        <?php
-        avatar($_SESSION['user'], $avatarBackgroundColor, 'logout.php');
-        ?>
-      </div>
+          <?php
+          avatar($_SESSION['user'], $avatarBackgroundColor, 'logout.php', './change_password.php');
+          ?>
+        </div>
     </div>
   </nav>
 

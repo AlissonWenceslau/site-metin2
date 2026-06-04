@@ -1,5 +1,5 @@
 <?php
-    require_once '../../connection/conn.php';
+    require_once '../../../connection/conn.php';
 
     $dsn = "mysql:host=$servername;dbname=$dbaccount;charset=$charset";
     $options = [
@@ -52,7 +52,7 @@
         $_SESSION['success_system'] = "🚀 Sistema de notícias inicializado e sincronizado com o horário de Brasília!";
 
         // 3. REDIRECIONA PARA A OUTRA PÁGINA (mude 'index.php' para o arquivo que preferir)
-        header("Location: ../../index.php");
+        header("Location: ../../../index.php");
         exit(); // Interrompe o script para garantir o redirecionamento imediato
         
     } catch (\PDOException $e) {

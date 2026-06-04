@@ -1,37 +1,37 @@
 <?php
-session_start();
-require './pages/utils/utils.php';
-require './connection/conn.php';
+  session_start();
+  require './pages/utils/utils.php';
+  require './connection/conn.php';
 
-try{
-  // Exemplo de conexão PDO
-  $pdo = new PDO("mysql:host=$servername;dbname=$dbaccount", "$username", "$password");
+  try{
+    // Exemplo de conexão PDO - ADEQUADO COM CHARSET UTF8MB4 PARA CARREGAR EMOJIS
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbaccount;charset=utf8mb4", "$username", "$password");
 
-  // Prepara e executa a busca
-  $sql = "SELECT id, titulo, conteudo, data_publicacao FROM noticias ORDER BY data_publicacao DESC LIMIT 5";
-  $query = $pdo->query($sql);
-  $noticias = $query->fetchAll(PDO::FETCH_ASSOC);
+    // Prepara e executa a busca
+    $sql = "SELECT id, titulo, conteudo, autor, data_publicacao FROM noticias ORDER BY data_publicacao DESC LIMIT 5";
+    $query = $pdo->query($sql);
+    $noticias = $query->fetchAll(PDO::FETCH_ASSOC);
 
-  //Essa variável é utilizada no 'panel.php' dentro da pasta 'adm'
-  $_SESSION['news_system'] = 'success';
+    //Essa variável é utilizada no 'panel.php' dentro da pasta 'adm'
+    $_SESSION['news_system'] = 'success';
 
-}catch (PDOException $e) {
-    // O código '42S02' é o erro específico do MySQL para "Tabela não encontrada"
-    if ($e->getCode() === '42S02' || strpos($e->getMessage(), 'not found') !== false) {
-        
-        // OPÇÃO A: Silenciar o erro e deixar a lista vazia (o site carrega normal, apenas sem notícias)
-        $noticias = []; 
+  }catch (PDOException $e) {
+      // O código '42S02' é o erro específico do MySQL para "Tabela não encontrada"
+      if ($e->getCode() === '42S02' || strpos($e->getMessage(), 'not found') !== false) {
+          
+          // OPÇÃO A: Silenciar o erro e deixar a lista vazia (o site carrega normal, apenas sem notícias)
+          $noticias = []; 
 
-        $_SESSION['news_system'] = 'failed';
-        
-        // OPÇÃO B (Opcional): Se quiser se avisado, você pode descomentar a linha abaixo:
-        // error_log("Aviso: A tabela noticias ainda não foi criada no banco de dados.");
-        
-    } else {
-        // Se for QUALQUER OUTRO erro de banco (senha errada, queda de servidor), aí sim ele avisa
-        die("Erro crítico no banco de dados: " . $e->getMessage());
-    }
-}
+          $_SESSION['news_system'] = 'failed';
+          
+          // OPÇÃO B (Opcional): Se quiser se avisado, você pode descomentar a linha abaixo:
+          // error_log("Aviso: A tabela noticias ainda não foi criada no banco de dados.");
+          
+      } else {
+          // Se for QUALQUER OUTRO erro de banco (senha errada, queda de servidor), aí sim ele avisa
+          die("Erro crítico no banco de dados: " . $e->getMessage());
+      }
+  }
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -73,7 +73,7 @@ try{
             <a class="nav-link" href="./pages/ranking.php"><i class="bi bi-trophy"></i>Ranking</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./pages/rules.php"><i class="bi bi-book"></i>Regras</a>
+            <a class="nav-link" href="./pages/rules.php"><i class="bi bi-shield-shaded me-2"></i>Regras</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./pages/status.php"><i class="bi bi-info-circle"></i>Status</a>
@@ -81,54 +81,50 @@ try{
         </ul>
       </div>
       <div class="logar">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav align-items-center pe-3 pe-md-4">
           <li class="nav-item">
-            <?php
-            if (!$_SESSION['user']) {
-              echo '<a class="btn btn-primary me-2" href="./pages/login.php">';
-              echo '<i class="bi bi-box-arrow-in-right me-1"></i>';
-              echo 'Entrar';
-              echo '</a>';
-            }
-            ?>
+            <?php if (!$_SESSION['user']): ?>
+              <a class="btn btn-outline-primary btn-sm px-3 py-1.5 fw-semibold text-uppercase d-inline-flex align-items-center gap-2" 
+                href="./pages/login.php" 
+                style="letter-spacing: 0.5px; font-size: 0.85rem; transition: all 0.2s ease;">
+                <i class="bi bi-box-arrow-in-right fs-5"></i>
+                <span>Entrar</span>
+              </a>
+            <?php endif; ?>
           </li>
         </ul>
         <?php
-        avatar($_SESSION['user'], $avatarBackgroundColor, './pages/logout.php');
+        avatar($_SESSION['user'], $avatarBackgroundColor, './pages/logout.php', './pages/change_password.php');
         ?>
       </div>
     </div>
   </nav>
   <main>
-    <!--Toast de mensagens do sistema de noticia -->
-    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
-    
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
       <?php if (isset($_SESSION['sucesso_sistema'])): ?>
-          <div id="toastSucesso" class="toast align-items-center text-white bg-success border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
-              <div class="d-flex">
-                  <div class="toast-body fw-semibold">
-                      <?= $_SESSION['sucesso_sistema']; ?>
-                  </div>
-                  <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-              </div>
+        <div id="toastSucesso" class="toast align-items-center text-white bg-success border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+          <div class="d-flex">
+            <div class="toast-body fw-semibold">
+              <?= $_SESSION['sucesso_sistema']; ?>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
-          <?php unset($_SESSION['sucesso_sistema']); // Limpa a mensagem ?>
+        </div>
+        <?php unset($_SESSION['sucesso_sistema']); // Limpa a mensagem ?>
       <?php endif; ?>
 
       <?php if (isset($_SESSION['erro_sistema'])): ?>
-          <div id="toastErro" class="toast align-items-center text-white bg-danger border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="7000">
-              <div class="d-flex">
-                  <div class="toast-body fw-semibold">
-                      <?= $_SESSION['erro_sistema']; ?>
-                  </div>
-                  <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-              </div>
+        <div id="toastErro" class="toast align-items-center text-white bg-danger border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="7000">
+          <div class="d-flex">
+            <div class="toast-body fw-semibold">
+              <?= $_SESSION['erro_sistema']; ?>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
+        </div>
           <?php unset($_SESSION['erro_sistema']); // Limpa a mensagem ?>
       <?php endif; ?>
-
     </div>
-    <!--Fim do toast de mensagens do sistema de noticia -->
     
     <div class="d-flex flex-column">
       <div class="container">
@@ -139,18 +135,17 @@ try{
         ?>
         <div class="container mt-5 mb-2">
           <div class="d-flex align-items-center justify-content-center mb-4">
-              <hr class="flex-grow-1 border-secondary opacity-25 d-none d-sm-block">
-              <h2 class="px-3 text-uppercase fw-bold text-center tracking-wide text text-primary" style="letter-spacing: 2px;">
-                  🎮 Últimas Notícias
-              </h2>
-              <hr class="flex-grow-1 border-secondary opacity-25 d-none d-sm-block">
+            <hr class="flex-grow-1 border-secondary opacity-25 d-none d-sm-block">
+            <h2 class="px-3 text-uppercase fw-bold text-center tracking-wide text text-primary" style="letter-spacing: 2px;">
+              🎮 Últimas Notícias
+            </h2>
+            <hr class="flex-grow-1 border-secondary opacity-25 d-none d-sm-block">
           </div>
 
           <div class="row justify-content-center g-4">
             <?php if (!empty($noticias)): ?>
               <?php foreach ($noticias as $index => $item): ?>
                   
-                <!-- CARD DA NOTÍCIA (Gatilho para abrir o Modal) -->
                 <div class="col-12 col-md-10 col-lg-8">
                   <div class="card bg-dark text-light border-secondary h-100 shadow-sm hover-zoom" 
                       style="transition: transform 0.2s; cursor: pointer;"
@@ -163,7 +158,7 @@ try{
                               <?php if ($index === 0): ?>
                                       <span class="badge bg-danger text-uppercase mb-2" style="font-size: 0.75rem; letter-spacing: 1px; animation: pulse 2s infinite;">🔥NOVIDADE</span>
                                   <?php else: ?>
-                                      <span class="badge bg-secondary text-uppercase mb-2" style="font-size: 0.75rem;">Notícia</span>
+                                      <span class="badge bg-secondary text-uppercase mb-2" style="font-size: 0.75rem;">📰 Notícia</span>
                                   <?php endif; ?>
                                 <h4 class="card-title h5 mb-0 text-light fw-semibold">
                                     <?= htmlspecialchars($item['titulo']); ?>
@@ -174,51 +169,55 @@ try{
                             </div>
                         </div>
 
-                        <?php if (isset($_SESSION['web']) && $_SESSION['web'] == 1): ?>
-                            <div class="text-end mt-3 border-top border-secondary pt-2">
-                                <a href="./pages/adm/notices/delete_notice.php?id=<?= $item['id']; ?>" 
+                          <?php if (isset($_SESSION['web']) && $_SESSION['web'] == 1): ?>
+                            <div class="text-end mt-3 border-top border-secondary pt-2 d-flex justify-content-end gap-2">
+                                
+                                <a href="./pages/adm/news/edit_news.php?id=<?= $item['id']; ?>" 
+                                   class="btn btn-outline-warning btn-sm p-1 px-2 fw-semibold"
+                                   style="font-size: 0.8rem;"
+                                   onclick="event.stopPropagation();">
+                                     <i class="bi bi-pencil me-1"></i> Editar
+                                </a>
+
+                                <a href="./pages/adm/news/delete_news.php?id=<?= $item['id']; ?>" 
                                    class="btn btn-outline-danger btn-sm p-1 px-2 fw-semibold"
                                    style="font-size: 0.8rem;"
                                    onclick="event.stopPropagation(); return confirm('⚠️ Tem certeza que deseja excluir esta notícia?\n\nEsta ação não poderá ser desfeita!');">
-                                    <i class="bi bi-trash me-1"></i> Excluir Notícia
+                                   <i class="bi bi-trash me-1"></i> Excluir
                                 </a>
+
                             </div>
-                        <?php endif; ?>
+                          <?php endif; ?>
 
                     </div>
                   </div>
                 </div>
 
-                  <!-- MODAL ESPECÍFICO DESTA NOTÍCIA -->
                   <div class="modal fade" id="modalNoticia<?= $item['id']; ?>" tabindex="-1" aria-labelledby="labelModal<?= $item['id']; ?>" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered modal-lg">
                           <div class="modal-content bg-dark text-light border-secondary">
                               
-                              <!-- Cabeçalho do Modal -->
                               <div class="modal-header border-secondary">
                                   <div>
                                 <?php if ($index === 0): ?>
-                                        <!-- Destaca em vermelho (bg-danger) apenas a última notícia -->
                                         <span class="badge bg-danger text-uppercase mb-2" style="font-size: 0.75rem; letter-spacing: 1px; animation: pulse 2s infinite;">🔥NOVIDADE</span>
                                     <?php else: ?>
-                                        <!-- As outras notícias ganham um tom neutro -->
-                                        <span class="badge bg-secondary text-uppercase mb-2" style="font-size: 0.75rem;">Notícia</span>
+                                        <span class="badge bg-secondary text-uppercase mb-2" style="font-size: 0.75rem;">📰 Notícia</span>
                                 <?php endif; ?>
                                       <h5 class="modal-title fw-bold text-warning" id="labelModal<?= $item['id']; ?>">
                                           <?= htmlspecialchars($item['titulo']); ?>
                                       </h5>
-                                      <small class="text-light">Publicado em <?= date('d/m/Y à\s H:i', strtotime($item['data_publicacao'])); ?></small>
+                                    <p class="text-white-50 small mb-0" style="font-size: 0.85rem;">
+                                        Publicado por <strong class="text-white fw-semibold"><?= htmlspecialchars($item['autor']); ?></strong> em <?= date('d/m/Y \à\s H:i', strtotime($item['data_publicacao'])); ?>
+                                    </p>
                                   </div>
                                   <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               
-                              <!-- Corpo do Modal (Conteúdo Completo) -->
                               <div class="modal-body fs-5 lh-base text-secondary-light" style="max-height: 70vh; overflow-y: auto;">
-                                  <!-- Busque o campo 'conteudo' na sua query para exibi-lo aqui -->
                                   <?= nl2br(htmlspecialchars($item['conteudo'])); ?>
                               </div>
                               
-                              <!-- Rodapé do Modal -->
                               <div class="modal-footer border-secondary">
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                               </div>
@@ -226,25 +225,54 @@ try{
                           </div>
                       </div>
                   </div>
-                  <!-- FIM DO MODAL -->
-              <?php endforeach; ?>
+                  <?php endforeach; ?>
+              <div class="d-grid gap-2 mt-4 mb-4">
+                    <a href="./pages/news.php" class="btn btn-outline-primary py-2 fw-semibold text-uppercase" style="letter-spacing: 0.5px; font-size: 0.9rem;">
+                        Ver todas as notícias <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+                </div>
+
+                <?php if (isset($totalPaginas) && $totalPaginas > 1): ?>
+                    <nav aria-label="Navegação de páginas" class="mt-4">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item <?= $paginaAtual <= 1 ? 'disabled' : ''; ?>">
+                                <a class="page-link bg-dark border-secondary text-light" href="?pagina=<?= $paginaAtual - 1; ?>" aria-label="Anterior">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
+                                <li class="page-item <?= $paginaAtual === $i ? 'active' : ''; ?>">
+                                    <a class="page-link border-secondary <?= $paginaAtual === $i ? 'bg-primary text-white border-primary' : 'bg-dark text-light'; ?>" href="?pagina=<?= $i; ?>">
+                                        <?= $i; ?>
+                                    </a>
+                                </li>
+                            <?php endfor; ?>
+                            <li class="page-item <?= $paginaAtual >= $totalPaginas ? 'disabled' : ''; ?>">
+                                <a class="page-link bg-dark border-secondary text-light" href="?pagina=<?= $paginaAtual + 1; ?>" aria-label="Próximo">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                <?php endif; ?>
+
             <?php else: ?>
-              <div class="col-12 col-md-8 text-center text-muted py-5">
-                  <p class="fs-5 mb-0">📡 Nenhuma novidade encontrada no momento.</p>
-                  <small>Fique ligado, as atualizações aparecem aqui!</small>
-              </div>
-            <?php endif; ?>                
-          </div>
+                <div class="text-center text-muted py-5 border border-secondary rounded bg-dark bg-opacity-25">
+                    <p class="fs-5 mb-1">📡 Nenhuma notícia encontrada no momento.</p>
+                    <small>Fique atento ao nosso mural para futuras atualizações!</small>
+                </div>
+            <?php endif; ?>
         </div>
+    </div>            
+        </div>
+      </div>
     </div>
   </main>
   <footer class="rodape">   
-      <!-- Direitos Autorais no meio -->
       <div class="direitos">
         &copy; <?php echo date("Y"); ?> Todos os direitos reservados!
       </div>
       
-      <!-- Redes Sociais na direita -->
       <div class="redes-sociais">
           <a href="#" target="_blank"><i class="bi bi-youtube"></i></a>
           <a href="#" target="_blank"><i class="bi bi-instagram"></i></a>

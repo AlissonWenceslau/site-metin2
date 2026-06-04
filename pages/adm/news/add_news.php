@@ -2,14 +2,14 @@
 session_start();
 if (!isset($_SESSION['user'])) {
   // Usuário não logado, redireciona para a página de login
-  header("Location: ../../index.php");
+  header("Location: ../../../index.php");
   exit;
 }
-require_once '../../connection/conn.php';
+require_once '../../../connection/conn.php';
 
 $mensagemSucesso = "";
 $mensagemErro = "";
-$pdo = new PDO("mysql:host=$servername;dbname=$dbaccount", "$username", "$password");
+$pdo = new PDO("mysql:host=$servername;dbname=$dbaccount;charset=$charset", "$username", "$password");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-8">
                 
-                <a href="../../index.php" class="btn btn-outline-secondary btn-sm mb-4">
+                <a href="../../../index.php" class="btn btn-outline-secondary btn-sm mb-4">
                     ← Voltar para o Site
                 </a>
 
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <h2 class="h4 mb-0 text-warning text-uppercase fw-bold" style="letter-spacing: 1px;">
                             ✍️ Publicar Nova Notícia
                         </h2>
-                        <small class="text-muted">Preencha os campos abaixo para atualizar os jogadores</small>
+                        <small class="text-llight">Preencha os campos abaixo para atualizar os jogadores</small>
                     </div>
                     
                     <div class="card-body p-4">

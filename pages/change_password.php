@@ -91,7 +91,7 @@ $conn->close();
             <div class="links-navegator">
                 <ul class="navbar-nav" id="mainNav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="../index.php"><i class="bi bi-house-door"></i>Início</a>
+                        <a class="nav-link" href="../index.php"><i class="bi bi-house-door"></i>Início</a>
                     </li>
                     <?php
             if (!$_SESSION['user']) {          

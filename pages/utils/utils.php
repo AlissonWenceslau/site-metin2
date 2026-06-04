@@ -62,7 +62,7 @@ $avatarBackgroundColor = [
     'Z' => '#66664D',
 ];
 
-function avatar($session, $avatarBackgroundColor, $path)
+function avatar($session, $avatarBackgroundColor, $path, $changePasswordPath = '#')
 {
     if ($session) {
         // Pega a primeira letra do nome, em maiúscula
@@ -70,20 +70,37 @@ function avatar($session, $avatarBackgroundColor, $path)
 
         // Protege a letra para evitar XSS e pega a cor correspondente
         $letraSegura = htmlspecialchars($letra);
-        $cor = $avatarBackgroundColor[$letra] ?? '#CCC'; // Cor padrão
+        $cor = $avatarBackgroundColor[$letra] ?? '#6c757d'; // Cor padrão cinza
 
-        echo '<div class="dropdown me-1">';
-        echo '<a href="#" class="d-flex align-items-center dropdown-toggle" data-bs-toggle="dropdown">';
-        echo 
-            '<div class="rounded-circle border d-flex justify-content-center align-items-center text-light link-offset-2 link-underline link-underline-opacity-0 me-1"
-            style="width:40px;height:40px;background-color:' . $cor . ';" alt="Avatar">' 
-                . $letraSegura . 
-            '</div>';
-        echo '</a>';
-        echo '<ul class="dropdown-menu">';
-        echo '<li><a class="dropdown-item" href="'.$path.'">Sair</a></li>';
-        echo '</ul>';
-        echo '</div>';
-
+        echo <<<HTML
+        <div class="dropdown me-2">
+            <a href="#" class="d-flex align-items-center dropdown-toggle text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="rounded-circle shadow-sm d-flex justify-content-center align-items-center text-light fw-bold fs-5"
+                     style="width: 40px; height: 40px; background-color: {$cor}; user-select: none;" 
+                     title="Acessar menu da conta">
+                    {$letraSegura}
+                </div>
+            </a>
+            
+            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-start dropdown-menu-md-end shadow border-secondary mt-2">
+                <li class="dropdown-header text-secondary small text-uppercase">Minha Conta</li>
+                <li><hr class="dropdown-divider border-secondary"></li>
+                
+                <li>
+                    <a class="dropdown-item text-light d-flex align-items-center gap-2 py-2" href="{$changePasswordPath}">
+                        <i class="bi bi-shield-lock text-primary fs-5"></i> Alterar Senha
+                    </a>
+                </li>
+                
+                <li><hr class="dropdown-divider border-secondary"></li>
+                
+                <li>
+                    <a class="dropdown-item text-danger d-flex align-items-center gap-2 fw-semibold py-2" href="{$path}">
+                        <i class="bi bi-box-arrow-right fs-5"></i> Sair da Conta
+                    </a>
+                </li>
+            </ul>
+        </div>
+        HTML;
     }
 }

@@ -90,7 +90,7 @@ $conn->close();
       <div class="links-navegator">
         <ul class="navbar-nav" id="mainNav">
           <li class="nav-item">
-            <a class="nav-link active" href="../../index.php"><i class="bi bi-house-door"></i>Início</a>
+            <a class="nav-link" href="../../index.php"><i class="bi bi-house-door"></i>Início</a>
           </li>
           <?php
             if (!$_SESSION['user']) {          
@@ -204,6 +204,24 @@ $conn->close();
     </form>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Dispara toast de sucesso se houver
+    var toastSucessoEl = document.getElementById('toastCashSucesso');
+    if (toastSucessoEl) {
+      var toastSucesso = new bootstrap.Toast(toastSucessoEl);
+      toastSucesso.show();
+    }
+
+    // Dispara lista de toasts de erro se houver
+    var toastErroEls = document.querySelectorAll('[id^="toastCashErro_"]');
+    toastErroEls.forEach(function (element) {
+      var toastErro = new bootstrap.Toast(element);
+      toastErro.show();
+    });
+  });
+</script>
   </main>
   <footer class="rodape">   
       <!-- Direitos Autorais no meio -->

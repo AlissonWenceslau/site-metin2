@@ -1,8 +1,8 @@
 
 
-# Webpage Responsiva para Servidor Metin2
+# Site Responsivo para Servidor Metin2
 
-Webpage completa e responsiva desenvolvida para gerenciamento e interface de servidores de Metin2. O projeto foca na experiência do usuário e na integração de sistemas essenciais para a operação do jogo.
+Site completo e responsivo desenvolvido para gerenciamento e interface de servidores de Metin2. O projeto foca na experiência do usuário e na integração de sistemas essenciais para a operação do jogo.
 
 🛠️ Funcionalidades
 - Autenticação: Páginas de Login e Cadastro de contas.
@@ -11,7 +11,7 @@ Webpage completa e responsiva desenvolvida para gerenciamento e interface de ser
 - Informativo: Seções dedicadas a Regras e Status do servidor em tempo real.
 - Design: Interface totalmente responsiva (Mobile/Desktop).
 
-## Demo
+## Demostração simples
 <img width="1898" height="914" alt="image" src="https://github.com/user-attachments/assets/9edf8505-df9e-492d-b5d0-9d35183d63fb" />
 
 

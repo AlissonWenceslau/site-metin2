@@ -8,7 +8,7 @@ Site completo e responsivo desenvolvido para gerenciamento e interface de servid
 - Autenticação: Páginas de Login e Cadastro de contas.
 - Central de Downloads: Acesso facilitado aos arquivos do cliente.
 - Competição: Sistema de Ranking integrado.
-- Informativo: Seções dedicadas a Regras e Status do servidor em tempo real.
+- Informativo: Seções dedicadas a Notícias, Regras e Status do servidor em tempo real.
 - Design: Interface totalmente responsiva (Mobile/Desktop).
 
 ## Demostração simples
@@ -35,6 +35,7 @@ O sistema de notícias é uma funcionalidade integrada ao site. Para que ele fun
 
 1. **Definir Administrador no Banco de Dados:**
    * Acesse a base de dados `account`.
+   * Acessa a tabela `account`
    * Localize a conta desejada e altere o valor da coluna `web` para `1`. Isso fará com que o site reconheça a conta como Administrador.
 
 2. **Acessar o Painel:**

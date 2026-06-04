@@ -43,7 +43,7 @@
         <?php if (isset($_SESSION['news_system']) && $_SESSION['news_system'] === 'success'): ?>
             <li class="list-group-item bg-dark border-secondary py-3">
                 <i class="bi bi-newspaper me-2 text-warning"></i>
-                <a href="../pages/adm/news/add_news.php" class="text-white text-decoration-none hover-link">Adicionar Notícia</a>
+                <a href="../pages/adm/news/add_news.php" class="text-white text-decoration-none hover-link">Públicar Nova Notícia</a>
             </li>
         <?php else: ?>
             <li class="list-group-item bg-dark border-secondary py-3">

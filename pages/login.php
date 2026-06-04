@@ -1,12 +1,12 @@
 <?php
 session_start();
 if (isset($_SESSION['user'])) {
-  // Usuário não logado, redireciona para a página de login
-  header("Location: ../index.php");
-  exit;
+    // Usuário não logado, redireciona para a página de login
+    header("Location: ../index.php");
+    exit;
 }
 require './utils/utils.php'
-?>
+    ?>
 <!doctype html>
 <html lang="pt-br">
 
@@ -19,7 +19,7 @@ require './utils/utils.php'
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
-    </script>
+        </script>
     <link rel="stylesheet" href="../css/style.css">
     <title>Metin2</title>
 </head>
@@ -39,12 +39,12 @@ require './utils/utils.php'
                         <a class="nav-link" href="../index.php"><i class="bi bi-house-door"></i>Início</a>
                     </li>
                     <?php
-            if (!$_SESSION['user']) {          
-              echo '<li class="nav-item">';
-              echo '<a class="nav-link" href="register.php"><i class="bi bi-person-plus"></i>Cadastrar</a>';
-              echo '</li>';
-            }
-          ?>
+                    if (!$_SESSION['user']) {
+                        echo '<li class="nav-item">';
+                        echo '<a class="nav-link" href="register.php"><i class="bi bi-person-plus"></i>Cadastrar</a>';
+                        echo '</li>';
+                    }
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link" href="download.php"><i class="bi bi-cloud-arrow-down"></i>Download</a>
                     </li>
@@ -60,50 +60,50 @@ require './utils/utils.php'
                 </ul>
             </div>
             <?php
-        avatar($_SESSION['user'], $avatarBackgroundColor, 'logout.php');
-        ?>
+            avatar($_SESSION['user'], $avatarBackgroundColor, 'logout.php');
+            ?>
         </div>
         </div>
     </nav>
     <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
         <?php
-  if (session_status() === PHP_SESSION_NONE) {
-      session_start();
-  }
-  if (isset($_SESSION['error'])): 
-  ?>
-        <div id="toastLoginErro" class="toast align-items-center text-white bg-danger border-0 shadow" role="alert"
-            aria-live="assertive" aria-atomic="true" data-bs-delay="6000">
-            <div class="d-flex">
-                <div class="toast-body fw-semibold">
-                    <i class="bi bi-person-fill-x me-2 fs-5"></i> <?= htmlspecialchars($_SESSION['error']); ?>
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (isset($_SESSION['error'])):
+            ?>
+            <div id="toastLoginErro" class="toast align-items-center text-white bg-danger border-0 shadow" role="alert"
+                aria-live="assertive" aria-atomic="true" data-bs-delay="6000">
+                <div class="d-flex">
+                    <div class="toast-body fw-semibold">
+                        <i class="bi bi-person-fill-x me-2 fs-5"></i> <?= htmlspecialchars($_SESSION['error']); ?>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
                 </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                    aria-label="Close"></button>
             </div>
-        </div>
-        <?php unset($_SESSION['error']); ?>
+            <?php unset($_SESSION['error']); ?>
         <?php endif; ?>
     </div>
 
     <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
         <?php
-  if (session_status() === PHP_SESSION_NONE) {
-      session_start();
-  }
-  if (isset($_SESSION['error'])): 
-  ?>
-        <div id="toastLoginErro" class="toast align-items-center text-white bg-danger border-0 shadow" role="alert"
-            aria-live="assertive" aria-atomic="true" data-bs-delay="6000">
-            <div class="d-flex">
-                <div class="toast-body fw-semibold">
-                    <i class="bi bi-person-fill-x me-2 fs-5"></i> <?= htmlspecialchars($_SESSION['error']); ?>
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (isset($_SESSION['error'])):
+            ?>
+            <div id="toastLoginErro" class="toast align-items-center text-white bg-danger border-0 shadow" role="alert"
+                aria-live="assertive" aria-atomic="true" data-bs-delay="6000">
+                <div class="d-flex">
+                    <div class="toast-body fw-semibold">
+                        <i class="bi bi-person-fill-x me-2 fs-5"></i> <?= htmlspecialchars($_SESSION['error']); ?>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
                 </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                    aria-label="Close"></button>
             </div>
-        </div>
-        <?php unset($_SESSION['error']); ?>
+            <?php unset($_SESSION['error']); ?>
         <?php endif; ?>
     </div>
 
@@ -176,49 +176,49 @@ require './utils/utils.php'
     </main>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var toastLoginEl = document.getElementById('toastLoginErro');
-        if (toastLoginEl) {
-            var toastLogin = new bootstrap.Toast(toastLoginEl);
-            toastLogin.show();
-        }
-    });
+        document.addEventListener('DOMContentLoaded', function () {
+            var toastLoginEl = document.getElementById('toastLoginErro');
+            if (toastLoginEl) {
+                var toastLogin = new bootstrap.Toast(toastLoginEl);
+                toastLogin.show();
+            }
+        });
     </script>
 
     <style>
-    .login-btn {
-        transition: all 0.2s ease-in-out;
-    }
+        .login-btn {
+            transition: all 0.2s ease-in-out;
+        }
 
-    .login-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.15);
-    }
+        .login-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.15);
+        }
 
-    .login-btn:active {
-        transform: translateY(0);
-    }
+        .login-btn:active {
+            transform: translateY(0);
+        }
 
-    /* SOLUÇÃO DEFINITIVA DO PROBLEMA: Força o placeholder a ficar branco puro e visível */
-    .custom-input-dark::placeholder {
-        color: #ffffff !important;
-        opacity: 1 !important;
-    }
+        /* SOLUÇÃO DEFINITIVA DO PROBLEMA: Força o placeholder a ficar branco puro e visível */
+        .custom-input-dark::placeholder {
+            color: #ffffff !important;
+            opacity: 1 !important;
+        }
 
-    .custom-input-dark::-webkit-input-placeholder {
-        color: #ffffff !important;
-        opacity: 1 !important;
-    }
+        .custom-input-dark::-webkit-input-placeholder {
+            color: #ffffff !important;
+            opacity: 1 !important;
+        }
 
-    .custom-input-dark::-moz-placeholder {
-        color: #ffffff !important;
-        opacity: 1 !important;
-    }
+        .custom-input-dark::-moz-placeholder {
+            color: #ffffff !important;
+            opacity: 1 !important;
+        }
 
-    .custom-input-dark:-ms-input-placeholder {
-        color: #ffffff !important;
-        opacity: 1 !important;
-    }
+        .custom-input-dark:-ms-input-placeholder {
+            color: #ffffff !important;
+            opacity: 1 !important;
+        }
     </style>
     <footer class="rodape">
         <!-- Direitos Autorais no meio -->

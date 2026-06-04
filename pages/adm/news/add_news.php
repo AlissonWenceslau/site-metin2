@@ -59,10 +59,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" type="image/x-icon" href="../../assets/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../assets/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Administrativo - Nova Notícia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/style.css">
 </head>
 <body class="bg-dark text-light">
 
@@ -100,21 +101,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             
                             <div class="mb-3">
                                 <label for="titulo" class="form-label fw-bold text-secondary-light">Título da Notícia</label>
-                                <input type="text" class="form-input form-control bg-dark text-light border-secondary" 
+                                <input type="text" class="form-input form-control bg-dark text-light border-secondary custom-placeholder" 
                                        id="titulo" name="titulo" placeholder="Ex: Grande atualização de balanceamento" 
                                        value="<?= isset($titulo) ? htmlspecialchars($titulo) : ''; ?>" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="autor" class="form-label fw-bold text-secondary-light">Autor / Redator</label>
-                                <input type="text" class="form-input form-control bg-dark text-light border-secondary" 
+                                <input type="text" class="form-input form-control bg-dark text-light border-secondary custom-placeholder" 
                                        id="autor" name="autor" placeholder="Ex: GM_Gabriel ou Admin"
                                        value="<?= isset($autor) ? htmlspecialchars($autor) : ''; ?>">
                             </div>
 
                             <div class="mb-4">
                                 <label for="conteudo" class="form-label fw-bold text-secondary-light">Conteúdo Completo</label>
-                                <textarea class="form-control bg-dark text-light border-secondary" 
+                                <textarea class="form-control bg-dark text-light border-secondary custom-placeholder" 
                                           id="conteudo" name="conteudo" rows="10" 
                                           placeholder="Escreva o texto aqui. Você pode apertar ENTER normalmente para criar novos parágrafos..." required><?= isset($conteudo) ? htmlspecialchars($conteudo) : ''; ?></textarea>
                             </div>
@@ -132,16 +133,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </div>
-
-    <style>
-        /* Ajustes finos de inputs para o tema dark */
-        .form-control:focus {
-            background-color: #212529 !important;
-            color: #fff !important;
-            border-color: #ffc107 !important;
-            box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25) !important;
-        }
-        .text-secondary-light { color: #d0d0d0; }
-    </style>
 </body>
 </html>

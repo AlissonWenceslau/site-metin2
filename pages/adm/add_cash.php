@@ -178,7 +178,7 @@ $conn->close();
           <i class="bi bi-person-vcard me-1 text-primary"></i>Login da Conta
         </label>
         <div class="input-group has-validation">
-          <input type="text" class="form-control bg-secondary bg-opacity-10 text-light border-secondary" id="account" name="account" placeholder="Ex: player_metin2" required>
+          <input type="text" class="form-control bg-secondary bg-opacity-10 text-light border-secondary custom-placeholder" id="account" name="account" placeholder="Ex: player_metin2" required>
           <div class="invalid-feedback">
             Campo obrigatório! Por favor, informe a conta destino.
           </div>
@@ -190,7 +190,7 @@ $conn->close();
           <i class="bi bi-plus-circle me-1 text-primary"></i>Quantidade de Coins
         </label>
         <div class="input-group has-validation">
-          <input type="number" class="form-control bg-secondary bg-opacity-10 text-light border-secondary" id="addCash" name="addCash" min="1" placeholder="Ex: 1000" required>
+          <input type="number" class="form-control bg-secondary bg-opacity-10 text-light border-secondary custom-placeholder" id="addCash" name="addCash" min="1" placeholder="Ex: 1000" required>
           <div class="invalid-feedback">
             Campo obrigatório! Insira um valor maior que zero.
           </div>
@@ -206,21 +206,7 @@ $conn->close();
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Dispara toast de sucesso se houver
-    var toastSucessoEl = document.getElementById('toastCashSucesso');
-    if (toastSucessoEl) {
-      var toastSucesso = new bootstrap.Toast(toastSucessoEl);
-      toastSucesso.show();
-    }
 
-    // Dispara lista de toasts de erro se houver
-    var toastErroEls = document.querySelectorAll('[id^="toastCashErro_"]');
-    toastErroEls.forEach(function (element) {
-      var toastErro = new bootstrap.Toast(element);
-      toastErro.show();
-    });
-  });
 </script>
   </main>
   <footer class="rodape">   

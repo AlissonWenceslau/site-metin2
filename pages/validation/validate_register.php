@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (count($errors) > 0) {
         $_SESSION['errors'] = $errors;
-        header('Location: ../../index.php');
+        header('Location: ../register.php');
         exit();
     }
 

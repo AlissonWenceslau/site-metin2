@@ -2,9 +2,9 @@
 session_start();
 require './utils/utils.php';
 if (!isset($_SESSION['user'])) {
-  // Usuário não logado, redireciona para a página de login
-  header("Location: ./login.php");
-  exit;
+    // Usuário não logado, redireciona para a página de login
+    header("Location: ./login.php");
+    exit;
 }
 
 require '../connection/conn.php';
@@ -14,50 +14,50 @@ require './utils/validation.php';
 $conn = new mysqli($servername, $username, $password, $dbaccount);
 
 if ($conn->connect_error) {
-  die("Erro de conexão: " . $conn->connect_error);
+    die("Erro de conexão: " . $conn->connect_error);
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $login = $_SESSION['user'];
-  $senhaAtual = $_POST['actualPassword'];
-  $novaSenha = $_POST['newPassword'];
-  $newConfirmPassword = $_POST['newConfirmPassword'];
+    $login = $_SESSION['user'];
+    $senhaAtual = $_POST['actualPassword'];
+    $novaSenha = $_POST['newPassword'];
+    $newConfirmPassword = $_POST['newConfirmPassword'];
 
-  // Criptografa a senha atual e nova no formato MySQL
-  $senhaAtualHash = '*' . strtoupper(sha1(sha1($senhaAtual, true)));
-  $novaSenhaHash  = '*' . strtoupper(sha1(sha1($novaSenha, true)));
+    // Criptografa a senha atual e nova no formato MySQL
+    $senhaAtualHash = '*' . strtoupper(sha1(sha1($senhaAtual, true)));
+    $novaSenhaHash = '*' . strtoupper(sha1(sha1($novaSenha, true)));
 
-  // Verifica se a senha atual está correta
-  $stmt = $conn->prepare("SELECT * FROM account WHERE login = ? AND password = ?");
-  $stmt->bind_param("ss", $login, $senhaAtualHash);
-  $stmt->execute();
-  $result = $stmt->get_result();
+    // Verifica se a senha atual está correta
+    $stmt = $conn->prepare("SELECT * FROM account WHERE login = ? AND password = ?");
+    $stmt->bind_param("ss", $login, $senhaAtualHash);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-  $errorsValidatePassword = validatePassword($novaSenha);
-  $errorsValidadeNewConfirmPassword = validateNewConfirmPassword($novaSenha, $newConfirmPassword);
-  $errors = array_merge($errorsValidatePassword, $errorsValidadeNewConfirmPassword);
+    $errorsValidatePassword = validatePassword($novaSenha);
+    $errorsValidadeNewConfirmPassword = validateNewConfirmPassword($novaSenha, $newConfirmPassword);
+    $errors = array_merge($errorsValidatePassword, $errorsValidadeNewConfirmPassword);
 
-  if ($result->num_rows === 0) {
-    $errors[] = 'Senha atual incorreta';
-  }
-
-  if (count($errors) > 0) {
-    $_SESSION['errors'] = $errors;
-    header('Location: change_password.php');
-    exit();
-  }
-
-  if ($result->num_rows === 1) {
-    // Senha atual correta, atualiza para nova senha
-    $stmt = $conn->prepare("UPDATE account SET password = ? WHERE login = ?");
-    $stmt->bind_param("ss", $novaSenhaHash, $login);
-    if ($stmt->execute()) {
-      $_SESSION['password_updated'] = 'Senha alterada com sucesso!';
-    } else {
-      echo "Erro ao atualizar senha.";
+    if ($result->num_rows === 0) {
+        $errors[] = 'Senha atual incorreta';
     }
-    $stmt->close();
-  }
+
+    if (count($errors) > 0) {
+        $_SESSION['errors'] = $errors;
+        header('Location: change_password.php');
+        exit();
+    }
+
+    if ($result->num_rows === 1) {
+        // Senha atual correta, atualiza para nova senha
+        $stmt = $conn->prepare("UPDATE account SET password = ? WHERE login = ?");
+        $stmt->bind_param("ss", $novaSenhaHash, $login);
+        if ($stmt->execute()) {
+            $_SESSION['password_updated'] = 'Senha alterada com sucesso!';
+        } else {
+            echo "Erro ao atualizar senha.";
+        }
+        $stmt->close();
+    }
 }
 
 $conn->close();
@@ -74,7 +74,7 @@ $conn->close();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
-    </script>
+        </script>
     <link rel="stylesheet" href="../css/style.css">
     <title>Metin2</title>
 </head>
@@ -94,12 +94,12 @@ $conn->close();
                         <a class="nav-link" href="../index.php"><i class="bi bi-house-door"></i>Início</a>
                     </li>
                     <?php
-            if (!$_SESSION['user']) {          
-              echo '<li class="nav-item">';
-              echo '<a class="nav-link" href="register.php"><i class="bi bi-person-plus"></i>Cadastrar</a>';
-              echo '</li>';
-            }
-          ?>
+                    if (!$_SESSION['user']) {
+                        echo '<li class="nav-item">';
+                        echo '<a class="nav-link" href="register.php"><i class="bi bi-person-plus"></i>Cadastrar</a>';
+                        echo '</li>';
+                    }
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link" href="download.php"><i class="bi bi-cloud-arrow-down"></i>Download</a>
                     </li>
@@ -118,18 +118,18 @@ $conn->close();
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <?php
-            if (!$_SESSION['user']) {
-              echo '<a class="btn btn-primary me-2" href="login.php">';
-              echo '<i class="bi bi-box-arrow-in-right me-1"></i>';
-              echo 'Entrar';
-              echo '</a>';
-            }
-            ?>
+                        if (!$_SESSION['user']) {
+                            echo '<a class="btn btn-primary me-2" href="login.php">';
+                            echo '<i class="bi bi-box-arrow-in-right me-1"></i>';
+                            echo 'Entrar';
+                            echo '</a>';
+                        }
+                        ?>
                     </li>
                 </ul>
                 <?php
-        avatar($_SESSION['user'], $avatarBackgroundColor, 'logout.php', './change_password.php');
-        ?>
+                avatar($_SESSION['user'], $avatarBackgroundColor, 'logout.php', './change_password.php');
+                ?>
             </div>
         </div>
     </nav>
@@ -137,34 +137,34 @@ $conn->close();
         <!-- Container de Toasts (Fica fixo no topo direito da tela, sem quebrar o design) -->
         <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
             <?php if (isset($_SESSION['password_updated'])): ?>
-            <div id="toastSenhaSucesso" class="toast align-items-center text-white bg-success border-0 shadow"
-                role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
-                <div class="d-flex">
-                    <div class="toast-body fw-semibold">
-                        <i class="bi bi-check-circle-fill me-2"></i> <?= $_SESSION['password_updated']; ?>
+                <div id="toastSenhaSucesso" class="toast align-items-center text-white bg-success border-0 shadow"
+                    role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="d-flex">
+                        <div class="toast-body fw-semibold">
+                            <i class="bi bi-check-circle-fill me-2"></i> <?= $_SESSION['password_updated']; ?>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                            aria-label="Close"></button>
                     </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                        aria-label="Close"></button>
                 </div>
-            </div>
-            <?php unset($_SESSION['password_updated']); ?>
+                <?php unset($_SESSION['password_updated']); ?>
             <?php endif; ?>
 
             <?php if (isset($_SESSION['errors'])): ?>
-            <?php foreach ($_SESSION['errors'] as $index => $erro): ?>
-            <div id="toastSenhaErro_<?= $index; ?>"
-                class="toast align-items-center text-white bg-danger border-0 shadow mb-2" role="alert"
-                aria-live="assertive" aria-atomic="true" data-bs-delay="7000">
-                <div class="d-flex">
-                    <div class="toast-body fw-semibold">
-                        <i class="bi bi-exclamation-triangle-fill me-2"></i> <?= $erro; ?>
+                <?php foreach ($_SESSION['errors'] as $index => $erro): ?>
+                    <div id="toastSenhaErro_<?= $index; ?>"
+                        class="toast align-items-center text-white bg-danger border-0 shadow mb-2" role="alert"
+                        aria-live="assertive" aria-atomic="true" data-bs-delay="7000">
+                        <div class="d-flex">
+                            <div class="toast-body fw-semibold">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i> <?= $erro; ?>
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                                aria-label="Close"></button>
+                        </div>
                     </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                        aria-label="Close"></button>
-                </div>
-            </div>
-            <?php endforeach; ?>
-            <?php unset($_SESSION['errors']); ?>
+                <?php endforeach; ?>
+                <?php unset($_SESSION['errors']); ?>
             <?php endif; ?>
         </div>
 
@@ -192,8 +192,8 @@ $conn->close();
                         </label>
                         <div class="input-group has-validation">
                             <input type="password"
-                                class="form-control bg-secondary bg-opacity-10 text-light border-secondary campo-senha"
-                                id="actualPassword" name="actualPassword" required>
+                                class="form-control bg-secondary bg-opacity-10 text-light border-secondary campo-senha custom-placeholder"
+                                id="actualPassword" name="actualPassword" placeholder="Digite sua senha aqui" required>
                             <div class="invalid-feedback">
                                 Campo obrigatório!
                             </div>
@@ -206,8 +206,8 @@ $conn->close();
                         </label>
                         <div class="input-group has-validation">
                             <input type="password"
-                                class="form-control bg-secondary bg-opacity-10 text-light border-secondary campo-senha"
-                                id="newPassword" name="newPassword" required>
+                                class="form-control bg-secondary bg-opacity-10 text-light border-secondary campo-senha custom-placeholder"
+                                id="newPassword" name="newPassword" placeholder="Digite sua senha aqui" required>
                             <button type="button" class="btn btn-outline-secondary border-secondary text-light px-3"
                                 data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top"
                                 data-bs-html="true"
@@ -226,8 +226,9 @@ $conn->close();
                         </label>
                         <div class="input-group has-validation">
                             <input type="password"
-                                class="form-control bg-secondary bg-opacity-10 text-light border-secondary campo-senha"
-                                id="newConfirmPassword" name="newConfirmPassword" required>
+                                class="form-control bg-secondary bg-opacity-10 text-light border-secondary campo-senha custom-placeholder"
+                                id="newConfirmPassword" name="newConfirmPassword" placeholder="Digite sua senha aqui"
+                                required>
                             <div class="invalid-feedback">
                                 Campo obrigatório!
                             </div>
@@ -252,25 +253,6 @@ $conn->close();
                 </form>
             </div>
         </div>
-
-        <!-- Script no fim da página para disparar os Toasts automaticamente se eles existirem na sessão -->
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Inicializa e exibe o toast de sucesso se ele existir
-            var toastSucessoEl = document.getElementById('toastSenhaSucesso');
-            if (toastSucessoEl) {
-                var toastSucesso = new bootstrap.Toast(toastSucessoEl);
-                toastSucesso.show();
-            }
-
-            // Inicializa e exibe todos os toasts de erro se existirem
-            var toastErroEls = document.querySelectorAll('[id^="toastSenhaErro_"]');
-            toastErroEls.forEach(function(element) {
-                var toastErro = new bootstrap.Toast(element);
-                toastErro.show();
-            });
-        });
-        </script>
     </main>
     <footer class="rodape">
         <!-- Direitos Autorais no meio -->
@@ -285,6 +267,7 @@ $conn->close();
         </div>
     </footer>
     <script src="../script/form.validation.js"></script>
+    <script src="../script/toast-message.js"></script>
 </body>
 
 </html>

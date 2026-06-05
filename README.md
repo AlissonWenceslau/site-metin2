@@ -12,7 +12,8 @@ Site completo e responsivo desenvolvido para gerenciamento e interface de servid
 - Design: Interface totalmente responsiva (Mobile/Desktop).
 
 ## Demostração simples
-<img width="1898" height="914" alt="image" src="https://github.com/user-attachments/assets/9edf8505-df9e-492d-b5d0-9d35183d63fb" />
+<img width="1910" height="908" alt="image" src="https://github.com/user-attachments/assets/ad73e282-cefa-499e-86da-d4c6d9510528" />
+
 
 
 
@@ -44,13 +45,15 @@ O sistema de notícias é uma funcionalidade integrada ao site. Para que ele fun
    * Conecte-se à conta modificada através do site.
 
 3. **Executar a Instalação:**
-   * No menu do usuário, clique no link **"Instalar sistema de notícia"**.
+   * No menu do usuário, clique no link **"Instalar Notícia"**.
    
-   <img width="1328" alt="Link de instalação no menu" src="https://github.com/user-attachments/assets/0ebbfb9f-446d-45e6-bb24-cf33e6c2d781" />
+<img width="1910" height="911" alt="image" src="https://github.com/user-attachments/assets/f7a044b1-8ad8-4405-99a0-16be2c8ff1a4" />
 
-   * O sistema exibirá uma tela com as orientações de configuração. Leia e basta aceitá-las para prosseguir.
+
+   * O sistema exibirá uma tela com as orientações de configuração. Leia e basta Executar Instalação para prosseguir.
    
-   <img width="454" alt="Janela de confirmação da instalação" src="https://github.com/user-attachments/assets/eb15a5d2-6657-4eed-bfc7-41fad49dc68e" />
+   <img width="515" height="641" alt="image" src="https://github.com/user-attachments/assets/7233a500-904a-4718-bc4b-e917831ee98b" />
+
 
 > 💡 **Pronto!** O sistema de notícias foi instalado e as tabelas estruturadas com sucesso. A partir de agora, o painel de gerenciamento estará disponível para uso da administração.
 

@@ -21,7 +21,7 @@ require '../utils/utils.php'
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a href="index.php" class="navbar-brand"><img src="../../assets/metin2.png" class="img-fluid ms-1" alt="metin2"></a>
+    <a href="../../../index.php" class="navbar-brand"><img src="../../assets/metin2.png" class="img-fluid ms-1" alt="metin2"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -217,8 +217,7 @@ require '../utils/utils.php'
                     <?php foreach ($personagens as $char): ?>
                       <tr>
                         <td>
-                          <div
-                            class="bg-opacity-25 text-primary d-flex align-items-center justify-content-center shadow-sm"
+                          <div class="bg-opacity-25 text-primary d-flex align-items-center justify-content-center shadow-sm"
                             style="width: 42px; height: 42px;">
                             <?= pgClass($char['job'], '../../assets/character/'); ?>
                           </div>
@@ -238,11 +237,13 @@ require '../utils/utils.php'
                           </span>
                         </td>
                         <td class="text-end">
-                          <a href="?action=unbug&char_name=<?= urlencode($char['name']); ?>"
+                          <button type="button"
                             class="btn btn-outline-warning btn-sm fw-semibold py-2 px-3 action-btn d-inline-flex align-items-center gap-1 shadow-sm"
-                            onclick="return confirm('⚠️ ATENÇÃO: Enviar <?= htmlspecialchars($char['name']); ?> para a Cidade 1?\n\nIMPORTANTE:\nSeu personagem DEVE estar totalmente DESLOGADO do jogo por pelo menos 1 MINUTO.\n\nSe você deslogou agora ou está com o jogo aberto, clique em Cancelar, aguarde o tempo e tente novamente. Caso contrário, a ação NÃO terá efeito.');">
+                            data-bs-toggle="modal" data-bs-target="#modalConfirmarTeleporte"
+                            data-charname="<?= htmlspecialchars($char['name']); ?>"
+                            data-url="?action=unbug&char_name=<?= urlencode($char['name']); ?>">
                             <i class="bi bi-geo-alt-fill"></i> Mandar para Cidade
-                          </a>
+                          </button>
                         </td>
                       </tr>
                     <?php endforeach; ?>
@@ -256,29 +257,8 @@ require '../utils/utils.php'
         </div>
       </div>
     </div>
+    <?php include_once './modais/modal-unbug.php'; ?>
   </main>
-
-  <style>
-    .border-dashed {
-      border-style: dashed !important;
-    }
-
-    .table-hover tbody tr:hover {
-      background-color: rgba(255, 255, 255, 0.03) !important;
-      transition: background-color 0.15s ease-in-out;
-    }
-
-    /* Estilização suave para o botão de ação */
-    .action-btn {
-      transition: all 0.2s ease-in-out;
-      border-color: rgba(255, 193, 7, 0.4);
-    }
-
-    .action-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 0.25rem 0.75rem rgba(255, 193, 7, 0.15);
-    }
-  </style>
   <footer class="rodape">
     <!-- Direitos Autorais no meio -->
     <div class="direitos">
@@ -291,6 +271,9 @@ require '../utils/utils.php'
       <a href="#" target="_blank"><i class="bi bi-instagram"></i></a>
     </div>
   </footer>
+  <script src="../../../script/modais/modal.js"></script>
+  <link rel="stylesheet" href="../../../css/modais.css">
+
 </body>
 
 </html>

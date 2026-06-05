@@ -137,7 +137,7 @@ try {
       <div class="container">
         <?php
         if ($_SESSION['user']) {
-          require './pages/includes/panel.php';
+          require './pages/user/panel.php';
         }
         ?>
         <div class="container mt-5 mb-2">

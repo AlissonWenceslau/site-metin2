@@ -27,8 +27,8 @@
   <ul class="list-group list-group-flush bg-transparent border-secondary">
     
     <li class="list-group-item bg-dark border-secondary py-3">
-        <i class="bi bi-lock me-2 text-primary"></i>
-        <a href="./pages/change_password.php" class="text-white text-decoration-none hover-link">Alterar senha</a>
+        <i class="bi bi-people me-2 text-primary"></i>
+        <a href="./pages/user/dashboard.php" class="text-white text-decoration-none hover-link">Seus Personagens</a>
     </li>
     
     <?php if (isset($_SESSION['web']) && $_SESSION['web'] == 1): ?>

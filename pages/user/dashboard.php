@@ -30,7 +30,7 @@ require '../utils/utils.php'
       <div class="links-navegator">
         <ul class="navbar-nav" id="mainNav">
           <li class="nav-item">
-            <a class="nav-link" href="index.php"><i class="bi bi-house-door"></i>Início</a>
+            <a class="nav-link" href="../../index.php"><i class="bi bi-house-door"></i>Início</a>
           </li>
           <?php
           if (!$_SESSION['user']) {
@@ -66,7 +66,7 @@ require '../utils/utils.php'
           </li>
         </ul>
         <?php
-        avatar($_SESSION['user'], $avatarBackgroundColor, './pages/logout.php', './pages/change_password.php');
+        avatar($_SESSION['user'], $avatarBackgroundColor, '../logout.php', '../change_password.php');
         ?>
       </div>
     </div>
@@ -82,7 +82,6 @@ require '../utils/utils.php'
         session_start();
       }
 
-      // Simulação do ID da conta logada (Substitua pela sua variável oficial de sessão, ex: $_SESSION['user_id'])
       $account_id = $_SESSION['account_id'] ?? null;
 
       if (!$account_id) {
@@ -92,28 +91,67 @@ require '../utils/utils.php'
       }
 
       try {
-        // 2. Criar conexões PDO para os dois bancos usando os dados do seu conn.php
+        // Criar conexões PDO para o banco player
         $pdo_player = new PDO("mysql:host=$servername;dbname=player;charset=utf8mb4", $username, $password);
         $pdo_player->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // 3. Buscar o Reino (Empire) na tabela player_index do banco player
+        // 2. LÓGICA DE TELETRANSPORTE (Processa quando o botão/link é clicado)
+        if (isset($_GET['action']) && $_GET['action'] === 'unbug' && isset($_GET['char_name'])) {
+          $char_name = $_GET['char_name'];
+
+          // Primeiro, buscamos o reino (empire) para saber para qual cidade mandar
+          $stmt_empire = $pdo_player->prepare("SELECT empire FROM player_index WHERE id = :account_id LIMIT 1");
+          $stmt_empire->execute(['account_id' => $account_id]);
+          $empire_data = $stmt_empire->fetch(PDO::FETCH_ASSOC);
+          $empire_id = $empire_data['empire'] ?? 0;
+
+          // Define as coordenadas padrão da Cidade 1 de cada Reino
+          $map_index = 90;
+          $x = 469300;
+          $y = 964200; // Padrão Shinsoo
+      
+          if ($empire_id == 2) {
+            $map_index = 21;
+            $x = 55700;
+            $y = 157900; // Chunjo
+          } elseif ($empire_id == 3) {
+            $map_index = 91;
+            $x = 469300;
+            $y = 964200; // Jinno
+          }
+
+          // Atualiza o personagem no banco (Garante que só altera se pertencer à conta logada por segurança)
+          $stmt_unbug = $pdo_player->prepare("UPDATE player SET x = :x, y = :y, map_index = :map_index, exit_x = :x, exit_y = :y, exit_map_index = :map_index WHERE name = :char_name AND account_id = :account_id");
+          $stmt_unbug->execute([
+            'x' => $x,
+            'y' => $y,
+            'map_index' => $map_index,
+            'char_name' => $char_name,
+            'account_id' => $account_id
+          ]);
+
+          if ($stmt_unbug->rowCount() > 0) {
+            echo "<div class='alert alert-success border-0 shadow-sm mb-4'><i class='bi bi-check-circle-fill me-2'></i> O personagem <strong>" . htmlspecialchars($char_name) . "</strong> foi enviado para a Cidade 1 com sucesso! Entre no jogo novamente daqui 15 minutos.</div>";
+          }
+        }
+
+        // 3. Buscar o Reino (Empire) para exibição do Painel
         $stmt_empire = $pdo_player->prepare("SELECT empire FROM player_index WHERE id = :account_id LIMIT 1");
         $stmt_empire->execute(['account_id' => $account_id]);
         $empire_data = $stmt_empire->fetch(PDO::FETCH_ASSOC);
         $empire_id = $empire_data['empire'] ?? 0;
 
-        // Mapeamento de UX para os reinos do Metin2
         switch ($empire_id) {
           case 1:
-            $reino_nome = "Shinsoo (Vermelho)";
+            $reino_nome = "Shinsoo";
             $reino_badge = "bg-danger";
             break;
           case 2:
-            $reino_nome = "Chunjo (Amarelo)";
+            $reino_nome = "Chunjo";
             $reino_badge = "bg-warning text-dark";
             break;
           case 3:
-            $reino_nome = "Jinno (Azul)";
+            $reino_nome = "Jinno";
             $reino_badge = "bg-primary";
             break;
           default:
@@ -122,9 +160,8 @@ require '../utils/utils.php'
             break;
         }
 
-        // 4. Buscar os Personagens da conta na tabela player
-        // Filtramos pelo status 'OK' para ignorar personagens excluídos (padrão do jogo)
-        $stmt_chars = $pdo_player->prepare("SELECT name, level, job FROM player WHERE account_id = :account_id ORDER BY level DESC");
+        // 4. Buscar os Personagens ativos
+        $stmt_chars = $pdo_player->prepare("SELECT name, level FROM player WHERE account_id = :account_id ORDER BY level DESC");
         $stmt_chars->execute(['account_id' => $account_id]);
         $personagens = $stmt_chars->fetchAll(PDO::FETCH_ASSOC);
 
@@ -143,7 +180,7 @@ require '../utils/utils.php'
                 <h2 class="h3 text-white fw-bold mb-1">
                   <i class="bi bi-grid-1x2-fill me-2 text-primary"></i>Painel do Personagem
                 </h2>
-                <p class="text-secondary small mb-0">Gerencie e visualize os heróis da sua conta.</p>
+                <p class="text-secondary small mb-0">Gerencie e destrave os heróis da sua conta.</p>
               </div>
               <div class="text-sm-end">
                 <span class="text-secondary small text-uppercase fw-semibold d-block mb-1">Seu Reino</span>
@@ -171,7 +208,8 @@ require '../utils/utils.php'
                     <tr class="text-secondary small text-uppercase">
                       <th scope="col" class="pb-3" style="width: 80px;">Classe</th>
                       <th scope="col" class="pb-3">Nome do Herói</th>
-                      <th scope="col" class="pb-3 text-end">Nível</th>
+                      <th scope="col" class="pb-3 text-center">Nível</th>
+                      <th scope="col" class="pb-3 text-end">Ações de Suporte</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -188,10 +226,17 @@ require '../utils/utils.php'
                           <span class="text-white fw-bold fs-6 d-block"><?= htmlspecialchars($char['name']); ?></span>
                           <span class="text-secondary small">ID da Conta: #<?= $account_id; ?></span>
                         </td>
-                        <td class="text-end">
+                        <td class="text-center">
                           <span class="badge bg-secondary border border-secondary text-white fw-bold px-3 py-2 rounded">
                             Lv. <?= (int) $char['level']; ?>
                           </span>
+                        </td>
+                        <td class="text-end">
+                          <a href="?action=unbug&char_name=<?= urlencode($char['name']); ?>"
+                            class="btn btn-outline-warning btn-sm fw-semibold py-2 px-3 action-btn d-inline-flex align-items-center gap-1 shadow-sm"
+                            onclick="return confirm('Tem certeza que deseja enviar <?= htmlspecialchars($char['name']); ?> para a Cidade 1? Certifique-se de estar deslogado do jogo.');">
+                            <i class="bi bi-geo-alt-fill"></i> Mandar para Cidade
+                          </a>
                         </td>
                       </tr>
                     <?php endforeach; ?>
@@ -208,15 +253,24 @@ require '../utils/utils.php'
   </main>
 
   <style>
-    /* Estilo tracejado para o estado vazio */
     .border-dashed {
       border-style: dashed !important;
     }
 
-    /* Efeito hover suave na tabela escura */
     .table-hover tbody tr:hover {
       background-color: rgba(255, 255, 255, 0.03) !important;
       transition: background-color 0.15s ease-in-out;
+    }
+
+    /* Estilização suave para o botão de ação */
+    .action-btn {
+      transition: all 0.2s ease-in-out;
+      border-color: rgba(255, 193, 7, 0.4);
+    }
+
+    .action-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0.25rem 0.75rem rgba(255, 193, 7, 0.15);
     }
   </style>
   <footer class="rodape">

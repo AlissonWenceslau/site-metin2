@@ -27,7 +27,7 @@
                         <li>Configura os gatilhos (triggers) automáticos de fuso horário.</li>
                         <li><span class="text-info fw-semibold">Atualiza as configurações</span> caso a tabela já exista
                             (sem apagar seus dados antigos).</li>
-                        <li>Disponibilizará o link <span class="text-info fw-semibold">Publicar Nova Notícia</span> no seu painel.</li>
+                        <li>Disponibilizará o link <span class="text-info fw-semibold">Publicar Notícia</span> no seu painel.</li>
                     </ul>
                 </div>
 

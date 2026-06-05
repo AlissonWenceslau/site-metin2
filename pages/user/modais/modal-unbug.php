@@ -25,7 +25,7 @@
                     <p class="text-light mb-2 small">
                         Seu personagem <strong class="text-warning fw-bold">DEVE estar totalmente DESLOGADO</strong> do
                         jogo por
-                        pelo menos <strong class="text-warning fw-bold">1 MINUTO</strong>.
+                        pelo menos <strong class="text-warning fw-bold">2 MINUTOS</strong>.
                     </p>
                     <p class="text-white-50 mb-0 small">
                         Se você deslogou agora ou está com o jogo aberto, feche-o, feche este aviso, aguarde o tempo e

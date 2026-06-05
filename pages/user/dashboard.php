@@ -161,7 +161,7 @@ require '../utils/utils.php'
         }
 
         // 4. Buscar os Personagens ativos
-        $stmt_chars = $pdo_player->prepare("SELECT name, level, job, last_play FROM player WHERE account_id = :account_id ORDER BY level DESC");
+        $stmt_chars = $pdo_player->prepare("SELECT name, level, job, last_play, playtime FROM player WHERE account_id = :account_id ORDER BY level DESC");
         $stmt_chars->execute(['account_id' => $account_id]);
         $personagens = $stmt_chars->fetchAll(PDO::FETCH_ASSOC);
 
@@ -224,7 +224,7 @@ require '../utils/utils.php'
                         </td>
                         <td>
                           <span class="text-white fw-bold fs-6 d-block"><?= htmlspecialchars($char['name']); ?></span>
-                          <span class="text-secondary small">ID da Conta: #<?= $account_id; ?></span>
+                          <span class="text-secondary small">Horas Jogadas: <?= $char['playtime'] ?></span>
                         </td>
                         <td class="text-center">
                           <span class="badge bg-secondary border border-secondary text-white fw-bold px-3 py-2 rounded">

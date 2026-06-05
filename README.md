@@ -36,7 +36,9 @@ O sistema de notícias é uma funcionalidade integrada ao site. Para que ele fun
 1. **Definir Administrador no Banco de Dados:**
    * Acesse a base de dados `account`.
    * Acessa a tabela `account`
-   * Localize a conta desejada e altere o valor da coluna `web` para `1`. Isso fará com que o site reconheça a conta como Administrador.
+   * Localize a conta desejada e altere o valor da coluna `web_admin` para `1`. Isso fará com que o site reconheça a conta como Administrador.
+     <img width="1874" height="246" alt="image" src="https://github.com/user-attachments/assets/54d357ab-d6e2-4421-9977-f3159bdc38a0" />
+
 
 2. **Acessar o Painel:**
    * Conecte-se à conta modificada através do site.

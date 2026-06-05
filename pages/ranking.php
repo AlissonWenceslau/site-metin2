@@ -173,7 +173,7 @@ $offset = ($pagina - 1) * $por_pagina;
 
                                             echo "<tr class='border-bottom border-secondary-subtle " . $rowClass . "'>";
                                             echo "<th scope='row' class='fw-bold text-white py-3'>" . $medalha . $position . "</th>";
-                                            echo "<td class='text-white-50'>" . pgClass($row['job']) . "</td>";
+                                            echo "<td class='text-white-50'>" . pgClass($row['job'], '../assets/character/') . "</td>";
                                             echo "<td class='fw-semibold text-white'>" . htmlspecialchars($row["name"]) . "</td>";
                                             echo "<td><span class='badge bg-primary bg-opacity-25 border border-primary text-primary px-2.5 py-1.5 fw-bold'>" . $row["level"] . "</span></td>";
                                             echo "<td class='text-white-50 text-opacity-75'>" . number_format($row["exp"]) . "</td>";

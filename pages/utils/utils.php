@@ -1,23 +1,29 @@
 <?php
-function pgClass($job)
+function pgClass($job, $path)
 {
+    // Garante que o caminho termine com uma barra se o desenvolvedor esquecer de colocar
+    $path = rtrim($path, '/') . '/';
+
     switch ($job) {
         case 0:
-            return '<img src="../assets/character/0.png">';
+            return '<img src="' . htmlspecialchars($path) . '0.png" alt="Guerreiro M">';
         case 1:
-            return '<img src="../assets/character/1.png">';
+            return '<img src="' . htmlspecialchars($path) . '1.png" alt="Ninja F">';
         case 2:
-            return '<img src="../assets/character/2.png">';
+            return '<img src="' . htmlspecialchars($path) . '2.png" alt="Sura M">';
         case 3:
-            return '<img src="../assets/character/3.png">';
+            return '<img src="' . htmlspecialchars($path) . '3.png" alt="Xamã F">';
         case 4:
-            return '<img src="../assets/character/4.png">';
+            return '<img src="' . htmlspecialchars($path) . '4.png" alt="Guerreiro F">';
         case 5:
-            return '<img src="../assets/character/5.png">';
+            return '<img src="' . htmlspecialchars($path) . '5.png" alt="Ninja M">';
         case 6:
-            return '<img src="../assets/character/6.png">';
+            return '<img src="' . htmlspecialchars($path) . '6.png" alt="Sura F">';
         case 7:
-            return '<img src="../assets/ranking/7.png">';
+            return '<img src="' . htmlspecialchars($path) . '7.png" alt="Xamã M">';
+        default:
+            // Caso venha um job inválido ou não mapeado (ex: Lycan ou erro do banco)
+            return '<img src="' . htmlspecialchars($path) . '0.png" alt="Desconhecido">';
     }
 }
 

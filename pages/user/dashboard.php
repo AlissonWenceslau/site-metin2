@@ -161,7 +161,7 @@ require '../utils/utils.php'
         }
 
         // 4. Buscar os Personagens ativos
-        $stmt_chars = $pdo_player->prepare("SELECT name, level FROM player WHERE account_id = :account_id ORDER BY level DESC");
+        $stmt_chars = $pdo_player->prepare("SELECT name, level, job, last_play FROM player WHERE account_id = :account_id ORDER BY level DESC");
         $stmt_chars->execute(['account_id' => $account_id]);
         $personagens = $stmt_chars->fetchAll(PDO::FETCH_ASSOC);
 
@@ -207,8 +207,9 @@ require '../utils/utils.php'
                   <thead>
                     <tr class="text-secondary small text-uppercase">
                       <th scope="col" class="pb-3" style="width: 80px;">Classe</th>
-                      <th scope="col" class="pb-3">Nome do Herói</th>
+                      <th scope="col" class="pb-3">Nome do Personagem</th>
                       <th scope="col" class="pb-3 text-center">Nível</th>
+                      <th scope="col" class="pb-3 text-center">Último Acesso</th>
                       <th scope="col" class="pb-3 text-end">Ações de Suporte</th>
                     </tr>
                   </thead>
@@ -217,9 +218,9 @@ require '../utils/utils.php'
                       <tr>
                         <td>
                           <div
-                            class="bg-secondary bg-opacity-25 text-primary rounded-circle d-flex align-items-center justify-content-center shadow-sm"
+                            class="bg-opacity-25 text-primary d-flex align-items-center justify-content-center shadow-sm"
                             style="width: 42px; height: 42px;">
-                            <i class="bi bi-shield-shaded fs-5"></i>
+                            <?= pgClass($char['job'], '../../assets/character/'); ?>
                           </div>
                         </td>
                         <td>
@@ -231,10 +232,15 @@ require '../utils/utils.php'
                             Lv. <?= (int) $char['level']; ?>
                           </span>
                         </td>
+                        <td class="text-center">
+                          <span class="badge bg-secondary border border-secondary text-white fw-bold px-3 py-2 rounded">
+                            <?= date('d-m-y H:i', strtotime($char['last_play'])); ?>
+                          </span>
+                        </td>
                         <td class="text-end">
                           <a href="?action=unbug&char_name=<?= urlencode($char['name']); ?>"
                             class="btn btn-outline-warning btn-sm fw-semibold py-2 px-3 action-btn d-inline-flex align-items-center gap-1 shadow-sm"
-                            onclick="return confirm('Tem certeza que deseja enviar <?= htmlspecialchars($char['name']); ?> para a Cidade 1? Certifique-se de estar deslogado do jogo.');">
+                            onclick="return confirm('⚠️ ATENÇÃO: Enviar <?= htmlspecialchars($char['name']); ?> para a Cidade 1?\n\nIMPORTANTE:\nSeu personagem DEVE estar totalmente DESLOGADO do jogo por pelo menos 1 MINUTO.\n\nSe você deslogou agora ou está com o jogo aberto, clique em Cancelar, aguarde o tempo e tente novamente. Caso contrário, a ação NÃO terá efeito.');">
                             <i class="bi bi-geo-alt-fill"></i> Mandar para Cidade
                           </a>
                         </td>

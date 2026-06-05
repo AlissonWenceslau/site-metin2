@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit();
   }
 
-  $stmt = $conn->prepare("UPDATE account SET cash = cash + ? WHERE login = ?");
+  $stmt = $conn->prepare("UPDATE account SET coins = coins + ? WHERE login = ?");
   $stmt->bind_param("is", $addCash, $login);
   
   if ($stmt->execute()) {

@@ -187,11 +187,12 @@ try {
                             <i class="bi bi-pencil me-1"></i> Editar
                           </a>
 
-                          <a href="./pages/adm/news/delete_news.php?id=<?= $item['id']; ?>"
-                            class="btn btn-outline-danger btn-sm p-1 px-2 fw-semibold" style="font-size: 0.8rem;"
-                            onclick="event.stopPropagation(); return confirm('⚠️ Tem certeza que deseja excluir esta notícia?\n\nEsta ação não poderá ser desfeita!');">
+                          <button type="button" class="btn btn-outline-danger btn-sm p-1 px-2 fw-semibold"
+                            style="font-size: 0.8rem;" data-bs-toggle="modal" data-bs-target="#modalExcluirNoticia"
+                            data-url="./pages/adm/news/delete_news.php?id=<?= $item['id']; ?>"
+                            onclick="event.stopPropagation();">
                             <i class="bi bi-trash me-1"></i> Excluir
-                          </a>
+                          </button>
 
                         </div>
                       <?php endif; ?>
@@ -273,9 +274,24 @@ try {
               <?php endif; ?>
 
             <?php else: ?>
-              <div class="text-center text-muted py-5 border border-secondary rounded bg-dark bg-opacity-25">
-                <p class="fs-5 mb-1">📡 Nenhuma notícia encontrada no momento.</p>
-                <small>Fique atento ao nosso mural para futuras atualizações!</small>
+              <div
+                class="news-empty-state text-center py-5 px-4 rounded shadow-lg border border-secondary border-opacity-15 position-relative overflow-hidden">
+                <div class="glow-radial position-absolute top-50 start-50 translate-middle pointer-events-none"></div>
+
+                <div class="position-relative z-1 py-4">
+                  <div class="empty-icon-wrapper mx-auto mb-3 d-flex align-items-center justify-content-center">
+                    <i class="bi bi-broadcast text-secondary opacity-70"></i>
+                  </div>
+
+                  <h5 class="text-white fw-bold tracking-wide mb-2 text-uppercase"
+                    style="letter-spacing: 1.5px; font-size: 1.1rem;">
+                    Últimas Notícias
+                  </h5>
+                  <p class="text-white-50 mx-auto small mb-0" style="max-width: 420px; line-height: 1.6;">
+                    Não há novidades registradas no momento. Fique atento às nossas redes e ao site para futuras
+                    atualizações e patch notes!
+                  </p>
+                </div>
               </div>
             <?php endif; ?>
           </div>
@@ -283,6 +299,9 @@ try {
       </div>
     </div>
     </div>
+    <?php
+    include_once './pages/adm/news/modais/modal-delete-news.php';
+    ?>
   </main>
   <footer class="rodape">
     <div class="direitos">

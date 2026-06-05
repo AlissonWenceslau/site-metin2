@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $hash = '*' . strtoupper(sha1(sha1($password, true))); // mantém compatível com o banco
 
     // Busca apenas pelo login
-    $stmt = $conn->prepare("SELECT login, password, web, cash FROM account WHERE login = ?");
+    $stmt = $conn->prepare("SELECT login, password, web_admin, cash FROM account WHERE login = ?");
     $stmt->bind_param("s", $login);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             session_regenerate_id(true);
 
             $_SESSION['user'] = $user['login'];
-            $_SESSION['web'] = $user['web'];
+            $_SESSION['web'] = $user['web_admin'];
             $_SESSION['cash'] = $user['cash'];
 
             header("Location: ../../index.php");

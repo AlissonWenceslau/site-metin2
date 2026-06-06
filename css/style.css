@@ -104,6 +104,49 @@ a>i {
     box-shadow: 0 4px 15px #0B5ED7 !important;
 }
 
+/* Container Principal do Estado Vazio (Forçado para Modo Escuro) */
+.news-empty-state {
+    background: #0f1115 !important; /* Cor sólida de segurança caso o gradiente falhe */
+    background: linear-gradient(145deg, #15181c, #0b0d10) !important; /* Mesmo fundo do painel */
+    border-style: dashed !important;
+    border-width: 1px !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Círculo Holográfico do Ícone */
+.empty-icon-wrapper {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    font-size: 1.8rem;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6);
+    position: relative;
+    animation: iconPulse 4s infinite ease-in-out;
+}
+
+/* Brilho de Fundo Sutil */
+.glow-radial {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(13, 110, 253, 0.07) 0%, rgba(0, 0, 0, 0) 70%) !important;
+    z-index: 0;
+}
+
+/* Animação de flutuação/pulsação suave do ícone */
+@keyframes iconPulse {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+    50% {
+        transform: translateY(-3px) scale(1.03);
+        border-color: rgba(13, 110, 253, 0.25); /* Acende levemente em azul */
+        box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6), 0 0 15px rgba(13, 110, 253, 0.15);
+    }
+}
+
 /*PÁGINA DE CADASTRO*/
 .signup-btn {
     transition: all 0.2s ease-in-out;
@@ -140,3 +183,59 @@ a>i {
     box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25) !important;
 }
 .text-secondary-light { color: #d0d0d0; }
+
+/*PAINEL DO USUÁRIO*/
+    .card-action-link {
+        text-decoration: none !important;
+        display: block;
+    }
+
+    .card-premium {
+        background: rgba(255, 255, 255, 0.03) !important;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        border-radius: 8px !important;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+        min-height: 85px;
+    }
+
+    .action-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        transition: all 0.25s ease;
+    }
+
+    .card-desc {
+        font-size: 0.78rem;
+        margin-top: 2px;
+    }
+
+    .text-danger-light {
+        color: #f87171 !important;
+    }
+
+    .fs-7 {
+        font-size: 0.85rem;
+    }
+
+    /* Efeitos de Hover Dinâmicos */
+    .card-action-link:hover .card-premium {
+        background: rgba(255, 255, 255, 0.07) !important;
+        border-color: rgba(255, 255, 255, 0.2) !important;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-action-link:hover .bg-primary  { background-color: rgba(13, 110, 253, 0.25) !important; color: #398bf7 !important; }
+    .card-action-link:hover .bg-warning  { background-color: rgba(255, 193, 7, 0.25) !important; color: #ffca2c !important; }
+    .card-action-link:hover .bg-success  { background-color: rgba(25, 135, 84, 0.25) !important; color: #2ec165 !important; }
+    .card-action-link:hover .bg-danger   { background-color: rgba(220, 53, 69, 0.25) !important; color: #ea4d5d !important; }

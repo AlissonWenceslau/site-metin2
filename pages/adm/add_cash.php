@@ -1,16 +1,11 @@
 <?php
-session_start();
 require '../../connection/conn.php';
 require '../utils/validation.php';
 require '../utils/utils.php';
+require_once '../../auth/auth.php';
 
-if (!isset($_SESSION['user'])) {
-  header("Location: ../login.php");
-  exit;
-} else if ($_SESSION['web'] == 0) {
-  header("Location: ../logout.php");
-  exit;
-}
+protectPage('../login.php');
+protectPageAdmin('../login.php');
 
 $conn = new mysqli($servername, $username, $password, $dbaccount);
 

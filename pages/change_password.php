@@ -1,14 +1,10 @@
 <?php
-session_start();
-require './utils/utils.php';
-if (!isset($_SESSION['user'])) {
-    // Usuário não logado, redireciona para a página de login
-    header("Location: ./login.php");
-    exit;
-}
-
+require_once '../auth/auth.php';
 require '../connection/conn.php';
 require './utils/validation.php';
+require './utils/utils.php';
+
+protectPage('./login.php');
 
 // Conectar ao banco
 $conn = new mysqli($servername, $username, $password, $dbaccount);

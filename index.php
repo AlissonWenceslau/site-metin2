@@ -28,8 +28,59 @@ try {
     // error_log("Aviso: A tabela noticias ainda não foi criada no banco de dados.");
 
   } else {
-    // Se for QUALQUER OUTRO erro de banco (senha errada, queda de servidor), aí sim ele avisa
-    die("Erro crítico no banco de dados: " . $e->getMessage());
+    // Se for QUALQUER OUTRO erro de banco (senha errada, queda de servidor), renderiza a tela premium de erro
+    ?>
+    <div
+      style="display: flex; align-items: center; justify-content: center; margin-top: 3rem; margin-bottom: 3rem; padding-left: 1rem; padding-right: 1rem; font-family: sans-serif;">
+      <div
+        style="max-width: 550px; width: 100%; border-radius: 12px; background: linear-gradient(145deg, #1a1d24, #111317); padding: 3rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; border: 1px solid rgba(255,255,255,0.05); overflow: hidden;">
+
+        <div style="position: absolute; top: 0; start: 0; width: 100%; background-color: #dc3545; height: 4px; left: 0;">
+        </div>
+
+        <div
+          style="margin-left: auto; margin-right: auto; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; rounded-circle: 50%; border-radius: 50%; border: 1px solid rgba(220, 53, 69, 0.2); background-color: rgba(220, 53, 69, 0.1); color: #dc3545; width: 70px; height: 70px; font-size: 2rem;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+            <path
+              d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+          </svg>
+        </div>
+
+        <h4
+          style="color: #ffffff !important; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; margin-top: 0; font-size: 1.5rem;">
+          Falha de Conexão Crítica
+        </h4>
+
+        <p style="color: #a0aec0 !important; font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.5;">
+          Não foi possível estabelecer comunicação com a database do servidor. Verifique suas credenciais de configuração ou
+          se o serviço do MySQL está ativo.
+        </p>
+
+        <div
+          style="background-color: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px; padding: 1rem; text-align: left; margin-bottom: 1.5rem;">
+          <span
+            style="color: #f87171; font-weight: bold; font-size: 0.65rem; text-transform: uppercase; display: block; margin-bottom: 0.25rem; letter-spacing: 0.5px;">Log
+            de Erro do Sistema:</span>
+          <code
+            style="color: #cbd5e1 !important; font-family: monospace; font-size: 0.75rem; display: block; word-break: break-all; white-space: normal;">
+                            <?= htmlspecialchars($e->getMessage()); ?>
+                        </code>
+        </div>
+
+        <div style="display: grid;">
+          <button onclick="window.location.reload();"
+            style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #ffffff; font-weight: bold; text-transform: uppercase; padding: 0.75rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; letter-spacing: 0.5px; transition: background 0.2s;"
+            onmouseover="this.style.backgroundColor='rgba(255,255,255,0.05)'"
+            onmouseout="this.style.backgroundColor='transparent'">
+            <i class="bi bi-arrow-clockwise" style="margin-right: 0.25rem;"></i> Atualizar e Tentar Novamente
+          </button>
+        </div>
+
+      </div>
+    </div>
+    <?php
+    exit();
   }
 }
 ?>
@@ -137,7 +188,7 @@ try {
       <div class="container">
         <?php
         if ($_SESSION['user']) {
-          require './pages/includes/panel.php';
+          require './pages/user/panel.php';
         }
         ?>
         <div class="container mt-5 mb-2">
@@ -187,11 +238,12 @@ try {
                             <i class="bi bi-pencil me-1"></i> Editar
                           </a>
 
-                          <a href="./pages/adm/news/delete_news.php?id=<?= $item['id']; ?>"
-                            class="btn btn-outline-danger btn-sm p-1 px-2 fw-semibold" style="font-size: 0.8rem;"
-                            onclick="event.stopPropagation(); return confirm('⚠️ Tem certeza que deseja excluir esta notícia?\n\nEsta ação não poderá ser desfeita!');">
+                          <button type="button" class="btn btn-outline-danger btn-sm p-1 px-2 fw-semibold"
+                            style="font-size: 0.8rem;" data-bs-toggle="modal" data-bs-target="#modalExcluirNoticia"
+                            data-url="./pages/adm/news/delete_news.php?id=<?= $item['id']; ?>"
+                            onclick="event.stopPropagation();">
                             <i class="bi bi-trash me-1"></i> Excluir
-                          </a>
+                          </button>
 
                         </div>
                       <?php endif; ?>
@@ -273,9 +325,24 @@ try {
               <?php endif; ?>
 
             <?php else: ?>
-              <div class="text-center text-muted py-5 border border-secondary rounded bg-dark bg-opacity-25">
-                <p class="fs-5 mb-1">📡 Nenhuma notícia encontrada no momento.</p>
-                <small>Fique atento ao nosso mural para futuras atualizações!</small>
+              <div
+                class="news-empty-state text-center py-5 px-4 rounded shadow-lg border border-secondary border-opacity-15 position-relative overflow-hidden">
+                <div class="glow-radial position-absolute top-50 start-50 translate-middle pointer-events-none"></div>
+
+                <div class="position-relative z-1 py-4">
+                  <div class="empty-icon-wrapper mx-auto mb-3 d-flex align-items-center justify-content-center">
+                    <i class="bi bi-broadcast text-secondary opacity-70"></i>
+                  </div>
+
+                  <h5 class="text-white fw-bold tracking-wide mb-2 text-uppercase"
+                    style="letter-spacing: 1.5px; font-size: 1.1rem;">
+                    Últimas Notícias
+                  </h5>
+                  <p class="text-white-50 mx-auto small mb-0" style="max-width: 420px; line-height: 1.6;">
+                    Não há novidades registradas no momento. Fique atento às nossas redes e ao site para futuras
+                    atualizações e patch notes!
+                  </p>
+                </div>
               </div>
             <?php endif; ?>
           </div>
@@ -283,6 +350,9 @@ try {
       </div>
     </div>
     </div>
+    <?php
+    include_once './pages/adm/news/modais/modal-delete-news.php';
+    ?>
   </main>
   <footer class="rodape">
     <div class="direitos">

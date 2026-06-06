@@ -21,7 +21,8 @@ require '../utils/utils.php'
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a href="../../../index.php" class="navbar-brand"><img src="../../assets/metin2.png" class="img-fluid ms-1" alt="metin2"></a>
+    <a href="../../../index.php" class="navbar-brand"><img src="../../assets/metin2.png" class="img-fluid ms-1"
+        alt="metin2"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -224,7 +225,8 @@ require '../utils/utils.php'
                         </td>
                         <td>
                           <span class="text-white fw-bold fs-6 d-block"><?= htmlspecialchars($char['name']); ?></span>
-                          <span class="text-secondary small"><i class="bi bi-hourglass-split me-2"></i>Tempo de Jogo: <?= $char['playtime'] ?> hora(s)</span>
+                          <span class="text-secondary small"><i class="bi bi-hourglass-split me-2"></i>Tempo de Jogo:
+                            <?= $char['playtime'] ?> hora(s)</span>
                         </td>
                         <td class="text-center">
                           <span class="badge bg-secondary border border-secondary text-white fw-bold px-3 py-2 rounded">
@@ -233,7 +235,21 @@ require '../utils/utils.php'
                         </td>
                         <td class="text-center">
                           <span class="badge bg-secondary border border-secondary text-white fw-bold px-3 py-2 rounded">
-                            <?= date('d-m-y H:i', strtotime($char['last_play'])); ?>
+                            <?php
+                            $last_play = $account['last_play'] ?? null;
+
+                            if (empty($last_play) || $last_play === '0000-00-00 00:00:00') {
+                              echo $data_formatada = "Sem Registro";
+                            } else {
+                              echo $timestamp = strtotime($last_play);
+
+                              if ($timestamp === false) {
+                                $data_formatada = "Sem Registro";
+                              } else {
+                                echo $data_formatada = date('d-m-Y H:i', $timestamp);
+                              }
+                            }
+                            ?>
                           </span>
                         </td>
                         <td class="text-end">

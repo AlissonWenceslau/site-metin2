@@ -52,7 +52,8 @@ O sistema de notícias é uma funcionalidade integrada ao site. Para que ele fun
 
    * O sistema exibirá uma tela com as orientações de configuração. Leia e basta Executar Instalação para prosseguir.
    
-   <img width="515" height="641" alt="image" src="https://github.com/user-attachments/assets/7233a500-904a-4718-bc4b-e917831ee98b" />
+   <img width="507" height="639" alt="image" src="https://github.com/user-attachments/assets/e5b0ea88-9a17-4aba-9685-53176bafd18f" />
+
 
 
 > 💡 **Pronto!** O sistema de notícias foi instalado e as tabelas estruturadas com sucesso. A partir de agora, o painel de gerenciamento estará disponível para uso da administração.

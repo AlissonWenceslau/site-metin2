@@ -58,7 +58,7 @@ require '../utils/utils.php'
           <li class="nav-item">
             <?php if (!$_SESSION['user']): ?>
               <a class="btn btn-outline-primary btn-sm px-3 py-1.5 fw-semibold text-uppercase d-inline-flex align-items-center gap-2"
-                href="./pages/login.php" style="letter-spacing: 0.5px; font-size: 0.85rem; transition: all 0.2s ease;">
+                href="../login.php" style="letter-spacing: 0.5px; font-size: 0.85rem; transition: all 0.2s ease;">
                 <i class="bi bi-box-arrow-in-right fs-5"></i>
                 <span>Entrar</span>
               </a>
@@ -224,7 +224,7 @@ require '../utils/utils.php'
                         </td>
                         <td>
                           <span class="text-white fw-bold fs-6 d-block"><?= htmlspecialchars($char['name']); ?></span>
-                          <span class="text-secondary small">Horas Jogadas: <?= $char['playtime'] ?></span>
+                          <span class="text-secondary small"><i class="bi bi-hourglass-split me-2"></i>Tempo de Jogo: <?= $char['playtime'] ?> hora(s)</span>
                         </td>
                         <td class="text-center">
                           <span class="badge bg-secondary border border-secondary text-white fw-bold px-3 py-2 rounded">

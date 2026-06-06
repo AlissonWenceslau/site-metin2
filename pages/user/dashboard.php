@@ -236,19 +236,24 @@ require '../utils/utils.php'
                         <td class="text-center">
                           <span class="badge bg-secondary border border-secondary text-white fw-bold px-3 py-2 rounded">
                             <?php
-                            $last_play = $account['last_play'] ?? null;
+                            $last_play = $char['last_play'] ?? null;
 
                             if (empty($last_play) || $last_play === '0000-00-00 00:00:00') {
-                              echo $data_formatada = "Sem Registro";
+                              $data_formatada = "Sem Registro";
                             } else {
-                              echo $timestamp = strtotime($last_play);
+                              // Converte a string do banco de dados em um Timestamp válido do PHP
+                              $timestamp = strtotime($last_play);
 
                               if ($timestamp === false) {
                                 $data_formatada = "Sem Registro";
                               } else {
-                                echo $data_formatada = date('d-m-Y H:i', $timestamp);
+                                // Gera o formato brasileiro perfeito: dd-mm-Y H:i
+                                $data_formatada = date('d-m-Y H:i', $timestamp);
                               }
                             }
+
+                            // Imprime o resultado final uma única vez
+                            echo $data_formatada;
                             ?>
                           </span>
                         </td>

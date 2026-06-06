@@ -1,11 +1,10 @@
 <?php
 session_start();
+require_once '../../../auth/auth.php';
 
-// 1. BARREIRA DE SEGURANÇA RÍGIDA
-if (!isset($_SESSION['web']) || $_SESSION['web'] != 1) {
-    header("Location: index.php");
-    exit();
-}
+protectPage('../../login.php');
+protectPageAdmin('../../login.php');
+
 
 require_once '../../../connection/conn.php';
 $dsn = "mysql:host=$servername;dbname=$dbaccount;charset=$charset";

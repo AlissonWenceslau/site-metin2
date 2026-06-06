@@ -1,10 +1,11 @@
 <?php
 session_start();
-if (!isset($_SESSION['user'])) {
-  // Usuário não logado, redireciona para a página de login
-  header("Location: ../../../index.php");
-  exit;
-}
+require_once '../../../auth/auth.php';
+
+protectPage('../.../login.php');
+protectPageAdmin('../../login.php');
+
+
 require_once '../../../connection/conn.php';
 
 $mensagemSucesso = "";

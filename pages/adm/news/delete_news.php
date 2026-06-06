@@ -1,12 +1,9 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once '../../../auth/auth.php';
 
-if (!isset($_SESSION['web']) || $_SESSION['web'] != 1) {
-    header("Location: index.php");
-    exit();
-}
+protectPage('../.../login.php');
+protectPageAdmin('../../login.php');
+
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     

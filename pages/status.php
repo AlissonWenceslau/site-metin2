@@ -206,8 +206,8 @@ if (isMysqlOnline($mysql_host, $mysql_port, $timeout)) {
 
     <!-- Redes Sociais na direita -->
     <div class="redes-sociais">
-      <a href="#" target="_blank"><i class="bi bi-youtube"></i></a>
-      <a href="#" target="_blank"><i class="bi bi-instagram"></i></a>
+      <a href="<?= $social['youtube']?>" target="_blank"><i class="bi bi-youtube"></i></a>
+      <a href="<?= $social['instagram'] ?>" target="_blank"><i class="bi bi-instagram"></i></a>
     </div>
   </footer>
   <script src="../script/dynamic-icons.js"></script>
